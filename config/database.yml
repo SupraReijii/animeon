@@ -1,0 +1,21 @@
+default: &default
+  host: 74.119.195.68
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  template: template0
+  username: animeon
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  password: <%= ENV["PSWD"] %>
+
+development:
+  <<: *default
+  database: animeon_development
+
+test:
+  <<: *default
+  database: animeon_test
+
+production:
+  <<: *default
+  database: animeon_production

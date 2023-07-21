@@ -1,0 +1,90 @@
+// Entry point for your Sass build
+body {
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 1910px;
+  height: 920px;
+  color: #F5F5F5;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.66px;
+  text-transform: uppercase;
+}
+.main {
+  width: 1910px;
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  max-width: 1920px;
+  padding: 0px 181.67px;
+  justify-content: center;
+  align-items: flex-start;
+  background: #171717;
+}
+
+.navigation {
+  display: flex;
+  max-width: 1546.67px;
+  padding: 0px 186.66px;
+  align-items: flex-start;
+  gap: -0.01px;
+  flex: 1 0 0;
+}
+
+.navs {
+  display: flex;
+  max-width: 1546.66px;
+  padding-right: 0px;
+  align-items: center;
+  gap: 16px;
+  flex: 1 0 0;
+}
+
+.logo {
+  display: flex;
+  padding: 4px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: rgba(23, 23, 23, 0.80);
+}
+
+.buttons {
+  display: flex;
+  max-width: 500px;
+  align-items: center;
+}
+
+#button1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#button3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  padding: 20px 12px 20px;
+  margin: 0;
+}
+
+.button:hover {
+  background: #272727;
+  cursor: pointer;
+}
