@@ -41,10 +41,10 @@ gem "jbuilder"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
+gem 'turbolinks'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-gem 'slim-rails', '~> 3.6', '>= 3.6.2'
+gem 'slim-rails'
 # Use Sass to process CSS
 gem "sassc-rails"
 
