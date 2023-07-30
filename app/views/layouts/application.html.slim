@@ -5,18 +5,19 @@ html
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
-
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true
+    = javascript_pack_tag 'application', data: { 'turbolinks-track' => 'reload' }
   body
     div.main
       div.header
         nav.navigation
+          div.index Главная
           div.navs
-            img.logo src="/assets/logo.png"
             div.buttons
-              = link_to "Каталог аниме", animes_path, id: "button1", class: "button"
-              div#button2.button Собрания аниме
-              div#button3.button Новинки
+              = link_to "Главная", root_path, id: "button1", class: "button"
+              = link_to "Каталог", animes_path, id: "button2", class: "button"
+              div#button3.button Собрания
+          div.profile Профиль
     div.container
       = yield
+    #brg
