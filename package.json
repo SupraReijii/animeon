@@ -16,7 +16,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "webpack-dev-server": "4.15.1"
   },
-  "packageManager": "yarn@3.6.3",
+  "packageManager": "yarn@1.22.1",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"

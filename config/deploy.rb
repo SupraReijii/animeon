@@ -49,14 +49,6 @@ namespace :deploy do
       end
     end
   end
-
-  namespace :yarn do
-    task :install do
-      on roles(:app) do
-        execute "cd #{release_path} && yarn"
-      end
-    end
-  end
 end
 
 namespace :unicorn do
@@ -81,6 +73,3 @@ namespace :unicorn do
     end
   end
 end
-
-
-before 'deploy:assets:precompile', 'deploy:yarn:install'
