@@ -58,18 +58,6 @@ namespace :deploy do
 
   namespace :yarn do
     task :install do
-      on roles(:web) do
-        bundle_exec 'yarn install', release_path
-      end
-    end
-  end
-  namespace :assets do
-    namespace :precompile do
-      puts 'true'
-    end
-  end
-  namespace :yarn do
-    task :install do
       on roles(:app) do
         execute "cd #{release_path} && yarn"
       end
@@ -99,3 +87,5 @@ namespace :unicorn do
     end
   end
 end
+
+before 'deploy:assets:precompile', 'deploy:yarn:install'
