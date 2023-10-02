@@ -2,8 +2,7 @@ set :stage, :production
 set :deploy_to, "/home/devops/#{fetch :application}/#{fetch :stage}"
 
 server '188.120.247.210', user: fetch(:user), roles: %w{app web db}, ssh_options: {
-     keys: %w(/home/krraify/.ssh/web),
-     forward_agent: false,
+     keys: %w(/home/krraify/.ssh/web)
    }
 
 
