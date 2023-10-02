@@ -65,6 +65,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-copy-files', require: false
   gem 'capistrano-rails', require: false
+  gem 'capistrano-yarn'
   gem "airbrussh"
 end
 

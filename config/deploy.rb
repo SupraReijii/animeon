@@ -35,12 +35,6 @@ Airbrussh.configure do |config|
   config.truncate = false
 end
 
-def bundle_exec command, witin_path = "#{self.deploy_to}/current"
-  execute "cd #{witin_path} && "\
-            "RAILS_ENV=#{fetch :rails_env} #{fetch :rbenv_prefix} "\
-            "bundle exec #{command}"
-end
-
 namespace :deploy do
   namespace :file do
     task :lock do
@@ -87,5 +81,6 @@ namespace :unicorn do
     end
   end
 end
+
 
 before 'deploy:assets:precompile', 'deploy:yarn:install'
