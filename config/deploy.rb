@@ -2,7 +2,7 @@ set :application, 'animeon'
 set :repo_name, 'animeon'
 set :repo_url, "git@github.com:SupraReijii/#{fetch :repo_name}.git"
 set :rails_env, fetch(:stage)
-
+set :current_directory, 'current'
 set :user, 'devops'
 set :group, 'devops'
 set :unicorn_user, 'devops'
@@ -63,7 +63,11 @@ namespace :deploy do
       end
     end
   end
-
+  namespace :assets do
+    namespace :precompile do
+      puts 'true'
+    end
+  end
   namespace :yarn do
     task :install do
       on roles(:app) do
