@@ -1,5 +1,5 @@
 default: &default
-  host: 74.119.195.68
+  host: 86.110.208.25
   port: 5432
   adapter: postgresql
   encoding: unicode
