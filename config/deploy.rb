@@ -7,7 +7,7 @@ set :user, 'devops'
 set :group, 'devops'
 set :unicorn_user, 'devops'
 
-def bundle_exec command, witin_path = "#{self.deploy_to}/20231003093153"
+def bundle_exec command, witin_path = "#{self.deploy_to}/current"
   execute "cd #{witin_path} && "\
             "RAILS_ENV=#{fetch :rails_env} "\
             "bundle exec #{command}"
