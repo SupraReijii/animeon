@@ -2,10 +2,16 @@ set :application, 'animeon'
 set :repo_name, 'animeon'
 set :repo_url, "git@github.com:SupraReijii/#{fetch :repo_name}.git"
 set :rails_env, fetch(:stage)
-set :current_directory, 'current'
+
 set :user, 'devops'
 set :group, 'devops'
 set :unicorn_user, 'devops'
+
+def bundle_exec command, witin_path = "#{self.deploy_to}/20231003093153"
+  execute "cd #{witin_path} && "\
+            "RAILS_ENV=#{fetch :rails_env} "\
+            "bundle exec #{command}"
+end
 
 set :linked_files, %w[
   config/database.yml
@@ -47,6 +53,22 @@ namespace :deploy do
       on roles(:app) do
         execute "rm /tmp/deploy_#{fetch :application}_#{fetch :stage}.lock"
       end
+    end
+  end
+
+  namespace :yarn do
+    task :install do
+      on roles(:web) do
+        bundle_exec 'yarn install', release_path
+      end
+    end
+  end
+end
+
+namespace :test do
+  task :yarn do
+    on roles(:web) do
+      execute 'ls'
     end
   end
 end
