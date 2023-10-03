@@ -1,7 +1,7 @@
 rails_env = 'production'
 app_name = " animeon"
 app_root = "/home/devops/#{app_name}/"
-app_path = "#{app_root}/current"
+app_path = "#{app_root}"
 shared_path = "#{app_root}/shared"
 
 worker_processes 32
