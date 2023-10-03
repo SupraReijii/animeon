@@ -68,7 +68,7 @@ end
 namespace :test do
   task :yarn do
     on roles(:web) do
-      execute 'ls'
+      execute '/home/devops/.nvm/versions/node/v18.17.0/bin/yarn install'
     end
   end
 end
