@@ -1,6 +1,6 @@
 rails_env = 'production'
 app_name = " animeon"
-app_root = "/home/devops/#{app_name}/#{rails_env}"
+app_root = "/home/devops/#{app_name}/"
 app_path = "#{app_root}/current"
 shared_path = "#{app_root}/shared"
 

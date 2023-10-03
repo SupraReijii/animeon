@@ -50,7 +50,6 @@ gem 'slim-rails'
 # Use Sass to process CSS
 gem "sassc", '=2.1.0'
 gem "sassc-rails", '=2.1.0'
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -61,12 +60,6 @@ end
 
 group :development do
   gem "web-console"
-  gem 'capistrano'
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-copy-files', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-yarn'
-  gem "airbrussh"
 end
 
 group :test do
