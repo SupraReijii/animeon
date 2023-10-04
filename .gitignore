@@ -15,6 +15,7 @@
 vendor
 Gemfile.lock
 package-lock.json
+yarn.lock
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
