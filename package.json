@@ -8,17 +8,10 @@
     "coffee-loader": "^4.0.0",
     "coffeescript": "^2.7.0",
     "sass": "^1.68.0",
-    "turbolinks": "^5.2.0",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "webpack-dev-server": "4.15.1"
-  },
-  "packageManager": "yarn@3.6.3",
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "webpack-dev-server": "^3"
   }
 }
