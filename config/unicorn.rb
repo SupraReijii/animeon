@@ -1,6 +1,6 @@
 rails_env = 'production'
 app_name = "animeon"
-app_root = "/home/devops/#{app_name}/"
+app_root = "/home/devops/#{app_name}"
 app_path = "#{app_root}"
 shared_path = "#{app_root}/shared"
 
@@ -9,7 +9,7 @@ timeout 90
 listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4098
 
 
-user 'devops'
+user 'www-data'
 
 working_directory app_path
 
