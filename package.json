@@ -8,11 +8,10 @@
     "coffee-loader": "^4.0.0",
     "coffeescript": "^2.7.0",
     "sass": "^1.68.0",
-    "turbolinks": "^5.2.0",
-    "webpack-dev-server": "^3"
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "webpack-dev-server": "^3"
+    "webpack-dev-server": "^3.11.0"
   }
 }
