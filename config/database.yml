@@ -1,0 +1,22 @@
+default: &default
+  host: 5.180.55.36
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: animeon_dev
+  username: animeon_dev
+
+test:
+  <<: *default
+  database: animeon_test
+  username: animeon_test
+
+production:
+  <<: *default
+  database: animeon_prod
+  username: animeon_prod
+
