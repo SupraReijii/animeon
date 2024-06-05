@@ -8,8 +8,7 @@ worker_processes 32
 timeout 90
 listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4098
 
-
-user 'devops'
+user 'www-data'
 
 working_directory app_path
 
