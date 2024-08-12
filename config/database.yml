@@ -1,9 +1,10 @@
 default: &default
   host: 5.180.55.36
   adapter: postgresql
-  encoding: unicode
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   password: <%= ENV["DATABASE_PASSWORD"] %>
+  template: template0
 
 development:
   <<: *default

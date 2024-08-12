@@ -18,6 +18,7 @@ gem 'unicorn'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'rspec'
   gem 'rubocop', require: false
 end
 
@@ -28,4 +29,13 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+
+  gem 'rails-controller-testing'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-its'
+  gem 'rspec_junit_formatter'
+  gem 'rspec-mocks'
+  gem 'rspec-rails'
 end
