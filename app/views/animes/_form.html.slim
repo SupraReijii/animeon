@@ -1,22 +1,8 @@
-= form_for @animes do |f|
-  div.field
-    = f.label :name
-    = f.text_field :name
-  div.field
-    = f.label :description
-    = f.text_field :description
-  div.field
-    = f.label :episodes
-    = f.text_field :episodes
-  div.field
-    = f.label :status
-    = f.text_field :status
-  div.field
-    = f.label :user_rating
-    = f.text_field :user_rating
-  div.field
-    = f.label :franchise
-    = f.text_field :franchise
-  div.actions
-    = f.submit
-
+=simple_form_for @animes do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :episodes
+  = f.input :status
+  = f.input :user_rating
+  = f.input :franchise
+  = f.button :submit

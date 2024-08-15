@@ -1,4 +1,6 @@
+# frozen_string_literal: true
+
 class Anime < ApplicationRecord
-  attr_accessor :name
-  validates :name, presence: true
+  enumerize :status,
+            in: %i[announced ongoing released]
 end
