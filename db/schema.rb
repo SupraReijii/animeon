@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_15_033454) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_16_120653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,13 +25,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_033454) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "videos", force: :cascade do |t|
+  create_table "episodes", force: :cascade do |t|
+    t.string "name"
     t.bigint "anime_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_episodes_on_anime_id"
+  end
+
+  create_table "videos", force: :cascade do |t|
     t.string "url"
     t.string "quality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["anime_id"], name: "index_videos_on_anime_id"
+    t.bigint "episode_id"
+    t.index ["episode_id"], name: "index_videos_on_episode_id"
   end
 
 end

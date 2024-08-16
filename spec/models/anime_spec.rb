@@ -1,5 +1,5 @@
-require 'rails_helper'
-
-RSpec.describe Anime, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Anime do
+  describe 'enum' do
+    it { is_expected.to enumerize(:status).in(Anime::STATUSES) }
+  end
 end

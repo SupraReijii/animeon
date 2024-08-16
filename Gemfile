@@ -40,4 +40,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-mocks'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 end
