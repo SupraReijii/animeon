@@ -10,13 +10,13 @@ gem 'jsbundling-rails'
 gem 'pg', '~> 1.5.7'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
+gem 'simple_form', '~> 5.3', '>= 5.3.1'
 gem 'slim-rails', '3.6.2'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
-gem 'simple_form', '~> 5.3', '>= 5.3.1'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
@@ -31,7 +31,7 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
-
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'rspec-collection_matchers'
   gem 'rspec-core'
