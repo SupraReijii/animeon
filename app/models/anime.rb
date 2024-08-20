@@ -11,8 +11,8 @@ class Anime < ApplicationRecord
   def generate_episodes
     ep = self[:episodes].to_i
     if ep > 0
-      (1..ep).each do |_i|
-        Episode.new(anime_id: self[:id], name: _i).save
+      (1..ep).each do |i|
+        Episode.new(anime_id: self[:id], episode_number: i).save
       end
     end
   end
