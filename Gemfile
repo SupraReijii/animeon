@@ -3,20 +3,21 @@ source 'https://rubygems.org'
 ruby '3.3.1'
 
 gem 'bootsnap', require: false
-gem 'cssbundling-rails'
 gem 'enumerize'
 gem 'jbuilder'
-gem 'jsbundling-rails'
 gem 'pg', '~> 1.5.7'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
 gem 'simple_form', '~> 5.3', '>= 5.3.1'
 gem 'slim-rails', '3.6.2'
 gem 'sprockets-rails'
-gem 'stimulus-rails'
-gem 'turbo-rails'
+gem 'turbolinks'
+gem 'sassc', '~> 2.1.0'
+gem 'sassc-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
+gem 'bootstrap'
+gem "shakapacker", "= 8.0"
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]

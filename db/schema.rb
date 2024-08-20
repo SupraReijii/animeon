@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_16_120653) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_20_091328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_120653) do
     t.string "franchise"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "kind"
+    t.integer "duration"
+    t.string "age_rating"
+    t.string "russian", default: "", null: false
+    t.string "english"
+    t.string "japanese"
+    t.integer "shiki_id"
+    t.string "season"
+    t.integer "genres", default: [], null: false, array: true
   end
 
   create_table "episodes", force: :cascade do |t|
@@ -30,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_120653) do
     t.bigint "anime_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "episode_number", default: 0, null: false
     t.index ["anime_id"], name: "index_episodes_on_anime_id"
   end
 

@@ -4,6 +4,8 @@ class Anime < ApplicationRecord
   STATUSES = %i[announced ongoing released].freeze
   has_many :episode
 
+  validates :episodes, comparison: { greater_than_or_equal_to: 0 }
+
   after_create :generate_episodes
 
   def generate_episodes

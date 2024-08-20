@@ -2,7 +2,7 @@
 
 describe Video do
   describe 'enum' do
-    it { is_expected.to enumerize(:quality).in(Video::QUALITIES) }
+    it { is_expected.to enumerize(:quality).in(Video::QUALITIES).with_default(:unknown) }
   end
 
   describe 'relations' do
