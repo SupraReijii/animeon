@@ -19,6 +19,7 @@
 /storage/*
 
 /public/assets
+/shared
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
