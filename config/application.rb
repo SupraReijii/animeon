@@ -3,11 +3,17 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'aws-sdk-core'
 
 Bundler.require(*Rails.groups)
 
 module Animeon
   class Application < Rails::Application
+    Aws.config.update(
+      credentials: Aws::Credentials.new('xxx', 'xxx'),
+      region: 'xxx',
+      endpoint: 'xxx://xxx:9000'
+    )
     config.load_defaults 7.1
     config.autoload_paths << "#{config.root}/app/*"
     config.autoload_lib(ignore: %w[assets tasks])

@@ -20,7 +20,7 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.active_storage.service = :local
+  config.active_storage.service = :test
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
   config.active_support.deprecation = :log

@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '3.3.1'
 
+gem 'aws-sdk-s3', '~> 1.159'
+gem 'aws-sdk-core'
 gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'enumerize'
