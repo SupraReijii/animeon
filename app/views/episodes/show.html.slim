@@ -1,0 +1,6 @@
+= @episode.episode_number
+- @episode.video.each do |v|
+  .video_choose #{v.quality}
+  #player
+  script let player = new Playerjs({id:"player", file:"#{v.url}"});
+

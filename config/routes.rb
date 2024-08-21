@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   resources :animes, only: %i[index show new create edit update]
+  resources :episodes, only: %i[show new create edit update]
 end

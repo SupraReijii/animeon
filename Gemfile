@@ -6,8 +6,10 @@ gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'enumerize'
 gem 'jbuilder'
+gem 'jquery-rails'
 gem 'pg', '~> 1.5.7'
 gem 'puma', '>= 5.0'
+gem 'rack', '<3'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
 gem 'sassc', '~> 2.1.0'
 gem 'sassc-rails'
@@ -18,7 +20,6 @@ gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
-gem 'rack', '<3'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]

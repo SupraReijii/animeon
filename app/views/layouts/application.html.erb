@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_pack_tag :application, "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= javascript_pack_tag "application" %>
+    <%= stylesheet_pack_tag :application, "data-turbo-track": "reload" %>
+    <script src="https://ru.serverspace.store/v1/AUTH_3e4b5e5b66d6440ba5139186ccfc64da/animes/playerjs.js"></script>
   </head>
-
   <body>
     <%= yield %>
   </body>

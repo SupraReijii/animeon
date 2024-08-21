@@ -1,4 +1,4 @@
 = @animes.name
 p Смотреть
 - @animes.episode.each do |e|
-  p Серия #{e.episode_number}
+  = link_to "Серия #{e.episode_number}", e

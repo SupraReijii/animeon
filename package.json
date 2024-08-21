@@ -25,7 +25,8 @@
     "webpack": "5",
     "webpack-assets-manifest": "5",
     "webpack-cli": "4",
-    "webpack-merge": "5"
+    "webpack-merge": "5",
+    "jquery": "3.7.1"
   },
   "devDependencies": {
     "@webpack-cli/serve": "^2.0.5",
