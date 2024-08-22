@@ -1,7 +1,7 @@
 rails_env = 'production'
 app_name = 'animeon'
 app_path = "/home/devops/#{app_name}"
-shared_path = "#{app_root}/shared"
+shared_path = "#{app_path}/shared"
 
 worker_processes 32
 timeout 90
