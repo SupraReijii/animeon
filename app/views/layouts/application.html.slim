@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Animeon
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag "application"
+    = stylesheet_pack_tag :application, "data-turbo-track": "reload"
+    script src="https://ru.serverspace.store/v1/AUTH_3e4b5e5b66d6440ba5139186ccfc64da/animes/playerjs.js"
+  body
+    .navbar
+      .nav-item
+        = link_to "Animes", animes_path
+    .container
+      = yield

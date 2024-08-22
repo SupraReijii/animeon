@@ -3,7 +3,7 @@ const { generateWebpackConfig } = require('shakapacker')
 
 const customConfig = {
   resolve: {
-    extensions: ['.css', '.sass']
+    extensions: ['.css', '.sass', '.scss']
   }
 }
 
