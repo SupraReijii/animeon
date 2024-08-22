@@ -10,9 +10,9 @@ Bundler.require(*Rails.groups)
 module Animeon
   class Application < Rails::Application
     Aws.config.update(
-      credentials: Aws::Credentials.new('xxx', 'xxx'),
-      region: 'xxx',
-      endpoint: 'xxx://xxx:9000'
+      credentials: Aws::Credentials.new(ENV['access_key_id'], ENV['secret_access_key']),
+      region: ENV['region'],
+      endpoint: ENV['endpoint']
     )
     config.load_defaults 7.1
     config.autoload_paths << "#{config.root}/app/*"
