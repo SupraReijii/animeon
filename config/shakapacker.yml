@@ -112,7 +112,7 @@ production:
 
   # Production depends on precompilation of packs prior to booting for performance.
   compile: false
-
+  extract_css: true
   # Use content hash for naming assets. Cannot be overridden by for production.
   useContentHash: true
 
