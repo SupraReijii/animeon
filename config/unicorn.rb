@@ -1,20 +1,19 @@
 rails_env = 'production'
 app_name = 'animeon'
-app_root = "/home/devops/#{app_name}"
-app_path = "#{app_root}"
+app_path = "/home/devops/#{app_name}"
 shared_path = "#{app_root}/shared"
 
 worker_processes 32
 timeout 90
-listen '/www/shared/tmp/sockets/unicorn.socket', backlog: 4098
+listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4098
 
 user 'devops'
 
 working_directory app_path
 
-stderr_path '/www/shared/log/unicorn.error.log'
+stderr_path "#{shared_path}/log/unicorn.error.log"
 
-pid '/www/shared/tmp/pids/unicorn.pid'
+pid "#{shared_path}/tmp/pids/unicorn.pid"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
