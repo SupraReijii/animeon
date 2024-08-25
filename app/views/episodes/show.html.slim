@@ -1,6 +1,12 @@
-= @episode.episode_number
-- @episode.video.each do |v|
-  .video_choose #{v.quality}
-  #player.col-4
-  script let player = new Playerjs({id:"player", file:"#{v.url}"});
+span Серия #{@episode.episode_number}
+.video_block
+  = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id)
+  - @episode.video.each do |v|
+    - vurl = ""
+    - v.video_url.each do |vu|
+      - vurl += "[#{vu.quality}]#{vu.url},"
+    .video_choose
+    #player.col-4
+    = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: v.id)
+    script let player = new Playerjs({id:"player", file:"#{vurl}"});
 

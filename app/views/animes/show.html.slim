@@ -1,4 +1,5 @@
-= @animes.name
-p Смотреть
+span Смотреть #{@animes.name}
+
 - @animes.episode.each do |e|
-  = link_to "Серия #{e.episode_number}", e
+  .episodes_list
+    = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id)

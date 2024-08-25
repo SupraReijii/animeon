@@ -1,0 +1,5 @@
+- @video.video_url.each do |v|
+  = simple_form_for(v, url: anime_episode_video_path(id: params[:episode_id], video_url_id: v.id)) do |f|
+    = f.input :url
+    = f.input :quality
+    = f.button :submit, class: 'btn btn-outline-primary'
