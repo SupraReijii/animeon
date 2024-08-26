@@ -4,4 +4,8 @@ class VideoUrl < ApplicationRecord
             in: QUALITIES,
             default: :unknown
   belongs_to :video
+
+  def fandub
+    nil
+  end
 end

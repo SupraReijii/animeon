@@ -2,6 +2,7 @@ span Серия #{@episode.episode_number}
 .video_block
   = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id)
   - @episode.video.each do |v|
+    p Озвучка от #{v.fandub.first.name}
     - vurl = ""
     - v.video_url.each do |vu|
       - vurl += "[#{vu.quality}]#{vu.url},"

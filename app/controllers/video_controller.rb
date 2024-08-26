@@ -5,9 +5,9 @@ class VideoController < ApplicationController
   end
 
   def create
-    @video = Video.new(episode_id: params[:episode_id])
+    @video = Video.new(episode_id: params[:episode_id], fandub_id: video_params[:fandub])
     @video.save
-    @video_url = VideoUrl.new(video_params)
+    @video_url = VideoUrl.new(video_params.without('fandub'))
     @video_url.video_id = @video.id
     respond_to do |format|
       if @video_url.save
@@ -37,6 +37,6 @@ class VideoController < ApplicationController
 
   private
   def video_params
-    params.require(:video_url).permit(:url, :quality)
+    params.require(:video_url).permit(:fandub, :url, :quality)
   end
 end

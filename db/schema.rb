@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_25_151731) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_25_224325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_151731) do
     t.index ["anime_id"], name: "index_episodes_on_anime_id"
   end
 
+  create_table "fandubs", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "members", default: [], null: false, array: true
+    t.date "date_of_foundation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fandubs_videos", id: false, force: :cascade do |t|
+    t.bigint "video_id", null: false
+    t.bigint "fandub_id", null: false
+  end
+
   create_table "video_urls", force: :cascade do |t|
     t.string "url"
     t.bigint "video_id"
@@ -84,7 +98,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_151731) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "episode_id"
+    t.bigint "fandub_id"
     t.index ["episode_id"], name: "index_videos_on_episode_id"
+    t.index ["fandub_id"], name: "index_videos_on_fandub_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
