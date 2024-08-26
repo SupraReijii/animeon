@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   resources :animes, only: %i[index show new create edit update] do
     resources :episodes, only: %i[show new create edit update] do
-      resources :video, only: %i[new create edit update]
+      resources :video, only: %i[new create edit update] do
+        get :video_url_new
+        post :video_url_create
+      end
     end
   end
 

@@ -3,3 +3,9 @@
     = f.input :url
     = f.input :quality
     = f.button :submit, class: 'btn btn-outline-primary'
+
+.new_video_url.btn.btn-outline-primary
+  = link_to "Добавить ссылку", anime_episode_video_video_url_new_path(video_id: params[:id])
+br
+.btn.btn-outline-secondary
+  = link_to "Назад", anime_episode_path(id: params[:episode_id])
