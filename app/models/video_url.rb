@@ -5,7 +5,11 @@ class VideoUrl < ApplicationRecord
 
   belongs_to :video
   before_save :add_priority
-
+  after_create :add_url
+  def add_url
+    self[:url] = "https://cdn.animeon.ru/#{self[:video_id]}-#{self[:quality].match('\d+')[0]}.m3u8"
+    self.save
+  end
   def fandub
     nil
   end
