@@ -1,20 +1,16 @@
 class VideoController < ApplicationController
   def new
     @video = Video.new
-    @videourl = VideoUrl.new
   end
 
   def create
-    @video = Video.new(episode_id: params[:episode_id], fandub_id: video_params[:fandub])
-    @video.save
-    @video_url = VideoUrl.new(video_params.without('fandub'))
-    @video_url.video_id = @video.id
+    @video = Video.new(episode_id: params[:episode_id], fandub_id: video_params[:fandub], quality: video_params[:quality].drop(1))
     respond_to do |format|
-      if @video_url.save
+      if @video.save
         format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
       else
         format.html  { render action: 'new' }
-        format.json  { render json: @video_url.errors, status: :unprocessable_entity }
+        format.json  { render json: @video.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -26,7 +22,7 @@ class VideoController < ApplicationController
   def update
     @video_url = VideoUrl.find(params[:video_url_id])
     respond_to do |format|
-      if @video_url.update(video_params)
+      if @video_url.update(video_url_params)
         format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
       else
         format.html  { render action: 'new' }
@@ -40,7 +36,7 @@ class VideoController < ApplicationController
   end
 
   def video_url_create
-    @video_url = VideoUrl.new(video_params.without('fandub'))
+    @video_url = VideoUrl.new(video_url_params)
     @video_url.video_id = params[:video_id]
     respond_to do |format|
       if @video_url.save
@@ -54,6 +50,10 @@ class VideoController < ApplicationController
 
   private
   def video_params
-    params.require(:video_url).permit(:fandub, :url, :quality)
+    params.require(:video).permit(:fandub, quality: [])
+  end
+
+  def video_url_params
+    params.require(:video_url).permit(:url, :quality)
   end
 end

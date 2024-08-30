@@ -5,7 +5,7 @@ span Серия #{@episode.episode_number}
     p Озвучка от #{v.fandub.first.name}
     - vurl = ""
     - v.video_url.order(priority: :desc).each do |vu|
-      - vurl += "[#{vu.quality}]#{vu.url},"
+      - vurl += "[#{vu.quality}]#{vu.url},"x
     .video_choose
     #player.col-8
     = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: v.id)

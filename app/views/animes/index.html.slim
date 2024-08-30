@@ -1,5 +1,8 @@
-h1 All anime
-- @animes.each do |anime|
-  .animes_list
-    = link_to anime.name, anime
+h1 Все аниме
+.animes-card-block
+  - @animes.each do |anime|
+    .anime-card.card
+      img src="https://cdn.animeon.ru/posters/animes/#{anime.id}.jpeg"
+      .card-body
+        = link_to anime.name, anime
 

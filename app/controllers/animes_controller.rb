@@ -2,7 +2,7 @@
 
 class AnimesController < ApplicationController
   def index
-    @animes = Anime.all
+    @animes = Anime.all.order(user_rating: :desc)
   end
 
   def new

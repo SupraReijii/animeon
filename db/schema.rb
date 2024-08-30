@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_26_143511) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_30_164031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_143511) do
     t.integer "shiki_id"
     t.string "season"
     t.integer "genres", default: [], null: false, array: true
+    t.integer "episodes_aired", default: 0, null: false
   end
 
   create_table "episodes", force: :cascade do |t|
@@ -85,6 +86,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_143511) do
     t.bigint "fandub_id", null: false
   end
 
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.string "russian"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "video_urls", force: :cascade do |t|
     t.string "url"
     t.bigint "video_id"
@@ -100,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_26_143511) do
     t.datetime "updated_at", null: false
     t.bigint "episode_id"
     t.bigint "fandub_id"
+    t.string "quality", array: true
     t.index ["episode_id"], name: "index_videos_on_episode_id"
     t.index ["fandub_id"], name: "index_videos_on_fandub_id"
   end

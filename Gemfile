@@ -22,6 +22,8 @@ gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
+gem 'i18n'
+gem 'rails-i18n'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]

@@ -1,10 +1,16 @@
-=simple_form_for @animes do |f|
+= simple_form_for @animes do |f|
   = f.input :name
+  = f.input :russian
   = f.input :description
   = f.input :episodes
-  = f.input :status
+  = f.input :episodes_aired
+  = f.input :kind
+  = f.input :age_rating
+  = f.input :duration
+  = f.input :genres
   = f.input :user_rating
   = f.input :franchise
   = f.button :submit, class: 'btn btn-outline-primary'
-
+  .btn.btn-outline-danger.m-1
+    = link_to 'Назад', animes_path
 // TODO add inputs

@@ -9,15 +9,15 @@ Bundler.require(*Rails.groups)
 
 module Animeon
   class Application < Rails::Application
-    config.action_dispatch.default_headers.merge!({
-                                                    'Access-Control-Allow-Origin' => '*',
-                                                    'Access-Control-Request-Method' => '*'
-                                                  })
     Aws.config.update(
       credentials: Aws::Credentials.new(ENV['access_key_id'], ENV['secret_access_key']),
       region: ENV['region'],
       endpoint: ENV['endpoint']
     )
+
+    config.i18n.default_locale = :ru
+    config.i18n.locale = :ru
+    config.i18n.available_locales = %i[ru en]
     config.load_defaults 7.1
     config.autoload_paths << "#{config.root}/app/*"
     config.autoload_lib(ignore: %w[assets tasks])

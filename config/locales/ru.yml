@@ -1,0 +1,48 @@
+ru:
+  activerecord:
+    models:
+      anime:
+          one: Аниме
+          other: Аниме
+      video:
+          one: Видео
+          other: Видео
+
+  attributes: &anime_attributes
+    name: Английское название
+    description: Описание
+    episodes: Эпизоды
+    duration: Длительность эпизода
+    status: Статус
+    age_rating: Возврастной рейтинг
+    episodes_aired: Эпизодов вышло
+    kind: Тип
+    japanese: Японское название
+    russian: Русское название
+    english: Английское название
+    user_rating: Оценки зрителей
+    franchise: Франшиза
+    genres: Жанры
+  enumerize:
+    anime:
+      status:
+        announced: Анонс
+        ongoing: Онгоинг
+        released: Вышло
+      kind:
+        tv: TV Сериал
+        movie: Фильм
+        ona: ONA
+        ova: OVA
+        special: Спецвыпуск
+        pv: Проморолик
+        cm: Реклама
+        none: Нет
+      age_rating:
+        g: G
+        pg: PG
+        pg_13: PG-13
+        r: R-17
+        r_plus: R+
+        rx: Rx
+        none: Нет
