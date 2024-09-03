@@ -1,7 +1,7 @@
 h2 #{@animes.russian} / #{@animes.name}
 
 span Смотреть #{@animes.name}
-
-- @animes.episode.each do |e|
-  .episodes_list
-    = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id)
+.episodes_list
+  - @animes.episode.each do |e|
+    .btn.btn-outline-light.col-3.anime_episode
+      = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id)

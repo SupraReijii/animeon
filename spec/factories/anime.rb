@@ -8,5 +8,6 @@ FactoryBot.define do
     user_rating { 0 }
     episodes { 0 }
     franchise { nil }
+    episodes_aired { 0 }
   end
 end

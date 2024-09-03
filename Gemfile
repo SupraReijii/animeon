@@ -2,17 +2,19 @@ source 'https://rubygems.org'
 
 ruby '3.3.1'
 
-gem 'aws-sdk-s3', '~> 1.159'
 gem 'aws-sdk-core'
+gem 'aws-sdk-s3', '~> 1.159'
 gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'enumerize'
+gem 'i18n'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'pg', '~> 1.5.7'
 gem 'puma', '>= 5.0'
 gem 'rack', '<3'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
+gem 'rails-i18n'
 gem 'sassc', '~> 2.1.0'
 gem 'sassc-rails'
 gem 'shakapacker', '8.0'
@@ -22,8 +24,6 @@ gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
-gem 'i18n'
-gem 'rails-i18n'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]

@@ -8,14 +8,14 @@ class Anime < ApplicationRecord
   has_many :episode
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
-
   validates :episodes_aired, comparison: { less_than_or_equal_to: :episodes, greater_than_or_equal_to: 0 }
 
   after_create :generate_episodes
-  before_update :check_air
+  before_save :check_air
 
   def check_air
-    e, a = self[:episodes], self[:episodes_aired]
+    e = self[:episodes]
+    a = self[:episodes_aired]
     if a == 0
       self[:status] = "announced"
     elsif a < e
@@ -26,7 +26,7 @@ class Anime < ApplicationRecord
   end
 
   def generate_episodes
-    ep = self[:episodes_aired].to_i
+    ep = episodes_aired.to_i
     if ep > 0
       (1..ep).each do |i|
         Episode.new(anime_id: self[:id], episode_number: i).save

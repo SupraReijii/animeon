@@ -2,12 +2,11 @@
 
 class Video < ApplicationRecord
   belongs_to :episode
-  has_and_belongs_to_many :fandub, join_table: 'fandubs_videos'
+  belongs_to :fandub
   has_many :video_url
 
   enumerize :qualities, in: VideoUrl::QUALITIES, multiple: true, default: :unknown
 
-  after_create :add_to_join_table
   after_create :add_video_urls
 
   def add_video_urls
@@ -16,7 +15,7 @@ class Video < ApplicationRecord
     end
   end
 
-  def add_to_join_table
-    ActiveRecord::Base.connection.exec_query("INSERT INTO fandubs_videos (video_id, fandub_id) VALUES (#{self[:id]}, #{self[:fandub_id]})")
+  def fandub
+    Fandub.find_by(id: fandub_id)
   end
 end
