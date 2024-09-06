@@ -1,6 +1,7 @@
 class VideoController < ApplicationController
   def new
     @video = Video.new
+    @title = "Добавить видео для #{Episode.find(params[:episode_id]).episode_number} серии #{Anime.find(params[:anime_id]).name}"
   end
 
   def create
@@ -17,6 +18,7 @@ class VideoController < ApplicationController
 
   def edit
     @video = Video.find(params[:id])
+    @title = "Редактировать видео для #{Episode.find(params[:episode_id]).episode_number} серии #{Anime.find(params[:anime_id]).name}"
   end
 
   def update

@@ -1,10 +1,12 @@
 class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params[:id])
+    @title = "Смотреть аниме #{@episode.anime.name} - #{@episode.episode_number} серия"
   end
 
   def new
     @episode = Episode.new
+    @title = 'Создать эпизод'
   end
 
   def create

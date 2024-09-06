@@ -3,18 +3,22 @@
 class AnimesController < ApplicationController
   def index
     @animes = Anime.all.order(user_rating: :desc)
+    @title = 'Все аниме'
   end
 
   def new
     @animes = Anime.new
+    @title = 'Создать аниме'
   end
 
   def edit
     @animes = Anime.find(params[:id])
+    @title = 'редактировать аниме'
   end
 
   def show
     @animes = Anime.find(params[:id])
+    @title = @animes.name.to_s
   end
 
   def create
@@ -40,6 +44,8 @@ class AnimesController < ApplicationController
 
   private
   def animes_params
-    params.require(:anime).permit(:name, :description, :episodes, :status, :user_rating, :franchise)
+    params.require(:anime).permit(:name, :russian, :description, :episodes,
+                                  :episodes_aired, :kind, :status, :user_rating,
+                                  :franchise, :duration, :genres, :age_rating)
   end
 end
