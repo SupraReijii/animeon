@@ -22,21 +22,18 @@ class AnimesController < ApplicationController
   end
 
   def create
-    @animes = Anime.new(animes_params)
-    respond_to do |format|
-      if @animes.save
-        format.html  { redirect_to(@animes) }
-      else
-        format.html  { render action: 'new' }
-        format.json  { render json: @animes.errors, status: :unprocessable_entity }
-      end
+    @resource = Anime.new(animes_params)
+    if @resource.save
+      redirect_to(@resource)
+    else
+      render action: 'new'
     end
   end
 
   def update
-    @animes = Anime.find(params[:id])
-    if @animes.update(animes_params)
-      redirect_to @animes
+    @resource = Anime.find(params[:id])
+    if @resource.update(animes_params)
+      redirect_to @resource
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,6 +43,6 @@ class AnimesController < ApplicationController
   def animes_params
     params.require(:anime).permit(:name, :russian, :description, :episodes,
                                   :episodes_aired, :kind, :status, :user_rating,
-                                  :franchise, :duration, :genres, :age_rating)
+                                  :franchise, :duration, :age_rating)
   end
 end

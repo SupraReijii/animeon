@@ -9,6 +9,8 @@ require 'factory_bot_rails'
 require 'shoulda/matchers'
 require 'rails-controller-testing'
 
+require 'support/controller_resource'
+
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -23,7 +25,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.render_views
-
+  config.include ControllerResource, type: :controller
   config.include FactoryBot::Syntax::Methods
   config.include Shoulda::Matchers::ActiveModel, type: :validator
 end

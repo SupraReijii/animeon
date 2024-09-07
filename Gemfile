@@ -46,6 +46,7 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'rspec-mocks'
   gem 'rspec-rails'
+  gem 'fuubar'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
 end
