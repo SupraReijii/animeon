@@ -2,7 +2,6 @@ h1 Все аниме
 .animes-card-block
   - @animes.each do |anime|
     .anime-card.card
-      img src="https://cdn.animeon.ru/posters/animes/#{anime.id}.jpeg"
+      img src="https://storage.animeon.ru/posters/animes/#{anime.id}.webp"
       .card-body
         = link_to anime.name, anime
-

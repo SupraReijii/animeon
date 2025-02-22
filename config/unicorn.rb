@@ -1,5 +1,4 @@
-rails_env = 'production'
-app_name = 'animeon'
+app_name = "animeon"
 app_path = "/home/devops/#{app_name}"
 shared_path = "#{app_path}/shared"
 
@@ -7,7 +6,7 @@ worker_processes 32
 timeout 90
 listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4098
 
-user 'devops'
+user "devops"
 
 working_directory app_path
 
@@ -22,7 +21,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 check_client_connection false
 
 before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{app_path}/Gemfile"
+  ENV["BUNDLE_GEMFILE"] = "#{app_path}/Gemfile"
 end
 
 before_fork do |server, worker|
@@ -31,7 +30,7 @@ before_fork do |server, worker|
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exist?(old_pid) && server.pid != old_pid
     begin
-      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      sig = ((worker.nr + 1) >= server.worker_processes) ? :QUIT : :TTOU
       Process.kill(sig, File.read(old_pid).to_i)
     rescue Errno::ENOENT, Errno::ESRCH
     end
