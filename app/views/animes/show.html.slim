@@ -2,6 +2,6 @@ h2 #{@animes.russian} / #{@animes.name}
 
 span Смотреть #{@animes.name}
 .episodes_list
-  - @animes.episode.each do |e|
+  - @animes.episode.order(episode_number: :asc).each do |e|
     .btn.btn-outline-light.col-3.anime_episode
       = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id)
