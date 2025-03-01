@@ -1,7 +1,13 @@
 h2 #{@animes.russian} / #{@animes.name}
-
-span Смотреть #{@animes.name}
-.episodes_list
-  - @animes.episode.order(episode_number: :asc).each do |e|
-    .btn.btn-outline-light.col-3.anime_episode
-      = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id)
+.anime_page
+  .anime_info
+    .text_info
+      span Информация
+    div.anime_img
+      img src="https://storage.animeon.ru/posters/animes/#{@animes.id}.webp"
+  .watch
+    .text_info
+      span Смотреть #{@animes.russian}
+    .episodes_list
+      - @animes.episode.order(episode_number: :asc).each do |e|
+        = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode"

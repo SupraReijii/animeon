@@ -1,4 +1,4 @@
-h1 #{Anime.find_by(id: @episode.anime_id).name}
+h2 #{@episode.anime.russian} / #{@episode.anime.name}
 span Серия #{@episode.episode_number}
 .video_block
   = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id)
