@@ -41,7 +41,7 @@ body
   margin: 0 auto
   display: inline-block
 
-.anime_info
+.anime_img_box
   clear: left
   float: left
   margin: 5px
@@ -70,18 +70,24 @@ body
   margin-bottom: 10px
   border-left: 10px solid #a7acb1
 
-@media screen and (max-width: 1023px)
+@media screen and (max-width: 600px)
   .container
     margin: 0
     width: 100%
-  .anime_info
+  .anime_img_box
+    float: none
     width: 100%
-    margin: 10px
+    margin-bottom: 15px
   .watch
+    float: none
     width: 100%
-    margin: 10px
+
   .anime_img
-    width: 50%
+    width: 75%
+  .anime_episode
+    width: 45%
+  .text_info
+    width: 100%
 
 .anime_img img
   width: 75%
