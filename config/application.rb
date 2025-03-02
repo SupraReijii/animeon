@@ -17,7 +17,7 @@ module Animeon
 
     config.i18n.default_locale = :ru
     config.i18n.locale = :ru
-    config.i18n.available_locales = %i[ru en]
+    config.i18n.available_locales = %i[ru]
     config.load_defaults 7.1
     config.autoload_paths << "#{config.root}/app/*"
     config.autoload_lib(ignore: %w[assets tasks])

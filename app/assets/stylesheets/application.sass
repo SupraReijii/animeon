@@ -30,11 +30,13 @@ body
   flex-wrap: wrap
 
 .anime-card
-  width: 10rem
+  width: 12rem
   margin: 10px
 
-.anime-card a
+.anime-card span
   color: black
+  font-size: 12px
+  font-weight: bold
 
 .episodes_list
   max-width: 1300px
@@ -45,12 +47,12 @@ body
   clear: left
   float: left
   margin: 5px
-  width: 25%
+  width: 20%
 
 .watch
-  float: right
+  float: left
   margin: 5px
-  width: 65%
+  width: 50%
 
 .anime_episode
   margin: 5px
@@ -64,31 +66,66 @@ body
   content: ' '
 
 .text_info
-  width: 50%
+  width: 100%
   padding: 3px
   background: #36393c
   margin-bottom: 10px
   border-left: 10px solid #a7acb1
 
-@media screen and (max-width: 600px)
+.anime_img img
+  width: 75%
+  border-radius: 12px
+
+.anime_info_box
+  margin: 5px
+  width: 25%
+  float: left
+
+.card-body
+    padding: 10px
+
+@media screen and (max-width: 1023px)
   .container
     margin: 0
     width: 100%
   .anime_img_box
-    float: none
-    width: 100%
+    clear: left
+    float: left
+    width: 45%
     margin-bottom: 15px
   .watch
-    float: none
+    float: left
     width: 100%
-
   .anime_img
     width: 75%
   .anime_episode
     width: 45%
   .text_info
     width: 100%
+  .anime_info_box
+    float: left
+    width: 50%
+  .anime-card span
+    font-size: 11px
+  .card-body
+    padding: 7px
 
-.anime_img img
-  width: 75%
-  border-radius: 12px
+@media screen and (max-width: 576px)
+  .anime-card
+    width: 9.5rem
+  .anime_img_box
+    float: none
+    width: 100%
+  .watch
+    float: none
+    width: 100%
+  .anime_info_box
+    float: none
+    width: 100%
+    margin-bottom: 15px
+  .anime-card span
+    font-size: 10px
+.key
+  color: #8c9095
+  font-weight: bold
+

@@ -16,18 +16,18 @@ class Anime < ApplicationRecord
   def check_air
     e = self[:episodes]
     a = self[:episodes_aired]
-    if a == 0
-      self[:status] = "announced"
-    elsif a < e
-      self[:status] = "ongoing"
-    else
-      self[:status] = "released"
-    end
+    self[:status] = if a.zero?
+                      'announced'
+                    elsif a < e
+                      'ongoing'
+                    else
+                      'released'
+                    end
   end
 
   def generate_episodes
     ep = episodes_aired.to_i
-    if ep > 0
+    if ep.positive?
       (1..ep).each do |i|
         Episode.new(anime_id: self[:id], episode_number: i).save
       end

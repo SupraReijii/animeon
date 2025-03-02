@@ -41,7 +41,7 @@ ru:
       age_rating:
         g: G
         pg: PG
-        pg_13: PG-13
+        pg13: PG-13
         r: R-17
         r_plus: R+
         rx: Rx

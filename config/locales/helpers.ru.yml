@@ -1,0 +1,7 @@
+ru:
+  anime_helper:
+    minute: Мин.
+    hour:
+      one: Час
+      few: Часа
+      many: Часов

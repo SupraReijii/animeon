@@ -5,4 +5,4 @@ h1 Все аниме
       .anime-card.card
         img src="https://storage.animeon.ru/posters/animes/#{anime.id}.webp" alt="anime poster"
         .card-body
-          | #{anime.russian}
+          span #{anime_name_substr(anime.russian)}

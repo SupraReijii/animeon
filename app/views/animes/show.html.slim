@@ -2,9 +2,25 @@ h2 #{@animes.russian} / #{@animes.name}
 .anime_page
   .anime_img_box
     .text_info
-      span Информация
+      span Фото
     div.anime_img
       img src="https://storage.animeon.ru/posters/animes/#{@animes.id}.webp"
+  .anime_info_box
+    .text_info
+      span Информация
+    .anime_info
+      .line
+        span.key #{Anime.human_attribute_name(:status)}
+        span.value  - #{@animes.status_text}
+      .line
+        span.key #{Anime.human_attribute_name(:kind)}
+        span.value  - #{@animes.kind_text}
+      .line
+        span.key #{Anime.human_attribute_name(:age_rating)}
+        span.value  - #{@animes.age_rating_text}
+      .line
+        span.key #{Anime.human_attribute_name(:duration)}
+        span.value - #{humanize_minutes(@animes.duration)}
   .watch
     .text_info
       span Смотреть #{@animes.russian}
