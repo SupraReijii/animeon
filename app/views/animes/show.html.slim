@@ -9,18 +9,22 @@ h2 #{@animes.russian} / #{@animes.name}
     .text_info
       span Информация
     .anime_info
-      .line
-        span.key #{Anime.human_attribute_name(:status)}
-        span.value  - #{@animes.status_text}
-      .line
-        span.key #{Anime.human_attribute_name(:kind)}
-        span.value  - #{@animes.kind_text}
-      .line
-        span.key #{Anime.human_attribute_name(:age_rating)}
-        span.value  - #{@animes.age_rating_text}
-      .line
-        span.key #{Anime.human_attribute_name(:duration)}
-        span.value - #{humanize_minutes(@animes.duration)}
+      - if @animes.status.present?
+        .line
+          span.key #{Anime.human_attribute_name(:status)}
+          span.value  - #{@animes.status_text}
+      - if @animes.kind.present?
+        .line
+          span.key #{Anime.human_attribute_name(:kind)}
+          span.value  - #{@animes.kind_text}
+      - if @animes.age_rating.present?
+        .line
+          span.key #{Anime.human_attribute_name(:age_rating)}
+          span.value  - #{@animes.age_rating_text}
+      - if @animes.duration.present?
+        .line
+          span.key #{Anime.human_attribute_name(:duration)}
+          span.value - #{humanize_minutes(@animes.duration)}
   .watch
     .text_info
       span Смотреть #{@animes.russian}
