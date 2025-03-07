@@ -1,1 +1,2 @@
-console.log("start")
+import Turbolinks from 'turbolinks';
+Turbolinks.start();

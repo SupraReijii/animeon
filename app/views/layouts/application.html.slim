@@ -6,9 +6,10 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_pack_tag "application"
-    = stylesheet_pack_tag :application, "data-turbo-track": "reload"
+    = stylesheet_link_tag :application, media: 'all', data: { 'turbolinks-track' => 'reload' }
+    = stylesheet_pack_tag 'application', media: 'all', data: { 'turbolinks-track' => 'reload'  }
     script src="https://cdn.plrjs.com/player/d7ybfrhe9nh7e/gt0888ggbuuc.js"
-  body
+  body class="#{controller_classes}"
     .navbar
       .nav-item
         = link_to "Animes", animes_path

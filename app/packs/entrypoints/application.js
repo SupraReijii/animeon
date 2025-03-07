@@ -1,4 +1,4 @@
-import '../../assets/stylesheets/application.sass'
-//import $ from 'jquery'
-import '../javascripts/application'
-//import 'bootstrap'
+import "../javascripts/application"
+import 'core-js/stable'
+import $ from 'jquery'
+import "../../assets/stylesheets/application.sass"
