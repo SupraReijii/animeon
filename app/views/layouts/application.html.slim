@@ -11,7 +11,12 @@ html
     script src="https://cdn.plrjs.com/player/d7ybfrhe9nh7e/gt0888ggbuuc.js"
   body class="#{controller_classes}"
     .navbar
-      .nav-item
-        = link_to "Animes", animes_path
+      .nav-items
+        .nav-item
+          = link_to "Главная", root_path
+        .nav-item
+          = link_to "Аниме", animes_path
+        .nav-item
+          = link_to "Онгоинги", animes_path
     .container
       = yield

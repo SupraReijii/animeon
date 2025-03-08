@@ -22,11 +22,9 @@ gem 'simple_form', '~> 5.3', '>= 5.3.1'
 gem 'slim-rails', '3.6.2'
 gem 'sprockets-rails'
 gem 'turbolinks'
-gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'unicorn'
 
 group :development, :test do
-  gem 'debug', platforms: %i[mri windows]
   gem 'rspec'
   gem 'rubocop', require: false
   gem 'standard', '>=1.35.1', require: false

@@ -15,7 +15,8 @@ a
 
 .navbar
   background: $navbar-color
-  height: 35px
+  display: block
+  height: 40px
 
 .container
   background: #242629
@@ -24,8 +25,27 @@ a
 body
   background: $backgroud-color
 
-.nav-item
+.nav-items
+  display: block
+  width: 100%
   margin: 1px auto 1px auto
+  max-width: 800px
+
+.nav-items:after
+  clear: both
+  display: block
+  content: ' '
+
+.nav-item:first-child
+  clear: left
+
+.nav-item:last-child
+  border: none
+
+.nav-item
+  float: left
+  padding: 0 10%
+  border-right: white groove 1px
 
 .animes-card-block
   display: flex
@@ -91,5 +111,6 @@ body
     margin-bottom: 15px
   .anime-card span
     font-size: 10px
-
+  .nav-item
+    padding: 0 8%
 
