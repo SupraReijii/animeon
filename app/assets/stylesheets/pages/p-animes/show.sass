@@ -1,3 +1,5 @@
+@import '../../mixins/clear'
+
 .p-animes-show
   .key
     color: #8c9095
@@ -25,10 +27,8 @@
     color: #a7acb1
     border-color: #a7acb1
 
-  .anime_page:after
-    clear: both
-    display: block
-    content: ' '
+  .anime_page
+    +clear_left
 
   .text_info
     width: 100%

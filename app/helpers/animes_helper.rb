@@ -29,6 +29,6 @@ module AnimesHelper
   end
 
   def anime_name_substr(name)
-    "#{name[0..20]}..."
+    name.length > 20 ? "#{name[0..20]}..." : name
   end
 end

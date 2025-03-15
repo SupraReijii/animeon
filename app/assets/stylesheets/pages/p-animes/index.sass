@@ -1,0 +1,30 @@
+@import '../../mixins/clear'
+
+.p-animes-index
+  .animes-card-block
+    margin: 0 auto
+    max-width: 1120px
+    +clear_left
+
+  .anime-card:nth-child(5n+1)
+    clear: left
+
+  .anime-card
+    width: 17%
+    margin: 10px
+    border: 0
+    float: left
+
+  .card
+    border-radius: 7px
+
+  .anime-card span
+    color: black
+    font-size: 12px
+    font-weight: bold
+
+  .anime-card img
+    border-radius: 5px 5px 0 0
+
+  .card-body
+    padding: 10px

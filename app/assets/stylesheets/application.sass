@@ -1,7 +1,9 @@
-@use "./pages/pages"
-@use "bootstrap"
-@import "./vars"
+@use './pages/animes'
+@use './pages/episodes'
 
+@import bootstrap
+@import vars
+@import mixins/clear
 
 a
   color: $backgroud-color
@@ -30,11 +32,7 @@ body
   width: 100%
   margin: 1px auto 1px auto
   max-width: 800px
-
-.nav-items:after
-  clear: both
-  display: block
-  content: ' '
+  +clear_left
 
 .nav-item:first-child
   clear: left
@@ -46,29 +44,6 @@ body
   float: left
   padding: 0 10%
   border-right: white groove 1px
-
-.animes-card-block
-  display: flex
-  flex-wrap: wrap
-
-.anime-card
-  width: 12rem
-  margin: 10px
-  border: 0
-
-.card
-  border-radius: 7px
-
-.anime-card span
-  color: black
-  font-size: 12px
-  font-weight: bold
-
-.anime-card img
-  border-radius: 5px 5px 0 0
-
-.card-body
-    padding: 10px
 
 @media screen and (max-width: 1023px)
   .container
