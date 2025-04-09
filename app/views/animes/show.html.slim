@@ -31,3 +31,4 @@ h2 #{@animes.russian} / #{@animes.name}
     .episodes_list
       - @animes.episode.order(episode_number: :asc).each do |e|
         = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode"
+      = link_to '+', anime_url(id: @animes.id), class: "btn btn-outline-light anime_episode"
