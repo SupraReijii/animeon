@@ -1,20 +1,15 @@
 h2 #{@episode.anime.russian} / #{@episode.anime.name}
 span Серия #{@episode.episode_number}
 .video_block
-  = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id), class: "btn btn-outline-info ep"
-  - @episode.video.each do |v|
-    p Озвучка от #{v.fandub.name}
-    - vurl = ""
-    - v.video_url.order(priority: :desc).each do |vu|
-      - vurl += "[#{vu.quality}]#{vu.url},"
-    .video_choose
-    #player.anime-video-player
-    = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: v.id)
-    script let player = new Playerjs({id:"player", file:"#{vurl}"});
+  .video_choose
+  .anime-video-player[
+    id="player-#{@episode.id}"
+  ]
+  script new Playerjs({id:"player-#{@episode.id}", file: #{compile_videojs_url(@episode.video)}});
 
+  = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: 1), class: "btn btn-outline-info ep"
+  = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id), class: "btn btn-outline-info ep"
   - if @episode.episode_number < @episode.max_episode
     = link_to 'Следующая серия', anime_episode_path(id: @episode.next_episode.id), class: "btn btn-outline-success ep"
   - if  @episode.episode_number > 1
     = link_to 'Предыдущая серия', anime_episode_path(id: @episode.previous_episode.id), class: "btn btn-outline-danger ep"
-
-

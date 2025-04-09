@@ -31,4 +31,19 @@ module AnimesHelper
   def anime_name_substr(name)
     name.length > 20 ? "#{name[0..20]}..." : name
   end
+
+  def compile_videojs_url(ary)
+    u = '['
+    ary.to_a.each do |v|
+      u += '{"title":  "Озвучка ' + v.fandub.name + '","file": "'
+      v.video_url.each do |vu|
+        u += "[#{vu.quality}]#{vu.url},"
+      end
+      u[-1] = '"'
+      u += '},'
+    end
+    u += ']'
+    u[-2] = ''
+    u.html_safe
+  end
 end
