@@ -33,17 +33,21 @@ module AnimesHelper
   end
 
   def compile_videojs_url(ary)
-    u = '['
-    ary.to_a.each do |v|
-      u += '{"title":  "Озвучка ' + v.fandub.name + '","file": "'
-      v.video_url.each do |vu|
-        u += "[#{vu.quality}]#{vu.url},"
+    if ary.empty?
+      '"", poster: "/video_thumb.png"'.html_safe
+    else
+      u = '['
+      ary.to_a.each do |v|
+        u += '{"title":  "Озвучка ' + v.fandub.name + '","file": "'
+        v.video_url.each do |vu|
+          u += "[#{vu.quality}]#{vu.url},"
+        end
+        u[-1] = '"'
+        u += '},'
       end
-      u[-1] = '"'
-      u += '},'
+      u += ']'
+      u[-2] = ''
+      u.html_safe
     end
-    u += ']'
-    u[-2] = ''
-    u.html_safe
   end
 end
