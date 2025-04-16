@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'enumerize'
 gem 'i18n'
+gem 'kt-paperclip', '~> 6.4', '>= 6.4.1'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'non-stupid-digest-assets'

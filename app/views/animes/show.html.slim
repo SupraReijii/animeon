@@ -4,7 +4,9 @@ h2 #{@animes.russian} / #{@animes.name}
     .text_info
       span Фото
     div.anime_img
-      img src="https://storage.animeon.ru/posters/animes/#{@animes.id}.webp"
+      = image_tag @animes.poster.url
+      //img src="#{Rails.application.routes.url_helpers.rails_blob_path(@animes.poster, only_path: true)}"
+      //img src="https://storage.animeon.ru/posters/animes/#{@animes.id}.webp"
   .anime_info_box
     .text_info
       span Информация

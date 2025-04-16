@@ -6,6 +6,14 @@ class Anime < ApplicationRecord
   AGE_RATINGS = %i[g pg pg13 r r_plus rx none].freeze
 
   has_many :episode
+  has_attached_file :poster,
+                    styles: { original: ['225x350>', :webp] },
+                    convert_options: {
+                      original: '-quality 94'
+                    },
+                    url: '/files/posters/animes/:style/:id.:extension',
+                    path: ':rails_root/public/files/posters/animes/:style/:id.:extension'
+  validates_attachment_content_type :poster, content_type: /\Aimage/
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
   validates :episodes_aired, comparison: { less_than_or_equal_to: :episodes, greater_than_or_equal_to: 0 }
