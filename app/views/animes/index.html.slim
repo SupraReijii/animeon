@@ -2,6 +2,6 @@ h1 Все аниме
 .animes-card-block
   - @animes.each do |anime|
     = link_to anime, class: "anime-card card"
-      = image_tag anime.poster.url
+      = image_tag anime.poster.url(:mini)
         .card-body
           span #{anime_name_substr(anime.russian)}

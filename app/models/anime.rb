@@ -7,10 +7,10 @@ class Anime < ApplicationRecord
 
   has_many :episode
   has_attached_file :poster,
-                    styles: { original: ['225x350>', :webp], x2: ['450x700>', :webp] },
+                    styles: { mini: ['225x350>', :webp], original: ['450x700>', :webp] },
                     convert_options: {
                       original: '-quality 94',
-                      x2: '-quality 98'
+                      mini: '-quality 98'
                     },
                     url: '/files/posters/animes/:style/:id.:extension',
                     path: ':rails_root/public/files/posters/animes/:style/:id.:extension'
