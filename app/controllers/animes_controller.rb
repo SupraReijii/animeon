@@ -12,8 +12,12 @@ class AnimesController < ApplicationController
   end
 
   def edit
-    @animes = Anime.find(params[:id])
-    @title = 'редактировать аниме'
+    if user_signed_in? && current_user.role == 'admin'
+      @animes = Anime.find(params[:id])
+      @title = 'редактировать аниме'
+    else
+      redirect_to anime_path(params[:id])
+    end
   end
 
   def show

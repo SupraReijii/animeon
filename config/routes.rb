@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'dashboard#index'
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+  }
 
+  root 'dashboard#index'
+  resources :user, only: %i[show], controller: 'users/users'
   resources :animes, only: %i[index show new create edit update] do
     resources :episodes, only: %i[show new create edit update] do
       resources :video, only: %i[new create edit update] do

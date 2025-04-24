@@ -5,6 +5,8 @@ h2 #{@animes.russian} / #{@animes.name}
       span Фото
     div.anime_img
       = image_tag @animes.poster.url
+      - if user_signed_in? && current_user.role == 'admin'
+        = link_to "Редактировать", edit_anime_url(params[:id]), class: "btn btn-outline-light edit_anime"
   .anime_info_box
     .text_info
       span Информация
@@ -31,4 +33,5 @@ h2 #{@animes.russian} / #{@animes.name}
     .episodes_list
       - @animes.episode.order(episode_number: :asc).each do |e|
         = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode"
-      = link_to '+', anime_url(id: @animes.id), class: "btn btn-outline-light anime_episode"
+      - if user_signed_in?
+        = link_to '+', anime_url(id: @animes.id), class: "btn btn-outline-light anime_episode"

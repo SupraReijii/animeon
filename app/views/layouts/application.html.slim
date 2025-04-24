@@ -19,5 +19,10 @@ html
           = link_to "Аниме", animes_path
         .nav-item
           = link_to "Онгоинги", animes_path
+        .nav-item
+          - if user_signed_in?
+            = link_to "Ваш профиль", user_path(id: current_user.id)
+          - else
+            = link_to "Войти в профиль", new_user_session_path
     .container
       = yield
