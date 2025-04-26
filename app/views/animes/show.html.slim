@@ -32,7 +32,7 @@ h2 #{@animes.russian} / #{@animes.name}
       span Смотреть #{@animes.russian}
     .episodes_list
       - @animes.episode.order(episode_number: :asc).each do |e|
-        - if @user_rate.episodes >= e.episode_number
+        - if @user_rate.present? && (@user_rate.episodes >= e.episode_number)
           = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode episode_watched"
         - else
           = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode"
