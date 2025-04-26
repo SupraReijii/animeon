@@ -26,8 +26,7 @@ class AnimesController < ApplicationController
     @animes = Anime.find(params[:id])
     @title = @animes.name.to_s
     if user_signed_in? && UserRate.where(user_id: current_user.id, target_id: params[:id], target_type: 'Anime').empty?
-      @user_rate = UserRate.new(user_id: current_user.id, target_id: params[:id], target_type: 'Anime', status: 6).save
-    else
+      UserRate.new(user_id: current_user.id, target_id: params[:id], target_type: 'Anime', status: 6).save
       @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
     end
   end
