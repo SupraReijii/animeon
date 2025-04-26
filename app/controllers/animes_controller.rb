@@ -7,22 +7,29 @@ class AnimesController < ApplicationController
   end
 
   def new
+    unless user_signed_in? && %w[admin creator].include?(current_user.role)
+      redirect_to animes_path
+    end
     @animes = Anime.new
     @title = 'Создать аниме'
   end
 
   def edit
-    if user_signed_in? && current_user.role == 'admin'
-      @animes = Anime.find(params[:id])
-      @title = 'редактировать аниме'
-    else
+    unless user_signed_in? && current_user.role == 'admin'
       redirect_to anime_path(params[:id])
     end
+    @animes = Anime.find(params[:id])
+    @title = 'редактировать аниме'
   end
 
   def show
     @animes = Anime.find(params[:id])
     @title = @animes.name.to_s
+    if user_signed_in? && UserRate.where(user_id: current_user.id, target_id: params[:id], target_type: 'Anime').empty?
+      @user_rate = UserRate.new(user_id: current_user.id, target_id: params[:id], target_type: 'Anime', status: 6).save
+    else
+      @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
+    end
   end
 
   def create

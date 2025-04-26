@@ -1,7 +1,18 @@
+# frozen_string_literal: true
+
 class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params[:id])
     @title = "Смотреть аниме #{@episode.anime.name} - #{@episode.episode_number} серия"
+    @user_rate = UserRate.find_by(user_id: current_user.id, target_id: @episode.anime.id, target_type: 'Anime')
+
+    if params[:watched].present? && user_signed_in?
+      @user_rate.update(episodes: params[:watched])
+      if @episode.anime.episodes == params[:watched].to_i
+        @user_rate.completed
+        redirect_to anime_path(id: @episode.anime.id)
+      end
+    end
   end
 
   def new

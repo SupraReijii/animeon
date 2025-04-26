@@ -6,6 +6,7 @@ class Anime < ApplicationRecord
   AGE_RATINGS = %i[g pg pg13 r r_plus rx none].freeze
 
   has_many :episode
+
   has_attached_file :poster,
                     styles: { mini: ['225x350>', :webp], original: ['450x700>', :webp] },
                     convert_options: {
@@ -18,6 +19,10 @@ class Anime < ApplicationRecord
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
   validates :episodes_aired, comparison: { less_than_or_equal_to: :episodes, greater_than_or_equal_to: 0 }
+
+  enumerize :status, in: STATUSES, default: :announced
+  enumerize :kind, in: KINDS, default: :none
+  enumerize :age_rating, in: AGE_RATINGS, default: :none
 
   after_create :generate_episodes
   before_save :check_air
@@ -42,8 +47,4 @@ class Anime < ApplicationRecord
       end
     end
   end
-
-  enumerize :status, in: STATUSES, default: :announced
-  enumerize :kind, in: KINDS, default: :none
-  enumerize :age_rating, in: AGE_RATINGS, default: :none
 end

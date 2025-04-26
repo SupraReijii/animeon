@@ -6,10 +6,14 @@ span Серия #{@episode.episode_number}
     id="player-#{@episode.id}"
   ]
   script new Playerjs({id:"player-#{@episode.id}", file: #{compile_videojs_url(@episode.video)}});
-
-  = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: 1), class: "btn btn-outline-info ep"
-  = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id), class: "btn btn-outline-info ep"
-  - if @episode.episode_number < @episode.max_episode
-    = link_to 'Следующая серия', anime_episode_path(id: @episode.next_episode.id), class: "btn btn-outline-success ep"
+  - if user_signed_in? && (current_user.role == 'admin' || current_user.role == 'uploader')
+    = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: 1), class: "btn btn-outline-info ep"
+    = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id), class: "btn btn-outline-info ep"
   - if  @episode.episode_number > 1
     = link_to 'Предыдущая серия', anime_episode_path(id: @episode.previous_episode.id), class: "btn btn-outline-danger ep"
+  - else
+    = link_to 'Предыдущая серия', nil, class: "btn btn-outline-danger ep"
+  - if @episode.episode_number < @episode.max_episode
+    = link_to 'Следующая серия', anime_episode_path(id: @episode.next_episode.id, watched: @episode.episode_number), class: "btn btn-outline-success ep"
+  - else
+    = link_to 'Просмотренно', anime_episode_path(id: @episode.id, watched: @episode.episode_number), class: "btn btn-outline-success ep"
