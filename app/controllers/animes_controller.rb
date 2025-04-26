@@ -28,7 +28,9 @@ class AnimesController < ApplicationController
     if user_signed_in? && UserRate.where(user_id: current_user.id, target_id: params[:id], target_type: 'Anime').empty?
       UserRate.new(user_id: current_user.id, target_id: params[:id], target_type: 'Anime', status: 6).save
     end
-    @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
+    if user_signed_in?
+      @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
+    end
   end
 
   def create
