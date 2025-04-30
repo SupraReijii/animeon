@@ -1,0 +1,4 @@
+= simple_form_for(@episode, url: anime_episodes_path(anime_id: params[:anime_id])) do |f|
+  = f.input :name
+  = f.input :episode_number, input_html: { value: @episode.anime.next_episode? }
+  = f.button :submit, class: 'btn btn-outline-primary'

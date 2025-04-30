@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   root 'dashboard#index'
   resources :user, only: %i[show], controller: 'users/users'
   resources :animes, only: %i[index show new create edit update] do
+    collection do
+      get :new_from_shikimori
+      post :create_from_shikimori
+    end
     resources :episodes, only: %i[show new create edit update] do
       resources :video, only: %i[new create edit update] do
         get :video_url_new

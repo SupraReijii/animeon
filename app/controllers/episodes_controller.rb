@@ -17,17 +17,19 @@ class EpisodesController < ApplicationController
   end
 
   def new
-    @episode = Episode.new
     @title = 'Создать эпизод'
+    @episode = Episode.new(anime_id: params[:anime_id])
   end
 
   def create
     @episode = Episode.new(episode_params)
+    @episode.anime_id = params[:anime_id]
     respond_to do |format|
       if @episode.save
-        format.html  { redirect_to(@episode) }
+        @episode.anime.new_episode
+        format.html  { redirect_to anime_path(id: @episode.anime_id) }
       else
-        format.html  { render action: 'new' }
+        format.html  { redirect_to action: 'new' }
         format.json  { render json: @episode.errors, status: :unprocessable_entity }
       end
     end

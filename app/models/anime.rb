@@ -3,7 +3,7 @@
 class Anime < ApplicationRecord
   STATUSES = %i[announced ongoing released].freeze
   KINDS = %i[tv movie ova ona special pv cm none].freeze
-  AGE_RATINGS = %i[g pg pg13 r r_plus rx none].freeze
+  AGE_RATINGS = %i[g pg pg_13 r r_plus rx none].freeze
 
   has_many :episode
 
@@ -46,5 +46,13 @@ class Anime < ApplicationRecord
         Episode.new(anime_id: self[:id], episode_number: i).save
       end
     end
+  end
+
+  def next_episode?
+    status != 'released' ? self.episodes_aired += 1 : 0
+  end
+
+  def new_episode
+    status != 'released' ? update(episodes_aired: self.episodes_aired += 1) : false
   end
 end

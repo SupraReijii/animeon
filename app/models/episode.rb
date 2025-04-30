@@ -7,7 +7,7 @@ class Episode < ApplicationRecord
   belongs_to :anime
   has_many :video
   def max_episode
-    Anime.find_by(id: anime_id).episodes_aired
+    anime.episodes_aired
   end
 
   def next_episode

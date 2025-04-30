@@ -1,4 +1,9 @@
 h1 Все аниме
+- if user_signed_as_admin?
+  .new_anime
+    = link_to 'Добавить аниме',  new_anime_path
+  .new_anime
+    = link_to 'Добавить аниме с шикимори',  new_from_shikimori_animes_path
 .animes-card-block
   - @animes.each do |anime|
     = link_to anime, class: "anime-card card"

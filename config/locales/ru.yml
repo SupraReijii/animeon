@@ -27,6 +27,8 @@ ru:
         user_rating: Оценки зрителей
         franchise: Франшиза
         genres: Жанры
+        episodes_watched: Эпизодов просмотрено
+        shiki_id: ID на шикимори
       user:
         username: Логин
         password: Пароль
@@ -54,7 +56,7 @@ ru:
       age_rating:
         g: G
         pg: PG
-        pg13: PG-13
+        pg_13: PG-13
         r: R-17
         r_plus: R+
         rx: Rx

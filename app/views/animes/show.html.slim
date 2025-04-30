@@ -27,6 +27,10 @@ h2 #{@animes.russian} / #{@animes.name}
         .line
           span.key #{Anime.human_attribute_name(:duration)}
           span.value  - #{humanize_minutes(@animes.duration)}
+      - if user_signed_in?
+        .line
+          span.key #{Anime.human_attribute_name(:episodes_watched)}
+          span.value  - #{@user_rate.episodes}
   .watch
     .text_info
       span Смотреть #{@animes.russian}
@@ -38,5 +42,5 @@ h2 #{@animes.russian} / #{@animes.name}
           = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode episode_watched"
         - else
           = link_to "Серия #{e.episode_number}", anime_episode_url(anime_id: @animes.id, id: e.id), class: "btn btn-outline-light anime_episode"
-      - if user_signed_in?
-        = link_to '+', anime_url(id: @animes.id), class: "btn btn-outline-light anime_episode"
+      - if user_signed_in? && @animes.next_episode? != 0
+        = link_to '+', new_anime_episode_path(anime_id: @animes.id), class: "btn btn-outline-light anime_episode"

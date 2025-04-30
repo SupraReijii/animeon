@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :username, length: { maximum: 24 }
 
   enumerize :role, in: ROLES, default: :user
+
 end
