@@ -26,7 +26,7 @@ h2 #{@animes.russian} / #{@animes.name}
       - if @animes.duration.present?
         .line
           span.key #{Anime.human_attribute_name(:duration)}
-          span.value - #{humanize_minutes(@animes.duration)}
+          span.value  - #{humanize_minutes(@animes.duration)}
   .watch
     .text_info
       span Смотреть #{@animes.russian}

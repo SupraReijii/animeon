@@ -7,22 +7,35 @@ ru:
       video:
           one: Видео
           other: Видео
+      user:
+          one: Пользователь
+          other: Пользователь
 
-  attributes: &anime_attributes
-    name: Английское название
-    description: Описание
-    episodes: Эпизоды
-    duration: Длительность эпизода
-    status: Статус
-    age_rating: Возврастной рейтинг
-    episodes_aired: Эпизодов вышло
-    kind: Тип
-    japanese: Японское название
-    russian: Русское название
-    english: Английское название
-    user_rating: Оценки зрителей
-    franchise: Франшиза
-    genres: Жанры
+    attributes:
+      anime: &anime_attributes
+        name: Английское название
+        description: Описание
+        episodes: Эпизоды
+        duration: Длительность эпизода
+        status: Статус
+        age_rating: Возврастной рейтинг
+        episodes_aired: Эпизодов вышло
+        kind: Тип
+        japanese: Японское название
+        russian: Русское название
+        english: Английское название
+        user_rating: Оценки зрителей
+        franchise: Франшиза
+        genres: Жанры
+      user:
+        username: Логин
+        password: Пароль
+        avatar: Аватар
+        current_password: Текущий пароль
+        email: Эл. почта
+        location: Откуда
+        password_confirmation: Подтверждение пароля
+        remember_me: Запомнить меня
   enumerize:
     anime:
       status:

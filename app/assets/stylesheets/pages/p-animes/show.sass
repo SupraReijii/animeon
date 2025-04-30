@@ -1,5 +1,5 @@
 @import '../../mixins/clear'
-
+@import '../../mixins/btn'
 .p-animes-show
   .key
     color: #8c9095
@@ -25,8 +25,7 @@
     margin: 5px
     width: 31%
     min-width: 38px
-    color: #a7acb1
-    border-color: #a7acb1
+    +btn
 
   .episode_watched
     border-color: #0f5132
@@ -54,3 +53,45 @@
     margin-top: 5px
     width: 50%
     font-size: 14px
+
+
+
+@media screen and (max-width: 1023px)
+  .p-animes-show
+    .anime_img_box
+      clear: left
+      float: left
+      width: 45%
+      margin-bottom: 15px
+    .watch
+      float: left
+      width: 100%
+    .anime_img
+      width: 75%
+    .anime_episode
+      width: 45%
+    .text_info
+      width: 100%
+    .anime_info_box
+      float: left
+      width: 50%
+    .edit_anime
+      width: 75%
+      font-size: 14px
+
+@media screen and (max-width: 576px)
+ .p-animes-show
+  .anime_img_box
+    float: none
+    width: 100%
+  .anime_img
+    width: 350px
+  .watch
+    float: none
+    width: 100%
+  .anime_info_box
+    float: none
+    width: 100%
+    margin-bottom: 15px
+  .edit_anime
+    width: 45%

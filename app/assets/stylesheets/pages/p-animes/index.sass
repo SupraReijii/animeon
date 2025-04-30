@@ -35,43 +35,39 @@
     .container
       margin: 0
       width: 100%
-    .anime_img_box
-      clear: left
-      float: left
-      width: 45%
-      margin-bottom: 15px
-    .watch
-      float: left
-      width: 100%
-    .anime_img
-      width: 75%
-    .anime_episode
-      width: 45%
-    .text_info
-      width: 100%
-    .anime_info_box
-      float: left
-      width: 50%
     .anime-card
       width: 12rem
     .anime-card span
       font-size: 11px
     .card-body
       padding: 7px
+    .anime-card:nth-child(5n+1)
+      clear: none
+    .anime-card:nth-child(4n+1)
+      clear: left
+
+@media screen and (max-width: 872px)
+  .p-animes-index
+    .anime-card
+      width: 10rem
+      min-height: 270px
+    .anime-card:nth-child(4n+1)
+      clear: none
+    .anime-card:nth-child(3n+1)
+      clear: left
 
 @media screen and (max-width: 576px)
   .p-animes-index
     .anime-card
-      width: 9.5rem
-    .anime_img_box
-      float: none
-      width: 100%
-    .watch
-      float: none
-      width: 100%
-    .anime_info_box
-      float: none
-      width: 100%
-      margin-bottom: 15px
+      width: 9.8rem
+      min-height: 260px
+      margin: 5px
+    .card-body
+      padding: 5px
+      height: 35px
     .anime-card span
-      font-size: 10px
+      font-size: 11px
+    .anime-card:nth-child(3n+1)
+      clear: none
+    .anime-card:nth-child(2n+1)
+      clear: left
