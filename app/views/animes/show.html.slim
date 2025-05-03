@@ -31,6 +31,10 @@ h2 #{@animes.russian} / #{@animes.name}
         .line
           span.key #{Anime.human_attribute_name(:episodes_watched)}
           span.value  - #{@user_rate.episodes}
+      - if user_signed_in?
+        .line
+          span.key #{Anime.human_attribute_name(:user_status)}
+          span.value  - #{@user_rate.status}
   .watch
     .text_info
       span Смотреть #{@animes.russian}

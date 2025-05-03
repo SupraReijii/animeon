@@ -19,12 +19,13 @@ class Anime < ApplicationRecord
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
   validates :episodes_aired, comparison: { less_than_or_equal_to: :episodes, greater_than_or_equal_to: 0 }
+  validates :shiki_id, uniqueness: true
 
   enumerize :status, in: STATUSES, default: :announced
   enumerize :kind, in: KINDS, default: :none
   enumerize :age_rating, in: AGE_RATINGS, default: :none
 
-  after_create :generate_episodes
+  after_commit :generate_episodes
   before_save :check_air
 
   def check_air
@@ -40,9 +41,10 @@ class Anime < ApplicationRecord
   end
 
   def generate_episodes
+    last_episode = episode.empty? ? 1 : 1 + Episode.where(anime_id: id).order(episode_number: :asc).last.episode_number
     ep = episodes_aired.to_i
     if ep.positive?
-      (1..ep).each do |i|
+      (last_episode..ep).each do |i|
         Episode.new(anime_id: self[:id], episode_number: i).save
       end
     end
