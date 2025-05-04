@@ -1,5 +1,3 @@
-require 'rails_helper'
+describe Franchise do
 
-RSpec.describe Franchise, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
 end

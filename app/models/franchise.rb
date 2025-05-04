@@ -1,4 +1,5 @@
 class Franchise < ApplicationRecord
+  has_many :anime
   def animes
     s = []
     self[:animes].each do |i|

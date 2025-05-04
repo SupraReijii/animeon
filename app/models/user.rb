@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :user_rates
+
   validates :username, length: { maximum: 24 }
 
   enumerize :role, in: ROLES, default: :user

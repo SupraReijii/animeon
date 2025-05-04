@@ -9,5 +9,6 @@ FactoryBot.define do
     episodes { 0 }
     franchise { nil }
     episodes_aired { 0 }
+    shiki_id { 1 }
   end
 end

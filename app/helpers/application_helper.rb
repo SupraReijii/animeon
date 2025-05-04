@@ -10,4 +10,10 @@ module ApplicationHelper
 
     false
   end
+
+  def user_signed_as_creator?
+    return true if user_signed_in? && current_user.role == 'creator'
+
+    false
+  end
 end

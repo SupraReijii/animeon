@@ -1,3 +1,5 @@
 p #{@user.username}
-
-= link_to "Выйти из профиля", destroy_user_session_path
+p
+  = link_to 'Список аниме', anime_user_list_path(@user)
+- if current_user.id == params[:id].to_i
+  = link_to "Выйти из профиля", destroy_user_session_path

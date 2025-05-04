@@ -1,0 +1,71 @@
+- if current_user.id == @user.id
+  h1 Ваш список аниме
+- else
+  h1 Список аниме пользователя #{@user.username}
+
+- case params[:list_type]
+  - when 'planned'
+    - planned_active = 'active'
+  - when 'watching'
+    - watching_active = 'active'
+  - when 'completed'
+    - completed_active = 'active'
+  - else
+    - completed_active = 'active'
+= link_to "Запланировано (#{@user.user_rates.where(status: 0).count})", anime_user_list_path(list_type: 'planned'), class: "type-choose #{planned_active}"
+= link_to "Смотрю (#{@user.user_rates.where(status: 1).count})", anime_user_list_path(list_type: 'watching'), class: "type-choose #{watching_active}"
+= link_to "Просмотрено (#{@user.user_rates.where(status: 2).count})", anime_user_list_path(list_type: 'completed'), class: "type-choose #{completed_active}"
+- if params[:list_type] == 'completed' || !params[:list_type].present?
+  - if @user.user_rates.where(status: 2).count == 0
+    div.nothing
+      | Ничего нет
+  - else
+    table.anime-list
+      thead
+        th Название
+        th Оценка
+        th Эпизоды
+        th Тип
+      tbody
+        - @user.user_rates.where(status: 2).each do |a|
+          tr
+            td.anime-name #{link_to a.anime.russian, anime_path(a.anime)}
+            td 0
+            td #{a.episodes}/#{a.anime.episodes}
+            td #{a.anime.kind}
+- if params[:list_type] == 'watching'
+  - if @user.user_rates.where(status: 1).count == 0
+    div.nothing
+      | Ничего нет
+  - else
+    table.anime-list
+      thead
+        th Название
+        th Оценка
+        th Эпизоды
+        th Тип
+      tbody
+        - @user.user_rates.where(status: 1).each do |a|
+          tr
+            td.anime-name #{link_to a.anime.russian, anime_path(a.anime)}
+            td 0
+            td #{a.episodes}/#{a.anime.episodes}
+            td #{a.anime.kind}
+- if params[:list_type] == 'planned'
+  - if @user.user_rates.where(status: 0).count == 0
+    div.nothing
+      | Ничего нет
+  - else
+    table.anime-list
+      thead
+        th Название
+        th Оценка
+        th Эпизоды
+        th Тип
+      tbody
+        - @user.user_rates.where(status: 0).each do |a|
+          tr
+            td.anime-name #{link_to a.anime.russian, anime_path(a.anime)}
+            td 0
+            td #{a.episodes}/#{a.anime.episodes}
+            td #{a.anime.kind}

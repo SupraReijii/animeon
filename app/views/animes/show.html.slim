@@ -34,7 +34,7 @@ h2 #{@animes.russian} / #{@animes.name}
       - if user_signed_in?
         .line
           span.key #{Anime.human_attribute_name(:user_status)}
-          span.value  - #{@user_rate.status}
+          span.value  - #{@user_rate.status_name}
   .watch
     .text_info
       span Смотреть #{@animes.russian}

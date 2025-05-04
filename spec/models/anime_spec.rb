@@ -18,9 +18,10 @@ describe Anime do
         .is_greater_than_or_equal_to(0)
         .is_less_than_or_equal_to(:episodes)
     }
+    it { is_expected.to validate_uniqueness_of(:shiki_id) }
   end
 
-  describe 'check status' do
+  describe 'check air' do
     let(:anime) { create :anime, episodes: 12, episodes_aired: ea }
     context 'aired equal to episodes' do
       let(:ea) { 12 }
@@ -45,6 +46,41 @@ describe Anime do
     context 'no episodes' do
       let(:e) { 0 }
       it { expect(anime.episode).to have(:no).items }
+    end
+    context 'update episodes' do
+      let(:anime) { create :anime, episodes: 12, episodes_aired: 6 }
+      before { anime.update episodes_aired: 12 }
+      it 'generates more episodes' do
+        expect(anime.episode).to have(12).items
+      end
+    end
+  end
+
+  describe 'next_episode?' do
+    let(:anime) { create :anime, episodes: e, episodes_aired: 1 }
+    context 'released' do
+      let(:e) { 1 }
+      it { expect(anime.next_episode?).to eq(0) }
+    end
+    context 'ongoing' do
+      let(:e) { 10 }
+      it { expect(anime.next_episode?).to eq(2) }
+    end
+  end
+
+  describe 'new_episode' do
+    let(:anime) { create :anime, episodes: e, episodes_aired: 2 }
+    context 'released' do
+      let(:e) { 2 }
+      it { expect(anime.new_episode).to eq false }
+    end
+    context 'ongoing' do
+      let(:e) { 10 }
+      before { anime.new_episode }
+      it {
+        expect(anime.episode).to have(3).items
+        expect(anime.episodes_aired).to eq(3)
+      }
     end
   end
 end

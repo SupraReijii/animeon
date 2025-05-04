@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   }
 
   root 'dashboard#index'
-  resources :user, only: %i[show], controller: 'users/users'
+  resources :user, only: %i[show], controller: 'users/users' do
+    resource :list, only: %i[index] do
+      get :anime
+    end
+  end
   resources :animes, only: %i[index show new create edit update] do
     collection do
       get :new_from_shikimori

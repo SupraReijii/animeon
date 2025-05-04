@@ -28,6 +28,7 @@ ru:
         franchise: Франшиза
         genres: Жанры
         episodes_watched: Эпизодов просмотрено
+        user_status: Ваш статус
         shiki_id: ID на шикимори
       user:
         username: Логин
@@ -38,6 +39,12 @@ ru:
         location: Откуда
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить меня
+      user_rate:
+        statuses:
+          anime:
+            known: Известен
+            watching: Смотрю
+            completed: Просмотрено
   enumerize:
     anime:
       status:

@@ -8,17 +8,13 @@ class AnimesController < ApplicationController
   end
 
   def new
-    unless user_signed_in? && %w[admin creator].include?(current_user.role)
-      redirect_to animes_path
-    end
+    redirect_to animes_path unless user_signed_in? && %w[admin creator].include?(current_user.role)
     @animes = Anime.new
     @title = 'Создать аниме'
   end
 
   def edit
-    unless user_signed_in? && current_user.role == 'admin'
-      redirect_to anime_path(params[:id])
-    end
+    redirect_to anime_path(params[:id]) unless user_signed_in? && %w[admin creator].include?(current_user.role)
     @animes = Anime.find(params[:id])
     @title = 'редактировать аниме'
   end
@@ -72,9 +68,7 @@ class AnimesController < ApplicationController
       kind: anime['kind'],
       shiki_id: animes_params[:shiki_id]
     )
-    if @resource.save
-      redirect_to anime_path(id: @resource.id)
-    end
+    redirect_to anime_path(id: @resource.id) if @resource.save
   rescue Shikimori::API::NotFoundError
     redirect_to animes_path
   end

@@ -19,7 +19,7 @@ class Anime < ApplicationRecord
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
   validates :episodes_aired, comparison: { less_than_or_equal_to: :episodes, greater_than_or_equal_to: 0 }
-  validates :shiki_id, uniqueness: true
+  validates :shiki_id, uniqueness: true, presence: true
 
   enumerize :status, in: STATUSES, default: :announced
   enumerize :kind, in: KINDS, default: :none

@@ -15,6 +15,35 @@ class UserRate < ApplicationRecord
 
   validates :status, presence: true
 
+  before_update :auto_status
+
+  def auto_status
+    if episodes.positive? && episodes < anime.episodes
+      self.status = 1
+    elsif episodes.positive? && episodes == anime.episodes
+      self.status = 2
+    end
+  end
+
+  def status_name
+    self.class.status_name status, target_type
+  end
+
+  def self.status_name status, target_type
+    status_name =
+      if status.is_a? Integer
+        (
+          statuses.find { |_k, v| v == status } ||
+            raise("unknown status #{status} #{target_type}")
+        ).first
+      else
+        status
+      end
+
+    I18n.t 'activerecord.attributes.user_rate.statuses.' \
+             "#{target_type.downcase}.#{status_name}"
+  end
+
   def target
     association(:anime).loaded? && !anime.nil? ? anime : super
   end
