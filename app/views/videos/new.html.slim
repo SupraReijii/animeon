@@ -2,5 +2,3 @@ h1 Новое видео для аниме #{Anime.find_by(id: params[:anime_id]
 .row.justify-content-md-center
   .col-2
     = render 'form'
-    .btn.btn-outline-danger
-      = link_to 'Назад', anime_episode_path(id: params[:episode_id])

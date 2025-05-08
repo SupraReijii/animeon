@@ -1,17 +1,19 @@
-class VideoController < ApplicationController
+class VideosController < ApplicationController
   def new
     @video = Video.new
     @title = "Добавить видео для #{Episode.find(params[:episode_id]).episode_number} серии #{Anime.find(params[:anime_id]).name}"
   end
 
   def create
-    @video = Video.new(episode_id: params[:episode_id], fandub_id: video_params[:fandub], quality: video_params[:quality].drop(1))
+    @video = Video.new(episode_id: params[:episode_id],
+                       fandub_id: video_params[:fandub],
+                       quality: video_params[:quality].drop(1)
+    )
     respond_to do |format|
       if @video.save
         format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
       else
-        format.html  { render action: 'new' }
-        format.json  { render json: @video.errors, status: :unprocessable_entity }
+        format.html  { redirect_to action: 'new' }
       end
     end
   end
@@ -27,25 +29,7 @@ class VideoController < ApplicationController
       if @video_url.update(video_url_params)
         format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
       else
-        format.html  { render action: 'new' }
-        format.json  { render json: @video_url.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def video_url_new
-    @video_url = VideoUrl.new
-  end
-
-  def video_url_create
-    @video_url = VideoUrl.new(video_url_params)
-    @video_url.video_id = params[:video_id]
-    respond_to do |format|
-      if @video_url.save
-        format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
-      else
-        format.html  { render action: 'video_url_new' }
-        format.json  { render json: @video_url.errors, status: :unprocessable_entity }
+        format.html  { redirect_to action: 'update' }
       end
     end
   end

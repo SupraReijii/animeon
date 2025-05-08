@@ -5,8 +5,7 @@ class Video < ApplicationRecord
   belongs_to :fandub
   has_many :video_url
 
-  enumerize :qualities, in: VideoUrl::QUALITIES, multiple: true, default: :unknown
-
+  validates :quality, presence: true
   after_create :add_video_urls
 
   def add_video_urls

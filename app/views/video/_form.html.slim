@@ -1,4 +1,0 @@
-=simple_form_for(@video, url: anime_episode_video_index_path(id: params[:episode_id])) do |f|
-  = f.input :fandub, collection: Fandub.all, default: :first
-  = f.input :quality, collection: VideoUrl::QUALITIES, multiple: true
-  = f.button :submit, class: 'btn btn-outline-primary'

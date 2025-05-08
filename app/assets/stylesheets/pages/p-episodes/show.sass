@@ -1,10 +1,26 @@
 @import '../../mixins/btn'
+@import '../../mixins/icons.scss'
 .p-episodes-show
   .anime-video-player
     width: 100%
   .btn
-    margin: 5px
+    margin: 10px
+    width: 23%
+    text-align: center
+    +btn
   .admin
     +btn
   .ep
     color: #a7acb1
+  @media screen and (max-width: 1023px)
+    .btn
+      width: 22%
+  @media screen and (max-width: 825px)
+    .btn
+      width: 45%
+  @media screen and (max-width: 576px)
+    .btn
+      width: 45%
+  @media screen and (max-width: 400px)
+    .btn
+      width: 95%

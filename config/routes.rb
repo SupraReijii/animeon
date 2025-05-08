@@ -18,10 +18,7 @@ Rails.application.routes.draw do
       post :create_from_shikimori
     end
     resources :episodes, only: %i[show new create edit update] do
-      resources :video, only: %i[new create edit update] do
-        get :video_url_new
-        post :video_url_create
-      end
+      resources :videos, only: %i[new create edit update]
     end
   end
 

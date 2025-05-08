@@ -6,39 +6,45 @@
     max-width: 1120px
     +clear_left
 
-  .anime-card:nth-child(5n+1)
-    clear: left
-
   .anime-card
     width: 17%
     margin: 10px
     border: 0
     min-height: 320px
     float: left
+    display: flex
+    flex-direction: column
+    &:nth-child(5n+1)
+      clear: left
+    &:hover
+      text-decoration: underline
+      width: 17.2%
+    & span
+      color: #a7acb1
+      font-size: 14px
+      font-weight: bold
+      margin-top: 10px
+    & img
+      width: 100%
 
   .card
     border-radius: 7px
-
-  .anime-card span
-    color: black
-    font-size: 12px
-    font-weight: bold
-
-  .anime-card img
-    border-radius: 5px 5px 0 0
-
-  .card-body
-    padding: 10px
+    & .card-body
+      margin-top: 5px
 
 @media screen and (max-width: 1023px)
   .p-animes-index
+    .animes-card-block
+      max-width: 1000px
     .container
       margin: 0
       width: 100%
     .anime-card
-      width: 12rem
+      width: 22%
+      &:hover
+        width: 22.5%
     .anime-card span
-      font-size: 11px
+      font-size: 14px
     .card-body
       padding: 7px
     .anime-card:nth-child(5n+1)
@@ -48,9 +54,15 @@
 
 @media screen and (max-width: 872px)
   .p-animes-index
+    .animes-card-block
+      max-width: 750px
     .anime-card
-      width: 10rem
+      width: 28%
       min-height: 270px
+      &:hover
+        width: 28%
+      & span
+        font-size: 13px
     .anime-card:nth-child(4n+1)
       clear: none
     .anime-card:nth-child(3n+1)
@@ -58,15 +70,19 @@
 
 @media screen and (max-width: 576px)
   .p-animes-index
+    .animes-card-block
+      max-width: 550px
     .anime-card
-      width: 9.8rem
+      width: 46%
       min-height: 260px
       margin: 5px
+      &:hover
+        width: 46%
     .card-body
       padding: 5px
       height: 35px
     .anime-card span
-      font-size: 11px
+      font-size: 13px
     .anime-card:nth-child(3n+1)
       clear: none
     .anime-card:nth-child(2n+1)

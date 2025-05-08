@@ -1,10 +1,18 @@
 @use './pages/animes'
 @use './pages/episodes'
 @use './pages/lists'
+@use './pages/videos'
 
-@import bootstrap
+//@import bootstrap
+@import chosen
 @import vars
 @import mixins/clear
+
+body
+  font-family: "Nunito", sans-serif
+  font-optical-sizing: auto
+  font-weight: 400
+  font-style: normal
 
 a
   color: $backgroud-color
@@ -24,14 +32,20 @@ a
 .container
   background: #242629
   max-width: 1200px
+  margin: 0 auto
+  padding: 5px
 
 body
   background: $backgroud-color
 
+.navbar
+  height: 22px
+  padding: 5px 0
+
 .nav-items
   display: block
   width: 100%
-  margin: 1px auto 1px auto
+  margin: 0 auto
   max-width: 1200px
   +clear_left
 
@@ -49,18 +63,28 @@ body
 #video_quality
   height: 210px
 
+@media screen and (max-width: 1200px)
+  .nav-item
+    padding: 0 8%
+
 @media screen and (max-width: 1023px)
   .nav-item:nth-child(3)
     display: none
     border: none
     margin: 0
   .nav-item
-    padding: 0 10%
+    padding: 0 9.5%
+  .nav-items
+    max-width: 800px
 
 @media screen and (max-width: 576px)
   .nav-item
-    padding: 0 8%
+    padding: 0 7%
+  .nav-items
+    max-width: 450px
 
-@media screen and (max-width: 400px)
+@media screen and (max-width: 440px)
   .nav-item
-    padding: 0 6%
+    padding: 0 4%
+  .nav-items
+    max-width: 350px

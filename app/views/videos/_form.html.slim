@@ -1,0 +1,6 @@
+=simple_form_for(@video, url: anime_episode_videos_path) do |f|
+  = f.input :fandub, collection: Fandub.all, default: :first, input_html: { class: 'chosen-select' }
+  = f.input :quality, collection: VideoUrl::QUALITIES, multiple: true, input_html: { class: 'chosen-select' }
+  = f.button :submit, class: 'btn'
+  .btn
+    = link_to 'Назад', anime_episode_path(id: params[:episode_id])
