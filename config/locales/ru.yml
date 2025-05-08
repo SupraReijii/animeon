@@ -45,6 +45,8 @@ ru:
             known: Известен
             watching: Смотрю
             completed: Просмотрено
+            planned: Запланировано
+            dropped: Брошено
   enumerize:
     anime:
       status:

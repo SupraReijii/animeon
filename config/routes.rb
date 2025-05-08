@@ -6,13 +6,25 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  ani_manga_format = <<-FORMAT.gsub(/[\n ]/, '')
+    (/kind/:kind)
+    (/status/:status)
+    (/franchise/:franchise)
+  FORMAT
+
+  get "animes#{ani_manga_format}" => 'animes#index',
+      as: 'animes',
+      constraints: {
+        page: /\d+/
+      }
+
   root 'dashboard#index'
   resources :user, only: %i[show], controller: 'users/users' do
     resource :list, only: %i[index] do
       get :anime
     end
   end
-  resources :animes, only: %i[index show new create edit update] do
+  resources :animes, only: %i[show new create edit update] do
     collection do
       get :new_from_shikimori
       post :create_from_shikimori
@@ -20,6 +32,9 @@ Rails.application.routes.draw do
     resources :episodes, only: %i[show new create edit update] do
       resources :videos, only: %i[new create edit update]
     end
+    post :decrement_episode
+    post :increment_episode
+    post :user_status
   end
 
 end

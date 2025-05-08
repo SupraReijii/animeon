@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.6'
 
+gem 'turbo-rails'
 gem 'aws-sdk-core'
 gem 'aws-sdk-s3', '~> 1.159'
 gem 'bootsnap', require: false

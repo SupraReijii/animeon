@@ -63,9 +63,23 @@
     width: 50%
     &:after
       content: var(--svg-edit)
+  .button_to
+    display: inline-block
   .add_episode
-    &:after
+    background: none
+    cursor: pointer
+    &:before
       content: var(--svg-plus)
+  .remove_episode
+    background: none
+    cursor: pointer
+    &:before
+      content: var(--svg-minus)
+  .to_planned
+    background: none
+    cursor: pointer
+    &:before
+      content: var(--svg-plan)
 
 
 @media screen and (max-width: 1023px)

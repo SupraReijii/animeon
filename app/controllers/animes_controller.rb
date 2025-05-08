@@ -4,6 +4,10 @@ class AnimesController < ApplicationController
   require 'open-uri'
   def index
     @animes = Anime.all.order(user_rating: :desc)
+    params.except(:controller, :action).each do |i|
+      @animes = @animes.where("#{i[0]} = '#{i[1]}'")
+    end
+
     @title = 'Все аниме'
   end
 
@@ -25,9 +29,9 @@ class AnimesController < ApplicationController
     if user_signed_in? && UserRate.where(user_id: current_user.id, target_id: params[:id], target_type: 'Anime').empty?
       UserRate.new(user_id: current_user.id, target_id: params[:id], target_type: 'Anime', status: 6).save
     end
-    if user_signed_in?
-      @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
-    end
+    return unless user_signed_in?
+
+    @user_rate = UserRate.find_by(user_id: current_user.id, target_id: params[:id], target_type: 'Anime')
   end
 
   def create
@@ -71,6 +75,30 @@ class AnimesController < ApplicationController
     redirect_to anime_path(id: @resource.id) if @resource.save
   rescue Shikimori::API::NotFoundError
     redirect_to animes_path
+  end
+
+  def increment_episode
+    redirect_back fallback_location: anime unless user_signed_in?
+    anime = Anime.find(params[:anime_id])
+    user_rate = current_user.user_rates.find_by(target_type: 'Anime', target_id: anime.id)
+    user_rate.update(episodes: user_rate.episodes + 1) if user_signed_in? && anime.episodes > user_rate.episodes
+    redirect_back fallback_location: anime
+  end
+
+  def decrement_episode
+    redirect_back fallback_location: anime unless user_signed_in?
+    anime = Anime.find(params[:anime_id])
+    user_rate = current_user.user_rates.find_by(target_type: 'Anime', target_id: anime.id)
+    user_rate.update(episodes: user_rate.episodes - 1) if user_signed_in? && user_rate.episodes.positive?
+    redirect_back fallback_location: anime
+  end
+
+  def user_status
+    redirect_back fallback_location: anime unless user_signed_in?
+    anime = Anime.find(params[:anime_id])
+    user_rate = current_user.user_rates.find_by(target_type: 'Anime', target_id: anime.id)
+    user_rate.update(status: params[:status])
+    redirect_back fallback_location: anime
   end
 
   private
