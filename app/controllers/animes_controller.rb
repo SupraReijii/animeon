@@ -97,7 +97,7 @@ class AnimesController < ApplicationController
     redirect_back fallback_location: anime unless user_signed_in?
     anime = Anime.find(params[:anime_id])
     user_rate = current_user.user_rates.find_by(target_type: 'Anime', target_id: anime.id)
-    user_rate.update(status: params[:status])
+    params[:status] == 'completed' ? user_rate.update(status: 2, episodes: anime.episodes) : user_rate.update(status: params[:status])
     redirect_back fallback_location: anime
   end
 
