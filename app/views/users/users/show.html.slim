@@ -1,5 +1,8 @@
 p #{@user.username}
 p
   = link_to 'Список аниме', anime_user_list_path(@user)
+- if user_signed_as_admin?
+  p
+    = link_to 'Админ Панель', admin_index_path
 - if current_user.id == params[:id].to_i
   = link_to "Выйти из профиля", destroy_user_session_path

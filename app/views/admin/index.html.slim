@@ -1,0 +1,3 @@
+- %i[name russian franchise poster_file_name].each do |s|
+  p
+    = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil]).count})", blank_params_admin_index_path(property: s, type: 'anime')

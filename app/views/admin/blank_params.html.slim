@@ -1,0 +1,3 @@
+- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil]).order(:id).each do |a|
+  p
+    = link_to anime_path(a), anime_path(a)

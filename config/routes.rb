@@ -24,6 +24,13 @@ Rails.application.routes.draw do
       get :anime
     end
   end
+
+  resources :admin, only: %i[index] do
+    collection do
+      get :blank_params
+    end
+  end
+
   resources :animes, only: %i[show new create edit update] do
     collection do
       get :new_from_shikimori
