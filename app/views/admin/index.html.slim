@@ -6,5 +6,4 @@
 - c += @resource.where(genres: []).count
 p
   = link_to "Аниме без #{Anime.human_attribute_name(:genres)} (#{@resource.where(genres: []).count})", blank_params_admin_index_path(property: 'genres', type: 'anime')
-
-h2 #{100 - c / @resource.count * 10}% Заполнено
+h2 #{(100 - c.to_f / @resource.count * 10).ceil(2)}% Заполнено
