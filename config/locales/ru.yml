@@ -14,7 +14,9 @@ ru:
     attributes:
       anime: &anime_attributes
         name: Английское название
-        description: Описание
+        description:
+          one: Описание
+          other: Описания
         episodes: Эпизоды
         duration: Длительность эпизода
         status: Статус
@@ -30,6 +32,7 @@ ru:
         episodes_watched: Эпизодов просмотрено
         user_status: Ваш статус
         shiki_id: ID на шикимори
+        poster_file_name: Постер
       user:
         username: Логин
         password: Пароль

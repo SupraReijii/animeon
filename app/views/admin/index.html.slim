@@ -1,3 +1,10 @@
-- %i[name russian franchise poster_file_name].each do |s|
+- c = 0
+- %i[name russian description user_rating age_rating franchise poster_file_name episodes kind].each do |s|
+  - c += @resource.where(s => ['', nil, 0, 'none', 0.0]).count
   p
-    = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil]).count})", blank_params_admin_index_path(property: s, type: 'anime')
+    = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil, 0, 'none', 0.0]).count})", blank_params_admin_index_path(property: s, type: 'anime')
+- c += @resource.where(genres: []).count
+p
+  = link_to "Аниме без #{Anime.human_attribute_name(:genres)} (#{@resource.where(genres: []).count})", blank_params_admin_index_path(property: 'genres', type: 'anime')
+
+h2 #{100 - c / @resource.count * 10}% Заполнено

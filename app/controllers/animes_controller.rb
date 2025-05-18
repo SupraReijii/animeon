@@ -5,7 +5,11 @@ class AnimesController < ApplicationController
   def index
     @animes = Anime.all.order(user_rating: :desc)
     params.except(:controller, :action).each do |i|
-      @animes = @animes.where("#{i[0]} = '#{i[1]}'")
+      if i[0] == 'genres'
+        @animes = @animes.where("#{Genre.find_by(name: i[1]).id} = ANY(genres)")
+      else
+        @animes = @animes.where("#{i[0]} = '#{i[1]}'")
+      end
     end
 
     @title = 'Все аниме'
@@ -106,6 +110,6 @@ class AnimesController < ApplicationController
   def animes_params
     params.require(:anime).permit(:name, :russian, :description, :episodes,
                                   :episodes_aired, :kind, :status, :user_rating,
-                                  :franchise, :duration, :age_rating, :poster, :shiki_id)
+                                  :franchise, :duration, :age_rating, :poster, :shiki_id, :genres => [])
   end
 end

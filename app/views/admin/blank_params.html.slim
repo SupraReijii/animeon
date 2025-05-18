@@ -1,3 +1,7 @@
-- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil]).order(:id).each do |a|
+- if params[:property] == 'genres'
+  - params[:type].capitalize.singularize.constantize.where(genres: []).order(:id).each do |a|
+    p
+      = link_to anime_path(a), anime_path(a)
+- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none']).order(:id).each do |a|
   p
     = link_to anime_path(a), anime_path(a)

@@ -23,6 +23,13 @@ h2 #{@animes.russian} / #{@animes.name}
           span.key #{Anime.human_attribute_name(:kind)}
           = link_to animes_path(kind: @animes.kind)
             span.value  - #{@animes.kind_text}
+      - if @animes.genres != []
+        .line
+          span.key #{Anime.human_attribute_name(:genres)} -
+          - @animes.genres.each do |g|
+            - genre = Genre.find(g)
+            = link_to animes_path(genres: genre.name)
+              span.value  #{genre.russian}
       - if @animes.age_rating.present?
         .line
           span.key #{Anime.human_attribute_name(:age_rating)}

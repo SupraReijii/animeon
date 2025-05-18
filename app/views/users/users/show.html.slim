@@ -4,5 +4,5 @@ p
 - if user_signed_as_admin?
   p
     = link_to 'Админ Панель', admin_index_path
-- if current_user.id == params[:id].to_i
+- if user_signed_in? && current_user.id == params[:id].to_i
   = link_to "Выйти из профиля", destroy_user_session_path

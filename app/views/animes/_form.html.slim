@@ -10,6 +10,12 @@
   = f.input :user_rating
   = f.input :franchise
   = f.input :shiki_id
+  = f.input :genres, collection: Genre.all,
+          label_method: :russian,
+          multiple: true,
+          include_blank: false,
+          include_hidden: false,
+          input_html: { class: 'chosen-select' }
   = f.input :poster, as: :file
   = f.button :submit, class: 'btn btn-outline-primary'
 
