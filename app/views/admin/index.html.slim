@@ -4,6 +4,9 @@
   p
     = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil, 0, 'none', 0.0]).count})", blank_params_admin_index_path(property: s, type: 'anime')
 - c += @resource.where(genres: []).count
+- c += @resource.where(studio_ids: []).count
 p
   = link_to "Аниме без #{Anime.human_attribute_name(:genres)} (#{@resource.where(genres: []).count})", blank_params_admin_index_path(property: 'genres', type: 'anime')
-h2 #{(100 - c.to_f / @resource.count * 10).ceil(2)}% Заполнено
+p
+  = link_to "Аниме без #{Anime.human_attribute_name(:studio_ids)} (#{@resource.where(studio_ids: []).count})", blank_params_admin_index_path(property: 'studio_ids', type: 'anime')
+h2 #{(100 - c.to_f / @resource.count * 11).ceil(2)}% Заполнено

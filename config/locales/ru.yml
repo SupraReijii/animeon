@@ -33,6 +33,7 @@ ru:
         user_status: Ваш статус
         shiki_id: ID на шикимори
         poster_file_name: Постер
+        studio_ids: Студия
       user:
         username: Логин
         password: Пароль

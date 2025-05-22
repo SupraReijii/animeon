@@ -1,5 +1,6 @@
-- if params[:property] == 'genres'
-  - params[:type].capitalize.singularize.constantize.where(genres: []).order(:id).each do |a|
+h1 #{t("activerecord.models.#{params[:type]}.one")} без #{params[:type].capitalize.singularize.constantize.human_attribute_name(:studio_ids)}
+- if params[:property] == 'genres' || params[:property] == 'studio_ids'
+  - params[:type].capitalize.singularize.constantize.where(params[:property] => []).order(:id).each do |a|
     p
       = link_to anime_path(a), anime_path(a)
 - params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none']).order(:id).each do |a|
