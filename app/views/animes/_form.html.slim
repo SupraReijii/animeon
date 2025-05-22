@@ -10,7 +10,7 @@
   = f.input :user_rating
   = f.input :franchise
   = f.input :shiki_id
-  = f.input :genres, collection: Genre.all,
+  = f.input :genres, collection: Genre.where(genre_type: 'anime'),
           label_method: :russian,
           multiple: true,
           include_blank: false,
