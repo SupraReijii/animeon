@@ -5,11 +5,11 @@ class AnimesController < ApplicationController
   def index
     @animes = Anime.all.order(user_rating: :desc)
     params.except(:controller, :action).each do |i|
-      if i[0] == 'genres'
-        @animes = @animes.where("#{Genre.find_by(name: i[1]).id} = ANY(genres)")
-      else
-        @animes = @animes.where("#{i[0]} = '#{i[1]}'")
-      end
+      @animes = if i[0] == 'genres'
+                  @animes.where("#{Genre.find_by(name: i[1], genre_type: 'anime').id} = ANY(genres)")
+                else
+                  @animes.where("#{i[0]} = '#{i[1]}'")
+                end
     end
 
     @title = 'Все аниме'
