@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     (/status/:status)
     (/franchise/:franchise)
     (/genres/:genres)
+    (/studio/:studio)
   FORMAT
 
   get "animes#{ani_manga_format}" => 'animes#index',

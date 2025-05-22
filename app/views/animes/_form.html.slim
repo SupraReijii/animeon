@@ -16,6 +16,12 @@
           include_blank: false,
           include_hidden: false,
           input_html: { class: 'chosen-select' }
+  = f.input :studio_ids, collection: Studio.all,
+          label_method: :name,
+          multiple: true,
+          include_blank: false,
+          include_hidden: false,
+          input_html: { class: 'chosen-select' }
   = f.input :poster, as: :file
   = f.button :submit, class: 'btn btn-outline-primary'
 

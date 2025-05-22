@@ -8,6 +8,21 @@ require 'aws-sdk-core'
 Bundler.require(*Rails.groups)
 
 module Animeon
+  DOMAINS = {
+    production: 'animeon.ru',
+    development: 'animeon.local'
+  }.freeze
+  DOMAIN = DOMAINS[Rails.env.to_sym]
+
+  PROTOCOLS = {
+    production: 'https',
+    development: 'https'
+  }.freeze
+
+  PROTOCOL = ENV['IS_LOCAL_RUN'] ? 'https' : PROTOCOLS[Rails.env.to_sym]
+
+  HOST = "#{Animeon::PROTOCOL}://#{Animeon::DOMAIN}".freeze
+
   class Application < Rails::Application
     Aws.config.update(
       credentials: Aws::Credentials.new(ENV['access_key_id'], ENV['secret_access_key']),

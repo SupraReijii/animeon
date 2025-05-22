@@ -7,11 +7,12 @@ class AnimesController < ApplicationController
     params.except(:controller, :action).each do |i|
       @animes = if i[0] == 'genres'
                   @animes.where("#{Genre.find_by(name: i[1], genre_type: 'anime').id} = ANY(genres)")
+                elsif i[0] == 'studio'
+                  @animes.where("#{i[1]} = ANY(studio_ids)")
                 else
                   @animes.where("#{i[0]} = '#{i[1]}'")
                 end
     end
-
     @title = 'Все аниме'
   end
 
@@ -64,6 +65,19 @@ class AnimesController < ApplicationController
   def create_from_shikimori
     client = Shikimori::API::Client.new
     anime = client.v1.anime(animes_params[:shiki_id]).to_hash
+    genres_ids = []
+    studio_ids = []
+    anime['genres'].each do |genre|
+      genres_ids << genre['id']
+    end
+    anime['studios'].each do |studio|
+      studio_ids << studio['id']
+    end
+    img_url = if anime['image']['original'] != '/assets/globals/missing_original.jpg'
+                "https://shikimori.one#{anime['image']['original']}"
+              else
+                "#{Animeon::HOST}/default_poster.png"
+              end
     @resource = Anime.new(
       name: anime['name'],
       russian: anime['russian'],
@@ -74,7 +88,13 @@ class AnimesController < ApplicationController
       franchise: anime['franchise'],
       user_rating: anime['score'],
       kind: anime['kind'],
-      shiki_id: animes_params[:shiki_id]
+      shiki_id: animes_params[:shiki_id],
+      studio_ids: studio_ids,
+      genres: genres_ids,
+      poster: Paperclip.io_adapters.for(
+        URI.parse(img_url).to_s,
+        { hash_digest: Digest::MD5 }
+      )
     )
     redirect_to anime_path(id: @resource.id) if @resource.save
   rescue Shikimori::API::NotFoundError
@@ -110,6 +130,6 @@ class AnimesController < ApplicationController
   def animes_params
     params.require(:anime).permit(:name, :russian, :description, :episodes,
                                   :episodes_aired, :kind, :status, :user_rating,
-                                  :franchise, :duration, :age_rating, :poster, :shiki_id, :genres => [])
+                                  :franchise, :duration, :age_rating, :poster, :shiki_id, genres: [], studio_ids: [])
   end
 end
