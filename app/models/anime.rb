@@ -14,7 +14,8 @@ class Anime < ApplicationRecord
                       mini: '-quality 98'
                     },
                     url: '/files/posters/animes/:style/:id.:extension',
-                    path: ':rails_root/public/files/posters/animes/:style/:id.:extension'
+                    path: ':rails_root/public/files/posters/animes/:style/:id.:extension',
+                    default_url: '/default_poster.png'
   validates_attachment_content_type :poster, content_type: /\Aimage/
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }

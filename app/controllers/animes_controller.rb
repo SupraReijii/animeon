@@ -74,9 +74,12 @@ class AnimesController < ApplicationController
       studio_ids << studio['id']
     end
     img_url = if anime['image']['original'] != '/assets/globals/missing_original.jpg'
-                "https://shikimori.one#{anime['image']['original']}"
+                Paperclip.io_adapters.for(
+                  URI.parse("https://shikimori.one#{anime['image']['original']}").to_s,
+                  { hash_digest: Digest::MD5 }
+                )
               else
-                "#{Animeon::HOST}/default_poster.png"
+                nil
               end
     @resource = Anime.new(
       name: anime['name'],
@@ -91,10 +94,7 @@ class AnimesController < ApplicationController
       shiki_id: animes_params[:shiki_id],
       studio_ids: studio_ids,
       genres: genres_ids,
-      poster: Paperclip.io_adapters.for(
-        URI.parse(img_url).to_s,
-        { hash_digest: Digest::MD5 }
-      )
+      poster: img_url
     )
     redirect_to anime_path(id: @resource.id) if @resource.save
   rescue Shikimori::API::NotFoundError

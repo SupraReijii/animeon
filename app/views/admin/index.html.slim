@@ -2,7 +2,7 @@
 - %i[name russian description user_rating age_rating franchise poster_file_name episodes kind].each do |s|
   - c += @resource.where(s => ['', nil, 0, 'none', 0.0]).count
   p
-    = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil, 0, 'none', 0.0]).count})", blank_params_admin_index_path(property: s, type: 'anime')
+    = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil, 0, 'none', 0.0, 'default_poster.png']).count})", blank_params_admin_index_path(property: s, type: 'anime')
 - c += @resource.where(genres: []).count
 - c += @resource.where(studio_ids: []).count
 p

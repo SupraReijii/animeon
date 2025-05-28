@@ -3,6 +3,6 @@ h1 #{t("activerecord.models.#{params[:type]}.one")} без #{params[:type].capit
   - params[:type].capitalize.singularize.constantize.where(params[:property] => []).order(:id).each do |a|
     p
       = link_to anime_path(a), anime_path(a)
-- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none']).order(:id).each do |a|
+- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none', 'default_poster.png']).order(:id).each do |a|
   p
     = link_to anime_path(a), anime_path(a)
