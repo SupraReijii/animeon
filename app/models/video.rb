@@ -1,9 +1,22 @@
 # frozen_string_literal: true
 
 class Video < ApplicationRecord
+  enum status: {
+    created: 0,
+    formating: 1,
+    ready: 2,
+    deleted: 3,
+    moderation: 4
+  }
+
   belongs_to :episode
   belongs_to :fandub
   has_many :video_url
+
+  validates :status, presence: true
+  has_attached_file :video_file,
+                    path: '/mnt/video/:id/video-:id.:extension'
+  validates_attachment_content_type :video_file, content_type: /\Avideo/
 
   validates :quality, presence: true
   after_create :add_video_urls

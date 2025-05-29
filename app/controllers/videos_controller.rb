@@ -7,8 +7,8 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(episode_id: params[:episode_id],
                        fandub_id: video_params[:fandub],
-                       quality: video_params[:quality]
-    )
+                       quality: video_params[:quality],
+                       video_file: video_params[:video_file])
     respond_to do |format|
       if @video.save
         format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
@@ -36,6 +36,6 @@ class VideosController < ApplicationController
 
   private
   def video_params
-    params.require(:video).permit(:fandub, quality: [])
+    params.require(:video).permit(:fandub, :video_file, quality: [])
   end
 end

@@ -5,7 +5,9 @@
           multiple: true,
           include_blank: false,
           include_hidden: false,
-          input_html: { class: 'chosen-select' }
+          input_html: { class: 'chosen-select' },
+          selected: %w[480p 720p 1080p]
+  = f.input :video_file, as: :file
   = f.button :submit, class: 'btn'
   .btn
     = link_to 'Назад', anime_episode_path(id: params[:episode_id])
