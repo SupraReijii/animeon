@@ -1,4 +1,4 @@
-h1 Новое видео для аниме #{Anime.find_by(id: params[:anime_id]).name}
+h1 Новое видео для серии #{Episode.find(params[:episode_id]).episode_number} аниме #{Anime.find_by(id: params[:anime_id]).name}
 .row.justify-content-md-center
   .col-2
     = render 'form'
