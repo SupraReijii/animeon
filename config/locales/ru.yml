@@ -4,12 +4,15 @@ ru:
       anime:
           one: Аниме
           other: Аниме
+      episodes:
+          one: Эпизод
+          other: Эпизоды
       video:
           one: Видео
           other: Видео
       user:
           one: Пользователь
-          other: Пользователь
+          other: Пользователи
 
     attributes:
       anime: &anime_attributes

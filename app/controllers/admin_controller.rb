@@ -4,9 +4,12 @@ class AdminController < ApplicationController
     unless user_signed_as_admin?
       redirect_to(root_path)
     end
-    unless params[:kind].present?
+    if !params[:kind].present? || params[:kind] == 'animes'
       @resource = Anime.all
+    elsif params[:kind] == 'episodes'
+      @resource = Episode.all
     end
+
   end
 
   def blank_params

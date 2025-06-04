@@ -17,19 +17,27 @@ h2 #{@animes.russian} / #{@animes.name}
         .line
           span.key #{Anime.human_attribute_name(:status)}
           = link_to animes_path(status: @animes.status)
-            span.value  - #{@animes.status_text}
+            span.value.link  - #{@animes.status_text}
       - if @animes.kind.present?
         .line
           span.key #{Anime.human_attribute_name(:kind)}
           = link_to animes_path(kind: @animes.kind)
-            span.value  - #{@animes.kind_text}
+            span.value.link  - #{@animes.kind_text}
+      - if @animes.status == :ongoing.to_s
+        .line
+          span.key #{Anime.human_attribute_name(:episodes)}
+          span.value  - #{@animes.episodes_aired} / #{@animes.episodes}
+      - if @animes.status == :released.to_s
+        .line
+          span.key #{Anime.human_attribute_name(:episodes)}
+          span.value  - #{@animes.episodes}
       - if @animes.genres != []
         .line
           span.key #{Anime.human_attribute_name(:genres)} -
           - @animes.genres.each do |g|
             - genre = Genre.find(g)
             = link_to animes_path(genres: genre.name)
-              span.value  #{genre.russian}
+              span.value.link  #{genre.russian}
       - if @animes.age_rating.present?
         .line
           span.key #{Anime.human_attribute_name(:age_rating)}
@@ -42,13 +50,26 @@ h2 #{@animes.russian} / #{@animes.name}
         .line
           span.key #{Anime.human_attribute_name(:franchise)}
           = link_to animes_path(franchise: @animes.franchise)
-            span.value  - #{@animes.franchise.capitalize.gsub('_', ' ')}
+            span.value.link  - #{@animes.franchise.capitalize.gsub('_', ' ')}
       - if @animes.studio_ids != []
         .text_info.studio
           span Студия
-        = link_to animes_path(studio: @animes.studio_ids.first)
-          .studio_img
-            = image_tag Studio.find(@animes.studio_ids.first).image.url
+        - if @animes.studio_ids.count < 2
+          - studio = Studio.find(@animes.studio_ids.first)
+          = link_to animes_path(studio: studio.id)
+            - if studio.image_file_name.nil?
+              .studio_img
+                span.link #{studio.name}
+            - else
+              .studio_img
+                = image_tag studio.image.url
+        - else
+          - @animes.studio_ids.each do |studio_id|
+            - studio = Studio.find(studio_id.to_i)
+            = link_to animes_path(studio: studio_id)
+              .studio_img
+                span.link #{studio.name}
+
       - if user_signed_in?
         .text_info.user_status
           span Статус пользователя
@@ -58,7 +79,7 @@ h2 #{@animes.russian} / #{@animes.name}
         .line
           span.key #{Anime.human_attribute_name(:user_status)}
           = link_to anime_user_list_path(list_type: @user_rate.status, user_id: current_user)
-            span.value  - #{@user_rate.status_name}
+            span.value.link  - #{@user_rate.status_name}
         - if user_signed_in?
           = button_to '', anime_increment_episode_path(anime_id: @animes.id), class: "add_episode", title: 'Добавить просмотренную серию'
           = button_to '', anime_decrement_episode_path(anime_id: @animes.id), class: "remove_episode", title: 'Убрать просмотренную серию'

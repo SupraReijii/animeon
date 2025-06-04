@@ -1,8 +1,13 @@
-h1 #{t("activerecord.models.#{params[:type]}.one")} без #{params[:type].capitalize.singularize.constantize.human_attribute_name(:studio_ids)}
-- if params[:property] == 'genres' || params[:property] == 'studio_ids'
-  - params[:type].capitalize.singularize.constantize.where(params[:property] => []).order(:id).each do |a|
+h1 #{t("activerecord.models.#{params[:type]}.other")} без #{params[:type].capitalize.singularize.constantize.human_attribute_name(params['property'].to_sym)}
+- if params[:type] == 'anime'
+  - if params[:property] == 'genres' || params[:property] == 'studio_ids'
+    - params[:type].capitalize.singularize.constantize.where(params[:property] => []).order(:id).each do |a|
+      p
+        = link_to anime_path(a), anime_path(a)
+  - params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none', 'default_poster.png']).order(:id).each do |a|
     p
       = link_to anime_path(a), anime_path(a)
-- params[:type].capitalize.singularize.constantize.where(params[:property] => ['', nil, 0, 0.0, 'none', 'default_poster.png']).order(:id).each do |a|
-  p
-    = link_to anime_path(a), anime_path(a)
+- if params[:type] == 'episode'
+  - params[:type].capitalize.singularize.constantize.includes(:video).where(videos: { id: nil }).order(:anime_id, :id).each do |a|
+    p
+      = link_to anime_episode_path(anime_id: a.anime_id, id: a.id), anime_episode_path(anime_id: a.anime_id, id: a.id)

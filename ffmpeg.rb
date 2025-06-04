@@ -2,6 +2,8 @@
 
 require 'pg'
 require 'streamio-ffmpeg'
+require 'daemons'
+Daemons.daemonize
 
 i = 0
 conn = PG::Connection.new(host: ENV['DATABASE_HOST'], user: 'animeon_dev', password: ENV['DATABASE_PASSWORD'])
