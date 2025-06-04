@@ -1,4 +1,5 @@
-h2 #{@episode.anime.russian} / #{@episode.anime.name}
+=link_to anime_path(@episode.anime)
+  h2 #{@episode.anime.russian} / #{@episode.anime.name}
 span Серия #{@episode.episode_number}
 .video_block
   .video_choose

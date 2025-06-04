@@ -12,6 +12,7 @@ Rails.application.configure do
   config.force_ssl = true
   config.hosts << 'animeon.ru'
   config.hosts << 'www.animeon.ru'
+  config.hosts << 'animeon.vm'
   config.logger = ActiveSupport::Logger.new($stdout)
                                        .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
                                        .then { |logger| ActiveSupport::TaggedLogging.new(logger) }

@@ -7,7 +7,6 @@ class EpisodesController < ApplicationController
     if user_signed_in?
       @user_rate = UserRate.find_by(user_id: current_user.id, target_id: @episode.anime.id, target_type: 'Anime')
     end
-    puts @user_rate.status
     if params[:watched].present? && user_signed_in? && @user_rate.status != 'completed'
       @user_rate.update(episodes: params[:watched])
       if @episode.anime.episodes == params[:watched].to_i
