@@ -52,7 +52,7 @@ class Anime < ApplicationRecord
   end
 
   def next_episode?
-    status != 'released' ? self.episodes_aired += 1 : 0
+    status != 'released' ? self.episodes_aired + 1 : 0
   end
 
   def new_episode
