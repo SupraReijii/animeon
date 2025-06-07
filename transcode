@@ -9,7 +9,7 @@ shift
 done
 # shellcheck disable=SC2164
 cd /mnt/video/"$id"
-ffmpeg -y -i video-"$id".mp4 \
+ffmpeg -y -hwaccel cuda -c:v h264_cuvid -i video-"$id".mp4 \
       -vf scale=854:480 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v libx264 -level 3.1 -coder cabac -psy 1 -psy-rd 1.00:0.00 -deblock 1:0:0 -rc-lookahead 40 -bf 3 -b-pyramid 2 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://storage.animeon.ru/video/$id/480/" -hls_segment_filename "480/$id-%05d.ts" 480.m3u8 \
       -vf scale=1280:720 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v libx264 -level 4.1 -coder cabac -psy 1 -psy-rd 1.00:0.00 -deblock 1:0:0 -rc-lookahead 40 -bf 3 -b-pyramid 2 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://storage.animeon.ru/video/$id/720/" -hls_segment_filename "720/$id-%05d.ts" 720.m3u8 \
       -vf scale=1920:1080 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v libx264 -level 4.1 -coder cabac -psy 1 -psy-rd 1.00:0.00 -deblock 1:0:0 -rc-lookahead 40 -bf 3 -b-pyramid 2 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://storage.animeon.ru/video/$id/1080/" -hls_segment_filename "1080/$id-%05d.ts" 1080.m3u8
