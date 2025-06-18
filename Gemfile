@@ -27,6 +27,7 @@ gem 'slim-rails', '3.6.2'
 gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'unicorn'
+gem 'redis-rails'
 
 group :development, :test do
   gem 'rspec'
@@ -56,3 +57,7 @@ end
 
 gem "devise", "~> 4.9"
 gem 'apipie-rails'
+
+gem "sidekiq", "~> 7.3"
+
+gem "clockwork", "~> 3.0"

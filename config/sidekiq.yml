@@ -1,0 +1,18 @@
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
+
+development:
+  :concurrency: 10
+
+staging:
+  :concurrency: 5
+
+production:
+  :concurrency: 80
+
+:queues:
+  - [ShikiParser, 1]
+
+
+:limits:
+  ShikiParser: 1

@@ -24,6 +24,9 @@ module Animeon
   HOST = "#{Animeon::PROTOCOL}://#{Animeon::DOMAIN}".freeze
 
   class Application < Rails::Application
+    def redis
+      Rails.application.config.redis
+    end
     Aws.config.update(
       credentials: Aws::Credentials.new(ENV['access_key_id'], ENV['secret_access_key']),
       region: ENV['region'],
@@ -44,5 +47,9 @@ module Animeon
       generator.view_specs false
       generator.test_framework :rspec
     end
+    config.redis = Redis.new(
+      host: 'localhost',
+      port: 6379
+    )
   end
 end
