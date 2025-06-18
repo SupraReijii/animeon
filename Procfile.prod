@@ -1,2 +1,2 @@
-sidekiq: bundle exec sidekiq -C config/sidekiq.yml
-clockwork:  bundle exec clockwork config/clock.rb
+sidekiq: RAILS_ENV=production bundle exec sidekiq -C config/sidekiq.yml
+clockwork: RAILS_ENV=production bundle exec clockwork config/clock.rb
