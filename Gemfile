@@ -61,3 +61,5 @@ gem 'apipie-rails'
 gem "sidekiq", "~> 7.3"
 
 gem "clockwork", "~> 3.0"
+
+gem "pagy", "~> 9.3"

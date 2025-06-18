@@ -4,7 +4,7 @@ class AnimesController < ApplicationController
   require 'open-uri'
   def index
     @animes = Anime.all.order(user_rating: :desc)
-    params.except(:controller, :action).each do |i|
+    params.except(:controller, :action, :page).each do |i|
       @animes = if i[0] == 'genres'
                   @animes.where("#{Genre.find_by(name: i[1], genre_type: 'anime').id} = ANY(genres)")
                 elsif i[0] == 'studio'
@@ -13,6 +13,7 @@ class AnimesController < ApplicationController
                   @animes.where("#{i[0]} = '#{i[1]}'")
                 end
     end
+    @pagy, @animes = pagy(@animes)
     @title = 'Все аниме'
   end
 
