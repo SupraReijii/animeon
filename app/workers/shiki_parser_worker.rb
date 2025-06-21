@@ -63,7 +63,7 @@ class ShikiParserWorker
 
   def update(parsed)
     anime = Anime.find_by(shiki_id: parsed['id'])
-    %i[name russian episodes episodes_aired age_rating duration franchise user_rating kind].each do |key|
+    %i[name russian episodes episodes_aired age_rating duration franchise kind].each do |key|
       if anime[key] != parsed[key.to_s]
         DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
                            old_data: anime[key], new_data: parsed[key.to_s],
