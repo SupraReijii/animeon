@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_29_060625) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_21_160326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_29_060625) do
     t.index ["name"], name: "index_animes_on_name"
     t.index ["russian"], name: "index_animes_on_russian"
     t.index ["user_rating"], name: "index_animes_on_user_rating"
+  end
+
+  create_table "db_modifications", force: :cascade do |t|
+    t.string "table_name", null: false
+    t.string "row_name", null: false
+    t.bigint "target_id", null: false
+    t.string "old_data", null: false
+    t.string "new_data", null: false
+    t.string "status", default: "created", null: false
+    t.text "reason", default: "", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_db_modifications_on_status"
+    t.index ["table_name", "row_name", "target_id"], name: "index_db_modifications_on_target_id"
+    t.index ["user_id"], name: "index_db_modifications_on_user_id"
   end
 
   create_table "episodes", force: :cascade do |t|
