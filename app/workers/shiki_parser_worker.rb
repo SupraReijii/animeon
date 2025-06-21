@@ -67,7 +67,7 @@ class ShikiParserWorker
       if anime[key] != parsed[key.to_s]
         DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
                            old_data: anime[key], new_data: parsed[key.to_s],
-                           status: 'approved', user_id: User.find_by(name: 'reijii').id).save
+                           status: 'approved', user_id: 1).save
       end
     end
   end
