@@ -1,0 +1,36 @@
+class OngoingParserWorker
+  include Sidekiq::Worker
+  require 'open-uri'
+  sidekiq_options queue: :ShikiParser
+
+  def perform
+    target_anime = Anime.where(status: :ongoing).order(:updated_at).first
+    return if target_anime.nil?
+
+    client = Shikimori::API::Client.new
+    anime = client.v1.anime(target_anime.shiki_id).to_hash
+    anime['age_rating'] = anime['rating']
+    anime['user_rating'] = anime['score']
+    genres_ids = []
+    studio_ids = []
+    anime['genres'].each do |genre|
+      genres_ids << genre['id']
+    end
+    anime['studios'].each do |studio|
+      studio_ids << studio['id']
+    end
+    anime['episodes_aired'] = anime['episodes'] if anime['status'] == 'released'
+    update(anime)
+  end
+
+  def update(parsed)
+    anime = Anime.find_by(shiki_id: parsed['id'])
+    %i[name russian episodes episodes_aired age_rating duration franchise kind].each do |key|
+      if anime[key] != parsed[key.to_s]
+        DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
+                           old_data: anime[key], new_data: parsed[key.to_s],
+                           status: 'approved', user_id: 1).save
+      end
+    end
+  end
+end

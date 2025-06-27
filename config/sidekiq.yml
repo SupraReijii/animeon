@@ -11,8 +11,8 @@ production:
   :concurrency: 80
 
 :queues:
-  - [ShikiParser, 1]
+  - [ShikiParser, 5]
 
 
 :limits:
-  ShikiParser: 1
+  ShikiParser: 5
