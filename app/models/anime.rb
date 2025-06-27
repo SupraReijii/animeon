@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Anime < ApplicationRecord
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+                  against: %i[name russian],
+                  using: {
+                    tsearch: { prefix: true } # allows partial word matching
+                  }
   STATUSES = %i[announced ongoing released].freeze
   KINDS = %i[tv movie ova ona special pv cm none].freeze
   AGE_RATINGS = %i[g pg pg_13 r r_plus rx none].freeze

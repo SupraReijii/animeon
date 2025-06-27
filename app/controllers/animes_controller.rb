@@ -3,8 +3,12 @@
 class AnimesController < ApplicationController
   require 'open-uri'
   def index
-    @animes = Anime.all.order(user_rating: :desc)
-    params.except(:controller, :action, :page).each do |i|
+    @animes = if params[:name].present?
+                Anime.search_by_name(params[:name])
+              else
+                Anime.all.order(user_rating: :desc)
+              end
+    params.except(:controller, :action, :page, :name).each do |i|
       @animes = if i[0] == 'genres'
                   @animes.where("#{Genre.find_by(name: i[1], genre_type: 'anime').id} = ANY(genres)")
                 elsif i[0] == 'studio'

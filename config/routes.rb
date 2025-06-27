@@ -1,9 +1,20 @@
 # frozen_string_literal: true
-require "sidekiq/web"
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => "/sidekiq"
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   apipie
+  namespace :api, defaults: { format: 'json' } do
+    scope module: :v1 do
+      resources :animes, only: [:index] do
+        collection do
+          get :search
+        end
+      end
+    end
+  end
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

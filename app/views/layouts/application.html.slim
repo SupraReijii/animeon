@@ -29,4 +29,9 @@ html
           - else
             = link_to "Войти в профиль", new_user_session_path
     .container
+      .animes-search-block
+        input.search-field[
+          placeholder="Поиск..."
+        ]
+        .search-results
       = yield

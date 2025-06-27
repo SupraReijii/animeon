@@ -28,6 +28,7 @@ gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'unicorn'
 gem 'redis-rails'
+gem 'pg_search'
 
 group :development, :test do
   gem 'rspec'

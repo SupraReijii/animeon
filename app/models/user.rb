@@ -11,4 +11,7 @@ class User < ApplicationRecord
 
   enumerize :role, in: ROLES, default: :user
 
+  def admin?
+    role == :admin
+  end
 end

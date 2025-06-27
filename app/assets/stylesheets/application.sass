@@ -64,6 +64,35 @@ body
 #video_quality
   height: 210px
 
+.animes-search-block
+  width: 100%
+  background: $navbar-color
+  max-width: 600px
+  margin: 10px auto
+  & input
+    border: none
+    width: 600px
+    height: 30px
+    font-size: 20px
+    &:focus
+      outline: none
+      font-size: 24px
+
+.search-results
+  background: $navbar-color
+  color: white
+  z-index: 100
+  width: 600px
+  position: absolute
+
+.search-result
+  padding: 5px
+  display: flex
+  & .search-result-name
+    font-size: 18px
+    margin-left: 5px
+  &:hover
+    background: $container-color
 @media screen and (max-width: 1200px)
   .nav-item
     padding: 0 8%
@@ -83,6 +112,13 @@ body
     padding: 0 7%
   .nav-items
     max-width: 450px
+  .animes-search-block
+    width: 100%
+    max-width: 360px
+    & input
+      width: 360px
+  .search-results
+    width: 360px
 
 @media screen and (max-width: 440px)
   .nav-item
