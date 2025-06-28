@@ -10,7 +10,7 @@ module Api
       api :GET, '/animes/search', 'Search for an anime by name or russian'
       param :name, :undef, required: true
       def search
-        render json: Anime.search_by_name(params[:name]).limit(10).select(:id, :name, :russian)
+        render json: Anime.search_by_name(params[:name]).with_pg_search_rank.limit(10).select(:id, :name, :russian)
       end
     end
   end
