@@ -49,7 +49,8 @@ module Animeon
     end
     config.redis = Redis.new(
       host: 'localhost',
-      port: 6379
+      port: 6379,
+      password: ENV['REDIS_PASSWORD']
     )
   end
 end
