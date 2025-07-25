@@ -68,7 +68,7 @@ class ShikiParserWorker
 
       DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
                          old_data: anime[key], new_data: parsed[key.to_s],
-                         status: 'approved', user_id: 1).save
+                         status: 'approved', user_id: 1, reason: 'ShikiParserWorker update').save
     end
   end
 end

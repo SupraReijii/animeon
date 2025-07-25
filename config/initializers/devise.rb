@@ -25,3 +25,7 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
 end
+
+Rails.application.config.session_store :redis_store,
+                                       expire_after: 1.year,
+                                       key: '_animeon_session'
