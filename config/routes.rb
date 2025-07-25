@@ -13,6 +13,12 @@ Rails.application.routes.draw do
           get :search
         end
       end
+      resources :videos, only: %i[index create update] do
+        member do
+          patch :update_status
+          put :update_status
+        end
+      end
     end
   end
   devise_for :users, controllers: {

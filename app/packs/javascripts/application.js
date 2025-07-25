@@ -1,13 +1,116 @@
 import Turbolinks from 'turbolinks';
 Turbolinks.start();
 $(document).on('turbolinks:load', () => {
+  function Data() {
+    const formData = new FormData();
+    const file = $('#video_video_file')[0].files[0];
+    formData.append('video[video_file]', file);
+    formData.append('video[episode_id]', $('#ep-id').text());
+    formData.append('video[fandub]', $('#video_fandub').val())
+    formData.append('video[quality][]', $('#video_quality').val())
+    return formData
+  }
+
+  $('#btn-submit').on('click', function (e) {
+    e.preventDefault();
+    $('#btn-submit').prop({disabled: true})
+    const formData = Data()
+    if ($('#ep-id').attr('uploaded') == null) {
+      $.ajax({
+        url: '/api/videos',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        xhr: function () {
+          const xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+              const percentComplete = Math.round((evt.loaded / evt.total) * 100);
+              $('#progress-bar').css('width', percentComplete + '%');
+              //console.log(evt)
+            }
+          }, false);
+          return xhr;
+        },
+        success: function (response) {
+          $('#progress-bar').css('background-color', 'green');
+          $('#ep-id').attr({uploaded: response.video.id})
+          $('#btn-submit').prop({disabled: false})
+          $('#btn-save').css({visibility: 'visible'})
+        },
+        error: function () {
+          $('#progress-bar').css('background-color', 'red');
+          $('#btn-submit').prop({disabled: false})
+        }
+      });
+    } else {
+      $('#progress-bar').css('background-color', 'steelblue');
+      $.ajax({
+        url: '/api/videos/' + $('#ep-id').attr('uploaded'),
+        type: 'PATCH',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        xhr: function () {
+          const xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+              const percentComplete = Math.round((evt.loaded / evt.total) * 100);
+              $('#progress-bar').css('width', percentComplete + '%');
+              //console.log(evt)
+            }
+          }, false);
+          return xhr;
+        },
+        success: function (response) {
+          $('#progress-bar').css('background-color', 'green');
+          $('#ep-id').attr({uploaded: response.anime.id})
+          $('#btn-submit').prop({disabled: false})
+        },
+        error: function () {
+          $('#progress-bar').css('background-color', 'red');
+          $('#btn-submit').prop({disabled: false})
+        }
+      });
+    }
+  });
+
+  $('#btn-save').on('click', function (e) {
+    console.log('1')
+    e.preventDefault();
+    //$('#btn-submit').prop({disabled: true})
+    const formData = new FormData()
+    formData.append('video[status]', 0)
+    if ($('#ep-id').attr('uploaded') != null) {
+      $.ajax({
+        url: '/api/videos/' + $('#ep-id').attr('uploaded') + '/update_status',
+        type: 'PATCH',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        success: function (response) {
+          console.log(response)
+          Turbolinks.visit('/animes/' + response.anime.id + '/episodes/' + response.episode.id)
+        },
+        error: function () {
+          $('#progress-bar').css('background-color', 'red');
+          $('#btn-submit').prop({disabled: false})
+        }
+      })
+    }
+  })
+
   let input = $('.search-field');
   input.on('keyup', function (e){
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       Turbolinks.visit('animes?name='+input.val())
       console.log('enter')
     }
-    if (e.keyCode == 27) {
+    if (e.keyCode === 27) {
       input.val('')
       $('.search-results').html('')
     }
@@ -19,7 +122,7 @@ $(document).on('turbolinks:load', () => {
   })
 
   function search(value){
-    if (value != "") {
+    if (value !== "") {
       $.ajax({
         url: '/api/animes/search?name='+value,
         method: 'get',

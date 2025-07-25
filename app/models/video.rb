@@ -2,6 +2,7 @@
 
 class Video < ApplicationRecord
   enum status: {
+    uploaded: -1,
     created: 0,
     formating: 1,
     ready: 2,

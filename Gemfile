@@ -2,33 +2,38 @@ source 'https://rubygems.org'
 
 ruby '3.2.6'
 
-gem 'turbo-rails'
+gem 'apipie-rails'
 gem 'aws-sdk-core'
 gem 'aws-sdk-s3', '~> 1.159'
 gem 'bootsnap', require: false
 gem 'bootstrap'
+gem 'clockwork', '~> 3.0'
+gem 'devise', '~> 4.9'
 gem 'enumerize'
 gem 'i18n'
 gem 'jbuilder'
 gem 'jquery-rails'
 gem 'kt-paperclip', '~> 6.4', '>= 6.4.1'
 gem 'non-stupid-digest-assets'
+gem 'pagy', '~> 9.3'
 gem 'pg', '~> 1.5.7'
+gem 'pg_search'
 gem 'prometheus-client'
 gem 'puma', '>= 5.0'
 gem 'rack', '<3'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.3'
 gem 'rails-i18n'
+gem 'redis-rails'
 gem 'sassc-rails', '2.1.2'
 gem 'shakapacker', '8.2.0'
 gem 'shikimori-api'
+gem 'sidekiq', '~> 7.3'
 gem 'simple_form', '~> 5.3', '>= 5.3.1'
 gem 'slim-rails', '3.6.2'
 gem 'sprockets-rails'
 gem 'turbolinks'
+gem 'turbo-rails'
 gem 'unicorn'
-gem 'redis-rails'
-gem 'pg_search'
 
 group :development, :test do
   gem 'rspec'
@@ -56,11 +61,4 @@ group :test do
   gem 'shoulda-matchers'
 end
 
-gem "devise", "~> 4.9"
-gem 'apipie-rails'
 
-gem "sidekiq", "~> 7.3"
-
-gem "clockwork", "~> 3.0"
-
-gem "pagy", "~> 9.3"

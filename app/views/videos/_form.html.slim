@@ -1,4 +1,4 @@
-=simple_form_for(@video, url: anime_episode_videos_path) do |f|
+=simple_form_for @video, url: anime_episode_videos_path, defaults: { input_html: { enctype: "multipart/form-data" } } do |f|
   = f.input :fandub, collection: Fandub.all, default: :first, input_html: { class: 'chosen-select' }
   = f.input :quality,
           collection: VideoUrl::QUALITIES,
@@ -7,7 +7,18 @@
           include_hidden: false,
           input_html: { class: 'chosen-select' },
           selected: %w[480p 720p 1080p]
-  = f.input :video_file, as: :file
-  = f.button :submit, class: 'btn'
-  .btn
+  = f.input :video_file,
+          as: :file,
+          input_html: { type: 'file', accept: "video/*" }
+.btns
+  #btn-submit.btn Загрузить
+  #btn-back.btn
     = link_to 'Назад', anime_episode_path(id: params[:episode_id])
+  #btn-save.btn Сохранить
+span.upload-progress
+div id="progress-container" style="width: 50%; margin: 5px; background-color: #eee; height: 20px; border-radius: 5px; overflow: hidden;"
+  div id="progress-bar" style="width: 0%; height: 100%; background-color: steelblue;"
+
+#ep-id [
+  value="#{params[:episode_id]}"
+] #{params[:episode_id]}

@@ -4,7 +4,7 @@ module Api
     class AnimesController < BaseController
       api :GET, '/animes', 'List all animes'
       def index
-        render json: Anime.all.limit(5)
+        render json: Anime.all.limit(5), status: 200
       end
 
       api :GET, '/animes/search', 'Search for an anime by name or russian'
