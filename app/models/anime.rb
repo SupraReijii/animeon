@@ -5,8 +5,9 @@ class Anime < ApplicationRecord
   pg_search_scope :search_by_name,
                   against: %i[name russian],
                   using: {
-                    tsearch: { prefix: true } # allows partial word matching
-                  }
+                    tsearch: { prefix: true }
+                  },
+                  order_within_rank: "animes.user_rating DESC"
   STATUSES = %i[announced ongoing released].freeze
   KINDS = %i[tv movie ova ona special pv cm none].freeze
   AGE_RATINGS = %i[g pg pg_13 r r_plus rx none].freeze

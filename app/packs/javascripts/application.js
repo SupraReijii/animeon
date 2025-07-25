@@ -107,7 +107,7 @@ $(document).on('turbolinks:load', () => {
   let input = $('.search-field');
   input.on('keyup', function (e){
     if (e.keyCode === 13) {
-      Turbolinks.visit('animes?name='+input.val())
+      Turbolinks.visit('/animes?name='+input.val())
       console.log('enter')
     }
     if (e.keyCode === 27) {
