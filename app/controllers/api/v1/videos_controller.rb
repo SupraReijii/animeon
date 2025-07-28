@@ -12,7 +12,7 @@ module Api
       def create
         @video = Video.new(episode_id: video_params[:episode_id].to_i,
                            fandub_id: video_params[:fandub].to_i,
-                           quality: video_params[:quality].to_a,
+                           quality: video_params[:quality][0].split(','),
                            video_file: video_params[:video_file],
                            status: -1)
         if @video.save
