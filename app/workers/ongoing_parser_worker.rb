@@ -37,7 +37,7 @@ class OngoingParserWorker
     %i[genres studios].each do |key|
       next unless anime[key] != parsed[key.to_s] && parsed[key.to_s] != nil
       DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
-                         old_data: anime[key].to_s, new_data: parsed[key.to_s].to_s,
+                         old_data: anime[key].nil? ? '' : anime[key].to_s, new_data: parsed[key.to_s].to_s,
                          status: 'approved', user_id: 1, reason: 'OngoingParserWorker update from shiki').save
     end
   end
