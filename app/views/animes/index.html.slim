@@ -11,4 +11,5 @@ h1 Все аниме
       = image_tag anime.poster.url(:mini)
       .card-body
         span #{anime_name_substr(anime.russian)}
-==pagy_nav(@pagy)
+.pagination
+  ==pagy_nav(@pagy)

@@ -1,0 +1,68 @@
+=anime_card
+  .anime-card
+    width: 17%
+    margin: 10px
+    border: 0
+    min-height: 320px
+    float: left
+    display: flex
+    flex-direction: column
+    &:nth-child(5n+1)
+      clear: left
+    &:hover
+      text-decoration: underline
+    & span
+      color: #a7acb1
+      font-size: 14px
+      font-weight: bold
+      margin-top: 10px
+    & img
+      width: 100%
+      opacity: 85%
+      &:hover
+        opacity: 100%
+
+  .card
+    border-radius: 7px
+    & .card-body
+      margin-top: 5px
+
+  @media screen and (max-width: 1023px)
+    .anime-card
+      width: 22%
+    .anime-card span
+      font-size: 14px
+    .card-body
+      padding: 7px
+    .anime-card:nth-child(5n+1)
+      clear: none
+    .anime-card:nth-child(4n+1)
+      clear: left
+
+  @media screen and (max-width: 872px)
+    .anime-card
+      width: 28%
+      min-height: 270px
+      & span
+        font-size: 13px
+    .anime-card:nth-child(4n+1)
+      clear: none
+    .anime-card:nth-child(3n+1)
+      clear: left
+
+  @media screen and (max-width: 576px)
+    .anime-card
+      width: 46%
+      min-height: 260px
+      margin: 5px
+      &:hover
+        width: 46%
+    .card-body
+      padding: 5px
+      height: 35px
+    .anime-card span
+      font-size: 13px
+    .anime-card:nth-child(3n+1)
+      clear: none
+    .anime-card:nth-child(2n+1)
+      clear: left

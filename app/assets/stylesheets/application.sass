@@ -3,11 +3,13 @@
 @use './pages/lists'
 @use './pages/users'
 @use './pages/videos'
+@use './pages/dashboard'
 
 //@import bootstrap
 @import chosen
 @import vars
 @import mixins/clear
+@import mixins/btn
 
 body
   font-family: "Nunito", sans-serif
@@ -24,6 +26,15 @@ a
   padding: 0
   border: 0
   color: $backgroud-color
+
+.pagination
+  margin: 0 auto
+  display: table
+
+.pagy
+  & a
+    +btn
+    font-size: 20px
 
 .navbar
   background: $navbar-color

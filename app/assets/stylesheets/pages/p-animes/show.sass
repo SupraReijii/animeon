@@ -1,8 +1,10 @@
 @import '../../mixins/clear'
 @import '../../mixins/btn'
 @import '../../mixins/icons.scss'
+@import '../../mixins/text_info'
 
 .p-animes-show
+  +text_info
   .key
     color: #8c9095
     font-weight: bold
@@ -44,14 +46,6 @@
 
   .anime_page
     +clear_left
-
-  .text_info
-    width: 100%
-    padding: 3px
-    background: #36393c
-    margin-bottom: 10px
-    border-left: 10px solid #a7acb1
-    box-sizing: border-box
 
   .user_status
     margin-top: 10px

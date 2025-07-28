@@ -1,2 +1,10 @@
-h1 index#dashboard
+.ongoing_box
+  .text_info
+    = link_to  'Онгоинги', animes_path(status: 'ongoing')
+  .ongoing_cards
+    - @animes.each do |anime|
+      = link_to anime, class: "anime-card card"
+        = image_tag anime.poster.url(:mini)
+        .card-body
+          span #{anime_name_substr(anime.russian)}
 = link_to "Animes", animes_path
