@@ -17,16 +17,18 @@ class OngoingParserWorker
     anime['genres'].each do |genre|
       genres_ids << genre['id']
     end
+    anime['genres'] = genres_ids
     anime['studios'].each do |studio|
       studio_ids << studio['id']
     end
+    anime['studios'] = studio_ids
     anime['episodes_aired'] = anime['episodes'] if anime['status'] == 'released'
     update(anime)
   end
 
   def update(parsed)
     anime = Anime.find_by(shiki_id: parsed['id'])
-    %i[name russian episodes episodes_aired age_rating duration franchise kind].each do |key|
+    %i[name russian episodes episodes_aired age_rating duration franchise kind genres studios].each do |key|
       next unless anime[key] != parsed[key.to_s] && parsed[key.to_s] != nil
       DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
                          old_data: anime[key], new_data: parsed[key.to_s],
