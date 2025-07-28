@@ -26,6 +26,6 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
 end
 
-Rails.application.config.session_store :redis_store,
+Rails.application.config.session_store :cookie_store,
                                        expire_after: 1.year,
                                        key: '_animeon_session'
