@@ -21,7 +21,7 @@ class OngoingParserWorker
     anime['studios'].each do |studio|
       studio_ids << studio['id']
     end
-    anime['studios'] = studio_ids
+    anime['studio_ids'] = studio_ids
     anime['episodes_aired'] = anime['episodes'] if anime['status'] == 'released'
     update(anime)
   end
