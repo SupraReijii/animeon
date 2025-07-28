@@ -34,6 +34,7 @@ gem 'sprockets-rails'
 gem 'turbolinks'
 gem 'turbo-rails'
 gem 'unicorn'
+gem 'dotenv'
 
 group :development, :test do
   gem 'rspec'
