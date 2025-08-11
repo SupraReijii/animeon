@@ -79,7 +79,6 @@ $(document).on('turbolinks:load', () => {
   });
 
   $('#btn-save').on('click', function (e) {
-    console.log('1')
     e.preventDefault();
     //$('#btn-submit').prop({disabled: true})
     const formData = new FormData()

@@ -8,7 +8,9 @@ h2 #{@animes.russian} / #{@animes.name}
       - if user_signed_as_admin?
         = link_to '', edit_anime_url(params[:id]), class: "edit_anime", title: 'Редактировать'
       - if user_signed_as_admin? && @animes.next_episode? != 0
-        = link_to '', new_anime_episode_path(anime_id: @animes.id), class: "add_episode"
+        = link_to '', new_anime_episode_path(anime_id: @animes.id), class: "add_episode", title: 'Добавить эпизод'
+      - if user_signed_as_admin? && @animes.shiki_id.present?
+        = link_to '', "https://shikimori.one/animes/#{@animes.shiki_id}", class: "to_shiki", target: "_blank", title: 'Аниме на шикимори'
   .anime_info_box
     .text_info
       span Информация
