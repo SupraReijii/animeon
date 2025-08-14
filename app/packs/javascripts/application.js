@@ -11,6 +11,55 @@ $(document).on('turbolinks:load', () => {
     return formData
   }
 
+  $('.approve_changes').on('click', function (e) {
+    $.ajax({
+      url: '/api/db_modifications/' + e.currentTarget.id + '/approve',
+      type: 'POST',
+      data: null,
+      processData: false,
+      contentType: false,
+      headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+      success: function (response) {
+        $('#status-'+e.currentTarget.id).html(response.status)
+      },
+      error: function (error) {
+        console.log(error)
+      }
+    })
+  })
+  $('.rollback_changes').on('click', function (e) {
+    $.ajax({
+      url: '/api/db_modifications/' + e.currentTarget.id + '/rollback',
+      type: 'POST',
+      data: null,
+      processData: false,
+      contentType: false,
+      headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+      success: function (response) {
+        $('#status-'+e.currentTarget.id).html(response.status)
+      },
+      error: function (error) {
+        console.log(error)
+      }
+    })
+  })
+  $('.destroy_modification').on('click', function (e) {
+    $.ajax({
+      url: '/api/db_modifications/' + e.currentTarget.id,
+      type: 'DELETE',
+      data: null,
+      processData: false,
+      contentType: false,
+      headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+      success: function (response) {
+        $('tr#'+e.currentTarget.id).remove()
+      },
+      error: function (error) {
+        console.log(error)
+      }
+    })
+  })
+
   $('#btn-submit').on('click', function (e) {
     e.preventDefault();
     $('#btn-submit').prop({disabled: true})

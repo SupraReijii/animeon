@@ -1,0 +1,22 @@
+@import '../../mixins/icons.scss'
+
+.p-animes-information
+  td
+    text-align: center
+  table
+    width: 100%
+  .rollback
+    &:before
+      content: var(--svg-rollback)
+    &:hover
+      cursor: pointer
+  .success
+    &:before
+      content: var(--svg-success20)
+    &:hover
+      cursor: pointer
+  .destroy
+    &:before
+      content: var(--svg-minus20)
+    &:hover
+      cursor: pointer

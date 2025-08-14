@@ -14,6 +14,14 @@ class DbModification < ApplicationRecord
       table_name.capitalize.singularize.constantize.find(target_id).update(row_name => new_data)
     end
   end
+  def approve_changes
+    table_name.capitalize.singularize.constantize.find(target_id).update(row_name => new_data)
+    update(status: :approved)
+  end
+  def rollback_changes
+    table_name.capitalize.singularize.constantize.find(target_id).update(row_name => old_data)
+    update(status: :rollbacked)
+  end
 
   def anime?
     table_name == 'Anime'

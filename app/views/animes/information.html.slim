@@ -1,0 +1,36 @@
+table
+  thead
+    th ID
+    th Название строки
+    th Старое значение
+    th Новое значение
+    th Комментарий
+    th Статус
+    th Пользователь
+    th
+  tbody
+    - @resource.each do |r|
+      tr[
+        id="#{r['id']}"
+      ]
+        td = r['id']
+        td = Anime.human_attribute_name(r['row_name'])
+        td = r['old_data']
+        td = r['new_data']
+        td = r['reason']
+        td[
+          id="status-#{r['id']}"
+        ] = r['status']
+        td = User.find(r['user_id']).username
+        td.success.approve_changes[
+          id="#{r['id']}"
+          content="#{r['id']}"
+        ]
+        td.rollback.rollback_changes[
+          id="#{r['id']}"
+          content="#{r['id']}"
+        ]
+        td.destroy.destroy_modification[
+          id="#{r['id']}"
+          content="#{r['id']}"
+        ]

@@ -28,7 +28,6 @@ class AnimesController < ApplicationController
   end
 
   def edit
-    redirect_to anime_path(params[:id]) unless user_signed_in? && %w[admin creator].include?(current_user.role)
     @animes = Anime.find(params[:id])
     @title = 'редактировать аниме'
   end
@@ -55,11 +54,42 @@ class AnimesController < ApplicationController
 
   def update
     @resource = Anime.find(params[:id])
-    if @resource.update(animes_params)
-      redirect_to @resource
-    else
-      render :edit, status: :unprocessable_entity
+    %w[name russian description kind status franchise age_rating poster].each do |key|
+      if @resource[key].to_s != animes_params[key].to_s
+        DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
+                           old_data: @resource[key], new_data: animes_params[key].nil? ? '' : animes_params[key],
+                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+      end
     end
+    %w[episodes episodes_aired user_rating duration shiki_id].each do |key|
+      puts "#{@resource[key]} || #{animes_params[key]}"
+      if @resource[key].to_i != animes_params[key].to_i
+        DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
+                           old_data: @resource[key], new_data: animes_params[key].nil? ? '' : animes_params[key],
+                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+      end
+    end
+    %w[genres studio_ids].each do |key|
+      if @resource[key].to_a.map(&:to_i) != animes_params[key].to_a.map(&:to_i)
+        DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
+                           old_data: @resource[key], new_data: animes_params[key].nil? ? '[]' : animes_params[key].map(&:to_i),
+                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+      end
+    end
+    #animes_params.each do |key, value|
+    #  puts "#{@resource[key]} || #{value}"
+    #  if @resource[key].to_s != value.to_s do
+    #    DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
+    #                       old_data: @resource[key], new_data: value,
+    #                       status: 'approved', user_id: current_user.id, reason: "#{current_user.username} edit").save
+    #  end
+    #
+    redirect_to @resource
+    #if @resource.update(animes_params)
+    #
+    #else
+    #  render :edit, status: :unprocessable_entity
+    #end
   end
 
   def new_from_shikimori
@@ -128,6 +158,10 @@ class AnimesController < ApplicationController
     user_rate = current_user.user_rates.find_by(target_type: 'Anime', target_id: anime.id)
     params[:status] == 'completed' ? user_rate.update(status: 2, episodes: anime.episodes) : user_rate.update(status: params[:status])
     redirect_back fallback_location: anime
+  end
+
+  def information
+    @resource = DbModification.where(target_id: params[:anime_id], table_name: 'Anime').order(created_at: :desc)
   end
 
   private

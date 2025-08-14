@@ -65,4 +65,11 @@ class Anime < ApplicationRecord
   def new_episode
     status != 'released' ? update(episodes_aired: self.episodes_aired += 1) : false
   end
+
+  def genres=(value)
+    value.nil? ? super({}) : super(eval(value).map(&:to_i))
+  end
+  def studio_ids=(value)
+    value.nil? ? super({}) : super(eval(value).map(&:to_i))
+  end
 end

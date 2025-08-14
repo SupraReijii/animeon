@@ -5,15 +5,14 @@ h2 #{@animes.russian} / #{@animes.name}
       span Фото
     div.anime_img
       = image_tag @animes.poster.url
-      - if user_signed_as_admin?
-        = link_to '', edit_anime_url(params[:id]), class: "edit_anime", title: 'Редактировать'
+      = link_to '', edit_anime_url(params[:id]), class: "edit_anime", title: 'Редактировать'
       - if user_signed_as_admin? && @animes.next_episode? != 0
         = link_to '', new_anime_episode_path(anime_id: @animes.id), class: "add_episode", title: 'Добавить эпизод'
       - if user_signed_as_admin? && @animes.shiki_id.present?
         = link_to '', "https://shikimori.one/animes/#{@animes.shiki_id}", class: "to_shiki", target: "_blank", title: 'Аниме на шикимори'
   .anime_info_box
     .text_info
-      span Информация
+      = link_to 'Информация', anime_information_path(@animes)
     .anime_info
       - if @animes.status.present?
         .line

@@ -19,6 +19,10 @@ Rails.application.routes.draw do
           put :update_status
         end
       end
+      resources :db_modifications, only: %i[destroy] do
+        post :approve
+        post :rollback
+      end
     end
   end
   devise_for :users, controllers: {
@@ -64,6 +68,7 @@ Rails.application.routes.draw do
     post :decrement_episode
     post :increment_episode
     post :user_status
+    get :information
   end
 
 end
