@@ -54,11 +54,12 @@ class AnimesController < ApplicationController
 
   def update
     @resource = Anime.find(params[:id])
+    status = user_signed_as_admin? ? 'approved' : 'created'
     %w[name russian description kind status franchise age_rating].each do |key|
       if @resource[key].to_s != animes_params[key].to_s
         DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
                            old_data: @resource[key], new_data: animes_params[key].nil? ? '' : animes_params[key],
-                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+                           status: status, user_id: current_user.id, reason: "#{current_user.username} edit").save
       end
     end
     %w[episodes episodes_aired user_rating duration shiki_id].each do |key|
@@ -66,14 +67,14 @@ class AnimesController < ApplicationController
       if @resource[key].to_i != animes_params[key].to_i
         DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
                            old_data: @resource[key], new_data: animes_params[key].nil? ? '' : animes_params[key],
-                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+                           status: status, user_id: current_user.id, reason: "#{current_user.username} edit").save
       end
     end
     %w[genres studio_ids].each do |key|
       if @resource[key].to_a.map(&:to_i) != animes_params[key].to_a.map(&:to_i)
         DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
                            old_data: @resource[key], new_data: animes_params[key].nil? ? '[]' : animes_params[key].map(&:to_i),
-                           status: 'created', user_id: current_user.id, reason: "#{current_user.username} edit").save
+                           status: status, user_id: current_user.id, reason: "#{current_user.username} edit").save
       end
     end
     #animes_params.each do |key, value|
