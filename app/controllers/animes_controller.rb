@@ -54,7 +54,7 @@ class AnimesController < ApplicationController
 
   def update
     @resource = Anime.find(params[:id])
-    %w[name russian description kind status franchise age_rating poster].each do |key|
+    %w[name russian description kind status franchise age_rating].each do |key|
       if @resource[key].to_s != animes_params[key].to_s
         DbModification.new(table_name: 'Anime', row_name: key, target_id: @resource.id,
                            old_data: @resource[key], new_data: animes_params[key].nil? ? '' : animes_params[key],
