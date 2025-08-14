@@ -67,9 +67,17 @@ class Anime < ApplicationRecord
   end
 
   def genres=(value)
-    value.nil? ? super({}) : super(eval(value).map(&:to_i))
+    if value.class == Array
+      super(value)
+    elsif value.class == String
+      value.nil? ? super({}) : super(eval(value).map(&:to_i))
+    end
   end
   def studio_ids=(value)
-    value.nil? ? super({}) : super(eval(value).map(&:to_i))
+    if value.class == Array
+      super(value)
+    elsif value.class == String
+      value.nil? ? super({}) : super(eval(value).map(&:to_i))
+    end
   end
 end
