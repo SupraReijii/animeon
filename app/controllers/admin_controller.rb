@@ -1,6 +1,10 @@
 class AdminController < ApplicationController
 
   def index
+
+  end
+
+  def need_to_fill
     unless user_signed_as_admin?
       redirect_to(root_path)
     end
@@ -9,7 +13,6 @@ class AdminController < ApplicationController
     elsif params[:kind] == 'episodes'
       @resource = Episode.all
     end
-
   end
 
   def blank_params

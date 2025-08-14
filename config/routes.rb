@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   resources :admin, only: %i[index] do
     collection do
       get :blank_params
+      get :need_to_fill
     end
   end
 

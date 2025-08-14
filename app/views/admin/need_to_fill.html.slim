@@ -1,0 +1,20 @@
+- if params['kind'] == 'animes' || !params['kind'].present?
+  - c = 0
+  - %i[name russian description user_rating age_rating franchise poster_file_name episodes kind].each do |s|
+    - c += @resource.where(s => ['', nil, 0, 'none', 0.0]).count
+    p
+      = link_to "Аниме без #{Anime.human_attribute_name(s)} (#{@resource.where(s => ['', nil, 0, 'none', 0.0, 'default_poster.png']).count})", blank_params_admin_index_path(property: s, type: 'anime')
+  - c += @resource.where(genres: []).count
+  - c += @resource.where(studio_ids: []).count
+  p
+    = link_to "Аниме без #{Anime.human_attribute_name(:genres)} (#{@resource.where(genres: []).count})", blank_params_admin_index_path(property: 'genres', type: 'anime')
+  p
+    = link_to "Аниме без #{Anime.human_attribute_name(:studio_ids)} (#{@resource.where(studio_ids: []).count})", blank_params_admin_index_path(property: 'studio_ids', type: 'anime')
+  h2 #{((1 - (c.to_f / (@resource.count * 11)))*100).ceil(2)}% Заполнено
+- if params['kind'] == 'episodes'
+  - c = 0
+  - %i[video].each do |s|
+    - c += @resource.includes(:video).where(videos: { id: nil }).count
+    p
+      = link_to "Эпизоды без Видео (#{@resource.includes(:video).where(videos: { id: nil }).count})", blank_params_admin_index_path(property: s, type: 'episode')
+  h2 #{((1 - (c.to_f / @resource.count))*100).ceil(2)}% Заполнено
