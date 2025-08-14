@@ -83,7 +83,7 @@ class AnimesController < ApplicationController
     #                       old_data: @resource[key], new_data: value,
     #                       status: 'approved', user_id: current_user.id, reason: "#{current_user.username} edit").save
     #  end
-    #
+    @resource.update(poster: animes_params[:poster])
     redirect_to @resource
     #if @resource.update(animes_params)
     #
