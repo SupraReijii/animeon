@@ -4,7 +4,6 @@ require_relative 'boot'
 
 require 'rails/all'
 require 'aws-sdk-core'
-require 'prometheus/api_client'
 
 Bundler.require(*Rails.groups)
 
