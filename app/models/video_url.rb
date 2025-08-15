@@ -8,7 +8,7 @@ class VideoUrl < ApplicationRecord
   before_save :add_priority
   before_save :add_url
   def add_url
-    self[:url] = "https://storage.animeon.ru/video/#{self[:video_id]}/#{self[:quality].match('\d+')[0]}.m3u8"
+    self[:url] = "https://proxy.animeon.ru/video/#{self[:video_id]}/#{self[:quality].match('\d+')[0]}.m3u8"
   end
 
   def add_priority
