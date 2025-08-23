@@ -4,20 +4,6 @@ class VideosController < ApplicationController
     @title = "Добавить видео для #{Episode.find(params[:episode_id]).episode_number} серии #{Anime.find(params[:anime_id]).name}"
   end
 
-  def create
-    @video = Video.new(episode_id: params[:episode_id],
-                       fandub_id: video_params[:fandub],
-                       quality: video_params[:quality],
-                       video_file: video_params[:video_file])
-    respond_to do |format|
-      if @video.save
-        format.html  { redirect_to(anime_episode_path(id: params[:episode_id])) }
-      else
-        format.html  { redirect_to action: 'new' }
-      end
-    end
-  end
-
   def edit
     @video = Video.find(params[:id])
     @title = "Редактировать видео для #{Episode.find(params[:episode_id]).episode_number} серии #{Anime.find(params[:anime_id]).name}"

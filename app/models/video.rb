@@ -24,7 +24,7 @@ class Video < ApplicationRecord
 
   def add_video_urls
     self[:quality].each do |q|
-      VideoUrl.new(video_id: self[:id], quality: q).save
+      VideoUrl.new(video_id: self[:id], quality: q, cached_at: Time.now - 8.days).save
     end
   end
 

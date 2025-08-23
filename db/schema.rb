@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_21_160326) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_23_142044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -187,6 +187,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_160326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "priority", default: 0, null: false
+    t.datetime "cached_at", default: "2025-08-23 14:30:50", null: false
     t.index ["video_id"], name: "index_video_urls_on_video_id"
   end
 
@@ -201,6 +202,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_21_160326) do
     t.bigint "video_file_file_size"
     t.datetime "video_file_updated_at"
     t.integer "status", default: 0, null: false
+    t.bigint "user_id", default: 1, null: false
     t.index ["episode_id"], name: "index_videos_on_episode_id"
     t.index ["fandub_id"], name: "index_videos_on_fandub_id"
   end

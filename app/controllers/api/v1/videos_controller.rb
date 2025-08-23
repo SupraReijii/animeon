@@ -14,7 +14,8 @@ module Api
                            fandub_id: video_params[:fandub].to_i,
                            quality: video_params[:quality][0].split(','),
                            video_file: video_params[:video_file],
-                           status: -1)
+                           status: -1,
+                           user_id: current_user.id)
         if @video.save
           render json: {
             video: @video, episode: @video.episode, anime: @video.episode.anime

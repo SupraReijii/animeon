@@ -64,12 +64,11 @@ Rails.application.routes.draw do
       post :create_from_shikimori
     end
     resources :episodes, only: %i[show new create edit update] do
-      resources :videos, only: %i[new create edit update]
+      resources :videos, only: %i[new edit update]
     end
     post :decrement_episode
     post :increment_episode
     post :user_status
     get :information
   end
-
 end
