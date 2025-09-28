@@ -4,7 +4,7 @@ module Clockwork
   every 5.seconds, 'ShikiParser' do
     ShikiParserWorker.perform_async
   end
-  every 5.minutes, 'OngoingParser' do
+  every 1.minutes, 'OngoingParser' do
     OngoingParserWorker.perform_async
   end
 end

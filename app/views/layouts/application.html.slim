@@ -35,3 +35,5 @@ html
         ]
         .search-results
       = yield
+      - if Rails.env.production?
+        = render partial: 'metrika'

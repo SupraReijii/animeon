@@ -52,6 +52,10 @@ h2 #{@animes.russian} / #{@animes.name}
           span.key #{Anime.human_attribute_name(:franchise)}
           = link_to animes_path(franchise: @animes.franchise)
             span.value.link  - #{@animes.franchise.capitalize.gsub('_', ' ')}
+      - if @animes.user_rating.present?
+        .line
+          span.key #{Anime.human_attribute_name(:user_rating)}
+          span.value  - #{@animes.user_rating}
       - if @animes.studio_ids != []
         .text_info.studio
           span Студия
