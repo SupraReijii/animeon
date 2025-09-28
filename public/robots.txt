@@ -1,1 +1,23 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+User-agent: *
+Disallow: /*?
+Disallow: /*?rel=nofollow
+Disallow: /*undefined
+Disallow: /api/*
+Disallow: /*.html
+Disallow: /*/*.rss
+Host: https://animeon.ru
+Sitemap: https://animeon.ru/sitemap.xml
+
+User-agent: AhrefsBot
+User-agent: moget
+User-agent: ichiro
+User-agent: NaverBot
+User-agent: Yeti
+User-agent: Baiduspider
+User-agent: Baiduspider-video
+User-agent: Baiduspider-image
+User-agent: sogou spider
+User-agent: YoudaoBot
+User-agent: Yahoo Pipes 1.0
+User-agent: Yahoo Pipes 2.0
+Disallow: /
