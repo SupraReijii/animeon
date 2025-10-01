@@ -41,7 +41,7 @@ class OngoingParserWorker
                          status: 'approved', user_id: 1, reason: 'OngoingParserWorker update from shiki').save
     end
     if anime['user_rating'].to_f != parsed['user_rating'].to_f
-      DbModification.new(table_name: 'Anime', row_name: key, target_id: anime.id,
+      DbModification.new(table_name: 'Anime', row_name: 'user_rating', target_id: anime.id,
                          old_data: anime['user_rating'], new_data: parsed['user_rating'],
                          status: 'approved', user_id: 1, reason: 'OngoingParserWorker update from shiki').save
     end
