@@ -19,7 +19,7 @@ class AnimesController < ApplicationController
                   @animes.where("#{i[0]} = '#{i[1]}'")
                 end
     end
-    @pagy, @animes = pagy(@animes)
+    @pagy, @animes = pagy(@animes.where.not(age_rating: :rx))
     @title = 'Все аниме'
   end
 
