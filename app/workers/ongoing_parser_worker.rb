@@ -5,7 +5,7 @@ class OngoingParserWorker
 
   def perform
     target_anime = Anime.where(status: :ongoing).order(:updated_at).first
-    target_anime.touch(:updated_at)
+    target_anime.update(updated_at: Time.now)
     return if target_anime.nil?
 
     client = Shikimori::API::Client.new
