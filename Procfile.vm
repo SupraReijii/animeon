@@ -1,3 +1,3 @@
-webpack: RAILS_ENV=production bin/shakapacker
-assets: RAILS_ENV=production bin/rails assets:precompile
+#webpack: RAILS_ENV=production bin/shakapacker
+#assets: RAILS_ENV=production bin/rails assets:precompile
 unicorn: RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb
