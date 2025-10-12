@@ -31,9 +31,10 @@ while i != -1
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
     redis.set("transcoder:current", "0")
+    redis.set("transcoder:status", "active")
   end
   sleep(5)
-  redis.get("transcoder:stop") == 1 ? i = -1 : i += 1
+  redis.get("transcoder:stop") == "1" ? i = -1 : i += 1
   redis.incr("transcoder:iterations")
 end
 redis.set("transcoder:status", "stopped")
