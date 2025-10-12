@@ -26,7 +26,7 @@ while i != -1
       end
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
-      system("sh transcode -i #{id} -f #{format}")
+      system("sh /home/devops/transcode -i #{id} -f #{format}")
     end
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
