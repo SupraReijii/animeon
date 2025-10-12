@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 require 'daemons'
 
-Daemons.run('ffmpeg.rb')
+Daemons.run('/home/devops/ffmpeg.rb')
