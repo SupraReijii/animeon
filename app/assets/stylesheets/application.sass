@@ -75,19 +75,30 @@ body
 #video_quality
   height: 210px
 
+
+
 .animes-search-block
+  position: relative
   width: 100%
   background: $navbar-color
   max-width: 600px
   margin: 10px auto
+  & .search-ico
+    position: absolute
+    left: 3px
+    top: 3px
+    &:before
+      content: var(--svg-search)
   & input
+    padding-left: 30px
     border: none
+    border-radius: 5px
     width: 600px
     height: 30px
     font-size: 20px
     &:focus
       outline: none
-      font-size: 24px
+      color: #0e0e0e
 
 .search-results
   background: $navbar-color

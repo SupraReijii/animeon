@@ -38,10 +38,12 @@ html
             = link_to "Войти в профиль", new_user_session_path
     .container
       .animes-search-block
-        input.search-field[
-          placeholder="Поиск..."
-        ]
-        .search-results
+        label.field
+          span.search-ico
+          input.search-field[
+            placeholder="Поиск..."
+          ]
+          .search-results
       = yield
       - if Rails.env.production?
         = render partial: 'layouts/metrika'
