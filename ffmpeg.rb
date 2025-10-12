@@ -11,11 +11,13 @@ redis.set("transcoder:status", "active")
 redis.set("transcoder:iterations", "0")
 redis.set("transcoder:videos", "0")
 redis.set("transcoder:stop", "0")
+redis.set("transcoder:current", "0")
 while i != -1
   res = conn.exec('SELECT * FROM videos WHERE status = 0 ORDER BY id LIMIT 1').first
   puts res
   unless res.nil?
     id = res['id']
+    redis.set("transcoder:current", "#{id}")
     format = res['video_file_file_name'].match('(\.mp4|\.avi|\.mkv|\.mov|\.ts)')
     movie = FFMPEG::Movie.new("/mnt/video/#{id}/video-#{id}#{format}")
     if movie.valid?
@@ -28,6 +30,7 @@ while i != -1
     end
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
+    redis.set("transcoder:current", "0")
   end
   sleep(5)
   redis.get("transcoder:stop") == 1 ? i = -1 : i += 1
