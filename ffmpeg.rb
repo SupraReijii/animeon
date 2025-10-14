@@ -16,6 +16,7 @@ while i != -1
   res = conn.exec('SELECT * FROM videos WHERE status = 0 ORDER BY id LIMIT 1').first
   puts res
   unless res.nil?
+    time_start = Time.now
     id = res['id']
     redis.set("transcoder:current", "#{id}")
     format = res['video_file_file_name'].match('(\.mp4|\.avi|\.mkv|\.mov|\.ts)')
@@ -27,9 +28,11 @@ while i != -1
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
       system("sh /home/devops/transcode -i #{id} -f #{format}")
+      redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:time", (Time.now - time_start).round(0).to_s)
     end
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
+    redis.incr("transcoder:videos_all_time")
     redis.set("transcoder:current", "0")
     redis.set("transcoder:status", "active")
   end
