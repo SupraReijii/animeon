@@ -28,7 +28,13 @@ while i != -1
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
       system("sh /home/devops/transcode -i #{id} -f #{format}")
-      redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:time", (Time.now - time_start).round(0).to_s)
+      time_end = (Time.now - time_start).round(0)
+      redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:time",
+                time_end.to_s)
+      redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:id",
+                id.to_s)
+      redis.set("transcoder:videos_all_time_transcoding_time",
+                "#{(redis.get("transcoder:videos_all_time_transcoding_time").to_i + time_end)}")
     end
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
