@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
   def index
-    @news = News.where(is_public: true)
+    @news = News.where(is_public: true).order(public_after: :asc)
   end
 
   def show
