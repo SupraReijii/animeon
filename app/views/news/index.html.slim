@@ -1,0 +1,8 @@
+h1 Все новости
+- if user_signed_as_admin?
+  = link_to 'Создать новость', new_news_path
+
+.news-list
+  - @news.each do |n|
+    = link_to "#{n.title}", news_path(id: n.id)
+    p #{n.body}

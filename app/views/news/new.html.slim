@@ -1,0 +1,12 @@
+= simple_form_for @news do |f|
+  = f.input :title
+  = f.input :body
+  = f.input :tags,
+          collection: News::TAGS,
+          multiple: true,
+          include_blank: false,
+          include_hidden: false,
+          input_html: { class: 'chosen-select' }
+  = f.input :is_public
+  = f.input :public_after
+  = f.submit

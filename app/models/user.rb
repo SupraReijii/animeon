@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :user_rates
+  has_many :news
   has_attached_file :avatar,
                     styles: { mini: ['225x225>', :webp], original: ['450x450>', :webp] },
                     convert_options: {

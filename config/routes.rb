@@ -52,6 +52,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :news, only: %i[show new create index]
+
   resources :admin, only: %i[index] do
     collection do
       get :blank_params

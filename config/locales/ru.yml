@@ -13,6 +13,9 @@ ru:
       user:
           one: Пользователь
           other: Пользователи
+      news:
+          one: Новость
+          other: Новости
 
     attributes:
       anime: &anime_attributes
@@ -46,6 +49,10 @@ ru:
         location: Откуда
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить меня
+      news:
+        title: Заголовок
+        body: Текст новости
+        is_public: Опубликовать?
       user_rate:
         statuses:
           anime:

@@ -1,0 +1,7 @@
+.news-block
+  h2 #{@news.title}
+  = link_to @news.user
+    .user-block
+      = image_tag @news.user.avatar.url, size: '40x40'
+      span #{@news.user.username}
+  p #{@news.body}
