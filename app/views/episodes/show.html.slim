@@ -19,12 +19,13 @@ span Серия #{@episode.episode_number}
   - if user_signed_in? && (current_user.role == 'admin' || current_user.role == 'uploader')
     = link_to "Редактировать видео", edit_anime_episode_video_path(episode_id: @episode.id, id: 1), class: "btn btn-outline-info admin"
     = link_to "Добавить видео", new_anime_episode_video_path(episode_id: @episode.id), class: "btn btn-outline-info admin add_video"
-h3
-  | Загрузчики
-  - @episode.video.each do |v|
-    .uploader
-      = link_to User.find(v.user_id)
-        = image_tag(User.find(v.user_id).avatar.url, size: '40x40', class: "uploader_avatar")
-        p
-          | #{User.find(v.user_id).username}
+- unless @episode.video.empty?
+  h3
+    | Загрузчики
+    - @episode.video.each do |v|
+      .uploader
+        = link_to User.find(v.user_id)
+          = image_tag(User.find(v.user_id).avatar.url, size: '40x40', class: "uploader_avatar")
+          p
+            | #{User.find(v.user_id).username}
 
