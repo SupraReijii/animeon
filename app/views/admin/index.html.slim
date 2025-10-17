@@ -3,8 +3,9 @@ p
   | Видео в очереди: #{Video.where("status < 2").count}
 p
   | Статус транскодера: #{Animeon::Application.redis.get('transcoder:status')}
+- time = Animeon::Application.redis.get('transcoder:videos_all_time_transcoding_time').to_i / Animeon::Application.redis.get('transcoder:videos_all_time').to_i
 p
-  | Среднее время кодирования: #{Animeon::Application.redis.get('transcoder:videos_all_time_transcoding_time').to_i / Animeon::Application.redis.get('transcoder:videos_all_time').to_i / 60} Минуты
+  | Среднее время кодирования: #{time / 60} Минуты #{time % 60} Секунд
 - %w[animes episodes].each do |kind|
   .admin_link
     = link_to "Пустые строки у #{kind}", need_to_fill_admin_index_path(kind: kind)
