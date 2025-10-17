@@ -12,6 +12,7 @@ redis.set("transcoder:iterations", "0")
 redis.set("transcoder:videos", "0")
 redis.set("transcoder:stop", "0")
 redis.set("transcoder:current", "0")
+redis.set("transcoder:current_time_start", "0")
 while i != -1
   res = conn.exec('SELECT * FROM videos WHERE status = 0 ORDER BY id LIMIT 1').first
   puts res
@@ -27,6 +28,7 @@ while i != -1
       end
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
+      redis.set("transcoder:current_time_start", Time.now.to_s)
       system("sh /home/devops/transcode -i #{id} -f #{format.to_s.gsub('.', '')}")
       time_end = (Time.now - time_start).round(0)
       redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:time",
@@ -39,6 +41,7 @@ while i != -1
     conn.exec("UPDATE videos SET status = 2 WHERE id = #{id}")
     redis.incr("transcoder:videos")
     redis.incr("transcoder:videos_all_time")
+    redis.set("transcoder:current_time_start", "0")
     redis.set("transcoder:current", "0")
     redis.set("transcoder:status", "active")
   end
