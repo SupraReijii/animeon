@@ -10,7 +10,7 @@ shift
 done
 # shellcheck disable=SC2164
 cd /mnt/video/"$id"
-ffmpeg -y -i video-"$id""$format" \
+ffmpeg -y -i video-"$id"."$format" \
       -vf scale=854:480 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 3.1 -coder cabac -rc-lookahead 40 -bf 3 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/480/" -hls_segment_filename "480/$id-%05d.ts" 480.m3u8 \
       -vf scale=1280:720 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 4.1 -coder cabac -rc-lookahead 40 -bf 3 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/720/" -hls_segment_filename "720/$id-%05d.ts" 720.m3u8 \
       -vf scale=1920:1080 -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 4.1 -coder cabac -rc-lookahead 40 -bf 3 -crf 24 -g 48 -keyint_min 4 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/1080/" -hls_segment_filename "1080/$id-%05d.ts" 1080.m3u8

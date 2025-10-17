@@ -27,7 +27,7 @@ while i != -1
       end
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
-      system("sh /home/devops/transcode -i #{id} -f #{format}")
+      system("sh /home/devops/transcode -i #{id} -f #{format.gsub('.', '')}")
       time_end = (Time.now - time_start).round(0)
       redis.set("transcoder:video:#{redis.get("transcoder:videos_all_time")}:time",
                 time_end.to_s)
