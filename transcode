@@ -4,7 +4,7 @@ while [ -n "$1" ]
 do
 case "$1" in
 -i) id=$2;;
--f) format=$3;;
+-f) format=$2;;
 esac
 shift
 done
