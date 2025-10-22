@@ -23,9 +23,6 @@ while i != -1
     format = res['video_file_file_name'].match('(\.mp4|\.avi|\.mkv|\.mov|\.ts)')
     movie = FFMPEG::Movie.new("/mnt/video/#{id}/video-#{id}#{format}")
     if movie.valid?
-      res['quality'][1, res['quality'].size - 2].split(',').each do |q|
-        Dir.mkdir("/mnt/video/#{id}/#{q.gsub('p', '')}")
-      end
       conn.exec("UPDATE videos SET status = 1 WHERE id = #{id}")
       redis.set("transcoder:status", "transcoding")
       redis.set("transcoder:current_time_start", Time.now.to_s)
