@@ -18,8 +18,8 @@ rm -r /mnt/video/"$id"/1080.m3u8
 
 cd /mnt/video/"$id"
 ffmpeg -y -i video-"$id"."$format" \
-      -vf scale=854:480 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 3.1 -rc:v vbr -cq 24 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/480/" -hls_segment_filename "480/$id-%05d.ts" 480.m3u8 \
-      -vf scale=1280:720 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 4.1 -rc:v vbr -cq 22 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/720/" -hls_segment_filename "720/$id-%05d.ts" 720.m3u8 \
-      -vf scale=1920:1080 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -level 4.1 -rc:v vbr -cq 21 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/1080/" -hls_segment_filename "1080/$id-%05d.ts" 1080.m3u8
+      -vf scale=854:480 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -preset p4 -profile:v main -rc:v vbr -cq 24 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/480/" -hls_segment_filename "480/$id-%05d.ts" 480.m3u8 \
+      -vf scale=1280:720 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -preset p4 -profile:v main -rc:v vbr -cq 22 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/720/" -hls_segment_filename "720/$id-%05d.ts" 720.m3u8 \
+      -vf scale=1920:1080 -pix_fmt yuv420p -map 0:0 -map 0:1 -c:a aac -ar 48000 -c:v h264_nvenc -preset p4 -profile:v high -rc:v vbr -cq 21 -hls_time 10 -hls_playlist_type vod -hls_list_size 0 -hls_base_url "https://proxy.animeon.ru/video/$id/1080/" -hls_segment_filename "1080/$id-%05d.ts" 1080.m3u8
 # shellcheck disable=SC2103
 cd ..
