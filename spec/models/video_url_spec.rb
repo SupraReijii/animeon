@@ -26,12 +26,12 @@ describe VideoUrl do
     let(:video_url) { create :video_url, quality: q }
     context '720p' do
       let(:q) { '720p' }
-      it { expect(video_url.url).to eq("https://storage.animeon.ru/video/#{video_url.video.id}/720.m3u8") }
+      it { expect(video_url.url).to eq("https://proxy.animeon.ru/video/#{video_url.video.id}/720.m3u8") }
     end
 
     context '480p' do
       let(:q) { '480p' }
-      it { expect(video_url.url).to eq("https://storage.animeon.ru/video/#{video_url.video.id}/480.m3u8") }
+      it { expect(video_url.url).to eq("https://proxy.animeon.ru/video/#{video_url.video.id}/480.m3u8") }
     end
   end
 end

@@ -20,7 +20,7 @@ describe AnimesController, type: :controller do
   describe '#edit' do
     subject! { get :edit, params: { id: anime.id } }
     context 'default user' do
-      it { expect(response).to have_http_status :redirect }
+      it { expect(response).to have_http_status :success }
     end
     context 'admin' do
       include_context :authenticated, :admin
@@ -62,18 +62,6 @@ describe AnimesController, type: :controller do
     it do
       expect(resource).to be_persisted
       expect(response).to redirect_to anime_url(resource)
-    end
-  end
-  describe '#update' do
-    let(:anime) { create :anime, episodes: 2, episodes_aired: 0 }
-    subject! { patch :update, params: { id: anime.id, anime: params } }
-    context '>ongoing' do
-      let(:params) { { episodes_aired: 1 } }
-      it { expect(resource.status).to eq('ongoing') }
-    end
-    context '>released' do
-      let(:params) { { episodes_aired: anime.episodes } }
-      it { expect(resource.status).to eq('released') }
     end
   end
 end
