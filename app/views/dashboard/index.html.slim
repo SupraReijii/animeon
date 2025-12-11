@@ -1,10 +1,26 @@
 .ongoing_box
   .text_info
-    = link_to  'Онгоинги', animes_path(status: 'ongoing')
+    = link_to 'Онгоинги', animes_path(status: 'ongoing')
   .ongoing_cards
     - @animes.each do |anime|
       = link_to anime, class: "anime-card card"
         = image_tag anime.poster.url(:mini)
         .card-body
           span #{anime_name_substr(anime.russian)}
-= link_to "Animes", animes_path
+.animes_with_video_box
+  .text_info
+    = link_to 'Аниме которые можно посмотреть', animes_path(model: 'video')
+  .ongoing_cards
+    - @animes_with_video.each do |anime|
+      = link_to anime, class: "anime-card card"
+        = image_tag anime.poster.url(:mini)
+        .card-body
+          span #{anime_name_substr(anime.russian)}
+.news_box
+  .text_info
+    = link_to 'Все новости', news_index_path
+  .news_cards
+    - @news.each do |n|
+      = link_to n, class: "news-card card"
+        .card-body
+          span #{n.title}

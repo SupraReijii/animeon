@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module Animeon
   DOMAINS = {
     production: 'animeon.ru',
-    development: 'animeon.local'
+    development: 'animeon.local',
   }.freeze
   DOMAIN = DOMAINS[Rails.env.to_sym]
 
@@ -22,7 +22,8 @@ module Animeon
   PROTOCOL = ENV['IS_LOCAL_RUN'] ? 'https' : PROTOCOLS[Rails.env.to_sym]
 
   HOST = "#{Animeon::PROTOCOL}://#{Animeon::DOMAIN}".freeze
-
+  PROXY_SUBDOMAIN = 'proxy'
+  PROXY = "#{Animeon::PROTOCOL}://#{Animeon::PROXY_SUBDOMAIN}.#{Animeon::DOMAIN}".freeze
   class Application < Rails::Application
     def redis
       Rails.application.config.redis

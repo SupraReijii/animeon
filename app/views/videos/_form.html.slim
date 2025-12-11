@@ -9,7 +9,7 @@
           selected: %w[480p 720p 1080p]
   = f.input :video_file,
           as: :file,
-          input_html: { type: 'file', accept: "video/*" }
+          input_html: { type: 'file', accept: 'video/x-matroska, video/*' }
 .btns
   #btn-submit.btn Загрузить
   #btn-back.btn

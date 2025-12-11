@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     (/franchise/:franchise)
     (/genres/:genres)
     (/studio/:studio)
+    (/with/:model)
   FORMAT
 
   get "animes#{ani_manga_format}" => 'animes#index',
@@ -50,6 +51,8 @@ Rails.application.routes.draw do
       get :anime
     end
   end
+
+  resources :news, only: %i[show new create index]
 
   resources :admin, only: %i[index] do
     collection do

@@ -13,11 +13,13 @@ class AnimesController < ApplicationController
                   @animes.where("#{Genre.find_by(name: i[1], genre_type: 'anime').id} = ANY(genres)")
                 elsif i[0] == 'studio'
                   @animes.where("#{i[1]} = ANY(studio_ids)")
+                elsif i[0] == 'model'
+                  @animes.joins(episode: :video).distinct
                 else
                   @animes.where("#{i[0]} = '#{i[1]}'")
                 end
     end
-    @pagy, @animes = pagy(@animes)
+    @pagy, @animes = pagy(@animes.where.not(age_rating: :rx))
     @title = 'Все аниме'
   end
 

@@ -8,6 +8,7 @@ gem 'aws-sdk-s3', '~> 1.159'
 gem 'bootsnap', require: false
 gem 'bootstrap'
 gem 'clockwork', '~> 3.0'
+gem 'graphql-client'
 gem 'devise', '~> 4.9'
 gem 'enumerize'
 gem 'i18n'

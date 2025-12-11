@@ -1,4 +1,16 @@
 h1 Admin panel
+p
+  | Видео в очереди: #{Video.where("status < 2").count}
+- status = Animeon::Application.redis.get('transcoder:status')
+p
+  | Статус транскодера: #{status}
+- time = Animeon::Application.redis.get('transcoder:videos_all_time_transcoding_time').to_i / Animeon::Application.redis.get('transcoder:videos_all_time').to_i
+p
+  | Среднее время кодирования: #{time / 60} Минуты #{time % 60} Секунд
+- if status == 'transcoding'
+  - current_time = (Time.now - Time.new(Animeon::Application.redis.get('transcoder:current_time_start'))).to_i
+  p
+    | Время кодирования текущего видео: #{current_time / 60} Минуты #{current_time % 60} Секунд
 - %w[animes episodes].each do |kind|
   .admin_link
     = link_to "Пустые строки у #{kind}", need_to_fill_admin_index_path(kind: kind)
