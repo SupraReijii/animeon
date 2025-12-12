@@ -14,6 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+db_password
 
 # Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*

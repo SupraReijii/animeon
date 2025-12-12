@@ -9,15 +9,15 @@ default: &default
 development:
   <<: *default
   database: animeon_dev
-  username: animeon_dev
+  username: animeon
 
 test:
   <<: *default
   database: animeon_test
-  username: animeon_test
+  username: animeon
 
 production:
   <<: *default
   database: animeon_prod
-  username: animeon_prod
+  username: animeon
 
