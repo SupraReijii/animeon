@@ -15,7 +15,7 @@ ENV RAILS_ENV="production" \
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
-
+RUN echo "Acquire::http::Proxy \"http://proxy:Mesina226@ru.krainovpn.ru:12346\";" >> /etc/apt/apt.conf
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3
@@ -73,5 +73,5 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 9001
 CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
