@@ -15,7 +15,11 @@
 /log/*
 /tmp/*
 db_password
-
+fullchain.pem
+privkey.pem
+prod.dump
+dev.dump
+test.dump
 # Ignore storage (uploaded files in development and any SQLite databases).
 /storage/*
 

@@ -1,12 +1,12 @@
-app_name = "animeon"
-app_path = "/home/devops/#{app_name}"
+#app_name = "animeon"
+app_path = "/rails"
 shared_path = "#{app_path}/shared"
 
 worker_processes 32
 timeout 90
-listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4098
-
-user "devops"
+# listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4096
+listen 9001, :tcp_nopush => true
+user "rails"
 
 working_directory app_path
 

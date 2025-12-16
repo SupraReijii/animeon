@@ -49,9 +49,9 @@ module Animeon
       generator.test_framework :rspec
     end
     config.redis = Redis.new(
-      host: 'localhost',
+      host: 'redis',
       port: 6379,
-      password: ENV['REDIS_PASSWORD']
+      #password: ENV['REDIS_PASSWORD']
     )
   end
 end

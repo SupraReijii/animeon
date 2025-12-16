@@ -8,7 +8,7 @@ FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # Set production environment
-ENV RAILS_ENV="development" \
+ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle"
 
@@ -62,14 +62,16 @@ RUN apt-get update -qq && \
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
+RUN mkdir -p /rails/shared/log && \
+    mkdir -p /rails/shared/tmp/pids && \
+    mkdir -p /rails/shared/tmp/sockets
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log tmp
+    chown -R rails:rails db log tmp shared
 USER rails:rails
-
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["bundle", "exec", "unicorn", "-o","0.0.0.0", "-p", "3000"]
+CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
