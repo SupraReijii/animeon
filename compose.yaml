@@ -70,7 +70,9 @@ services:
     volumes:
       - ./config/datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
       - grafanadata:/var/lib/grafana
-
+      - ./fullchain.pem:/etc/grafana/fullchain.pem:ro
+      - ./privkey.pem:/etc/grafana/privkey.pem:ro
+      - ./config/grafana.ini
 secrets:
   db_password:
     file: ./db_password
