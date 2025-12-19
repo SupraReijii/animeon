@@ -53,8 +53,8 @@ services:
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheusdata:/prometheus
-      - ./fullchain.pem:/fullchain.pem:ro
-      - ./privkey.pem:/privkey.pem:ro
+      - ./fullchain.pem:/prometheus/fullchain.pem:ro
+      - ./privkey.pem:/prometheus/privkey.pem:ro
 secrets:
   db_password:
     file: ./db_password
