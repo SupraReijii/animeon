@@ -7,5 +7,6 @@ scrape_configs:
       cert_file: /prometheus/fullchain.pem
       key_file: /prometheus/privkey.pem
     metrics_path: /metrics
+    scheme: https
     static_configs:
-      - targets: ["https://web:443"]
+      - targets: ["web:443"]
