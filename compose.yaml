@@ -52,9 +52,12 @@ services:
       - "9090:9090"
     volumes:
       - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus-web-config.yml:/etc/prometheus/web-config.yml:ro
       - prometheusdata:/prometheus
       - ./fullchain.pem:/prometheus/fullchain.pem:ro
       - ./privkey.pem:/prometheus/privkey.pem:ro
+    command:
+      - -web.config.file=/etc/prometheus/web-config.yml
 secrets:
   db_password:
     file: ./db_password
