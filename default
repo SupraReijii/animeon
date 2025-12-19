@@ -8,6 +8,10 @@ server {
 
     root /home;
     try_files $uri/index.html $uri.html $uri @unicorn;
+    location /nginx_status {
+        stub_status;
+        allow all;
+    }
     location @unicorn {
         add_header Access-Control-Allow-Origin *;
         proxy_set_header  Host $http_host;
@@ -20,9 +24,5 @@ server {
         proxy_pass http://web:9001;
     }
     error_page 500 502 503 504 /500.html;
-    location /nginx_status {
-        stub_status;
-        allow all;
-    }
 
 }
