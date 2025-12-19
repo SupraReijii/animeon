@@ -8,4 +8,4 @@ scrape_configs:
       key_file: /prometheus/privkey.pem
     metrics_path: /metrics
     static_configs:
-      - targets: ["web:443"]
+      - targets: ["https://web:443"]
