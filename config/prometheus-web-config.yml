@@ -1,5 +1,3 @@
 tls_server_config:
   cert_file: /prometheus/fullchain.pem
   key_file: /prometheus/privkey.pem
-basic_auth_users:
-  admin: $2a$12$WjQZnF04qfXJkP9lcbShgeeH0OLo1qUwmXOPmMsnsERYDRRENUd6W
