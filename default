@@ -20,4 +20,9 @@ server {
         proxy_pass http://web:9001;
     }
     error_page 500 502 503 504 /500.html;
+    location /nginx_status {
+        stub_status;
+        allow all;
+    }
+
 }
