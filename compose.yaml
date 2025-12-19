@@ -57,6 +57,7 @@ services:
       - ./fullchain.pem:/prometheus/fullchain.pem:ro
       - ./privkey.pem:/prometheus/privkey.pem:ro
     command:
+      - --config.file=/etc/prometheus/prometheus.yml
       - --web.config.file=/etc/prometheus/web-config.yml
 secrets:
   db_password:
