@@ -72,7 +72,7 @@ services:
       - grafanadata:/var/lib/grafana
       - ./fullchain.pem:/etc/grafana/fullchain.pem:ro
       - ./privkey.pem:/etc/grafana/privkey.pem:ro
-      - ./config/grafana.ini
+      - ./config/grafana.ini:/etc/grafana/grafana.ini
 secrets:
   db_password:
     file: ./db_password
