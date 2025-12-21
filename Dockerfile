@@ -64,14 +64,16 @@ COPY --from=build /rails /rails
 
 RUN mkdir -p /rails/shared/log && \
     mkdir -p /rails/shared/tmp/pids && \
-    mkdir -p /rails/shared/tmp/sockets
+    mkdir -p /rails/shared/tmp/sockets && \
+    mkdir -p /mnt/video && \
+    mkdir -p /rails/public/files/posters
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails .
+    chown -R rails:rails db log tmp shared
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 9001
-CMD ["bin/overmind", "start", "-f", "Procfile.prod"]
+CMD ["bin/overmind", "start", "-f", "Procfile.prod", "-s", "/rails/tmp/.overmind.sock"]
