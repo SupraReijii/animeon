@@ -65,11 +65,11 @@ COPY --from=build /rails /rails
 RUN mkdir -p /rails/shared/log && \
     mkdir -p /rails/shared/tmp/pids && \
     mkdir -p /rails/shared/tmp/sockets && \
-    mkdir -p /mnt/video && \
+    mkdir -p /rails/public/files/video && \
     mkdir -p /rails/public/files/posters
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log tmp shared
+    chown -R rails:rails db log tmp shared public
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
