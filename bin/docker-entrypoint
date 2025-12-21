@@ -2,5 +2,6 @@
 
 # If running the rails server then create or migrate existing database
 ./bin/rails db:prepare
-
+mount -t nfs4 -v 79.120.9.56:/videos /mnt/video
+mount -t nfs4 -v 79.120.9.56:/posters /home/devops/animeon/public/files/posters
 exec "${@}"
