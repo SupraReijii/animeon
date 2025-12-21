@@ -1,2 +1,3 @@
 sidekiq: RAILS_ENV=production bundle exec sidekiq -C config/sidekiq.yml
 clockwork: RAILS_ENV=production bundle exec clockwork config/clock.rb
+unicorn: RAILS_ENV=production bundle exec unicorn -c config/unicorn.rb

@@ -36,6 +36,7 @@ gem 'turbolinks'
 gem 'turbo-rails'
 gem 'unicorn'
 gem 'dotenv'
+gem 'overmind'
 
 group :development, :test do
   gem 'rspec'
