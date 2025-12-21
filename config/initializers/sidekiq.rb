@@ -1,7 +1,7 @@
 REDIS_OPTIONS = {
   host: 'redis',
-  port: '6379',
-  password: ENV['REDIS_PASSWORD']
+  port: '6379'
+  #password: ENV['REDIS_PASSWORD']
 }
 
 
