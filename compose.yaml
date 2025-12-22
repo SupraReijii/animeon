@@ -29,6 +29,8 @@ services:
     environment:
       DATABASE_HOST: db
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    volumes:
+      - /home/devops/animeon/public/files/video:/rails/public/files/video
   adminer:
     image: adminer
     restart: always
@@ -77,6 +79,7 @@ secrets:
   db_password:
     file: ./db_password
 volumes:
+  video:
   grafanadata:
   prometheusdata:
   pgdata:
