@@ -30,7 +30,7 @@ services:
       DATABASE_HOST: db
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
     volumes:
-      - /home/devops/animeon/public/files/video:/rails/public/files/video
+      - video:/rails/public/files/video
   adminer:
     image: adminer
     restart: always
@@ -80,6 +80,11 @@ secrets:
     file: ./db_password
 volumes:
   video:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=79.120.9.56,nolock,soft,rw
+      device: :/videos
   grafanadata:
   prometheusdata:
   pgdata:
