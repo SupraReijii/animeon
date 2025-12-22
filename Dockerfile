@@ -18,7 +18,7 @@ FROM base AS build
 RUN echo 'Acquire::http::Proxy ${PROXY};' >> /etc/apt/apt.conf
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 tmux nfs-common
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 tmux nfs-common rpcbind
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=18.15.0
