@@ -70,7 +70,7 @@ RUN mkdir -p /rails/shared/log && \
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log tmp shared public
-RUN service rpcbind start
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
