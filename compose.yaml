@@ -83,7 +83,7 @@ volumes:
     driver: local
     driver_opts:
       type: nfs
-      o: addr=79.120.9.56,rw,nfsvers=4
+      o: addr=79.120.9.56,rw,nfsvers=3,tcp
       device: ":/video"
   grafanadata:
   prometheusdata:
