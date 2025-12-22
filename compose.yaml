@@ -29,8 +29,6 @@ services:
     environment:
       DATABASE_HOST: db
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-    volumes:
-      - nfs_videos:/rails/public/files/video
   adminer:
     image: adminer
     restart: always
@@ -79,12 +77,6 @@ secrets:
   db_password:
     file: ./db_password
 volumes:
-  nfs_videos:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=79.120.9.56,rw,nfsvers=3,tcp
-      device: ":/video"
   grafanadata:
   prometheusdata:
   pgdata:
