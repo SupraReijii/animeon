@@ -18,7 +18,7 @@ FROM base AS build
 RUN echo 'Acquire::http::Proxy ${PROXY};' >> /etc/apt/apt.conf
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 tmux nfs-common rpcbind
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3 tmux
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=18.15.0
@@ -64,9 +64,7 @@ COPY --from=build /rails /rails
 
 RUN mkdir -p /rails/shared/log && \
     mkdir -p /rails/shared/tmp/pids && \
-    mkdir -p /rails/shared/tmp/sockets && \
-    mkdir -p /rails/public/files/video && \
-    mkdir -p /rails/public/files/posters
+    mkdir -p /rails/shared/tmp/sockets &&
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log tmp shared public
