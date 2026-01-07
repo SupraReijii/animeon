@@ -2,6 +2,7 @@ p #{@user.username}
 = link_to 'Список аниме', anime_user_list_path(@user), class: 'btn'
 - if user_signed_as_admin?
   = link_to 'Админ Панель', admin_index_path, class: 'btn'
-  = link_to 'База данных', "https://adminer.animeon.ru/?pgsql=db&username=animeon&db=animeon_prod&ns=public"
+  = link_to 'Adminer', "https://adminer.animeon.ru/?pgsql=db&username=animeon&db=animeon_prod&ns=public", class: 'btn'
+  = link_to 'Redis commander', "https://redis-commander.animeon.ru", class: 'btn'
 - if user_signed_in? && current_user.id == params[:id].to_i
   = link_to "Выйти из профиля", destroy_user_session_path, class: 'btn'
