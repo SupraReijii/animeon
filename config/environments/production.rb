@@ -30,8 +30,8 @@ Rails.application.configure do
     address: "smtp.yandex.ru",
     port: 465,
     domain: 'animeon.ru',
-    user_name: Rails.application.credentials.dig(:smtp, :user_name),
-    password: Rails.application.credentials.dig(:smtp, :password),
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
     authentication:  "plain",
     enable_starttls: true
   }
