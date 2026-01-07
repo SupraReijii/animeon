@@ -22,7 +22,7 @@ services:
     environment:
       - REDIS_HOSTS=local:redis:6379
     ports:
-      - "8082:8081"
+      - "8081:8081"
   web:
     build:
       dockerfile: Dockerfile
@@ -44,7 +44,7 @@ services:
       - ./privkey.pem:/etc/nginx/privkey.pem:ro
     ports:
       - "443:443"
-      - "8888:80"
+#      - "8888:80"
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
