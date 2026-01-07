@@ -1,5 +1,5 @@
 server {
-    listen 443 ssl;
+    listen 127.0.0.1:1443 ssl;
     client_max_body_size 1G;
     server_name animeon.ru;
     keepalive_timeout 5;
