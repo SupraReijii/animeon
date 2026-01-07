@@ -23,6 +23,8 @@ Rails.application.configure do
   config.i18n.fallbacks = true
   config.active_support.report_deprecations = false
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.default_url_options = {:host => 'animeon.ru'}
+  config.action_mailer.default_options = { from: "admin@animeon.ru" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.yandex.ru",
