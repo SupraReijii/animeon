@@ -7,7 +7,15 @@ module Api
       def index
         render json: Video.where('status < 2').limit(10).select(:id, :episode_id, :fandub_id, :status), status: 200
       end
-
+      api :GET, '/api/v1/videos/:id', 'Get a single video urls'
+      def show
+        @video = Video.find(params[:id])
+        response = []
+        [480, 720, 1080].each do |r|
+          response.push quality: r, url: Aws::S3::Object.new(client: Animeon::Application.s3_client, bucket_name: 'video', key: "#{params[:id]}/#{r}.m3u8").presigned_url(:get, expires_in: 3600)
+        end
+        render json: response, status: 200
+      end
       api :POST, '/api/v1/videos', 'Create a video'
       def create
         @video = Video.new(episode_id: video_params[:episode_id].to_i,

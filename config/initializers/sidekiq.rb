@@ -1,5 +1,5 @@
 REDIS_OPTIONS = {
-  host: 'redis',
+  host: Rails.env == 'production' ? 'redis' : 'localhost',
   port: '6379'
   #password: ENV['REDIS_PASSWORD']
 }

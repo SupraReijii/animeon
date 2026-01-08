@@ -13,7 +13,7 @@ Rails.application.routes.draw do
           get :search
         end
       end
-      resources :videos, only: %i[index create update] do
+      resources :videos, only: %i[index create update show] do
         member do
           patch :update_status
           put :update_status

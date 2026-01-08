@@ -13,12 +13,10 @@ module Animeon
     development: 'animeon.local',
   }.freeze
   DOMAIN = DOMAINS[Rails.env.to_sym]
-
   PROTOCOLS = {
     production: 'https',
     development: 'https'
   }.freeze
-
   PROTOCOL = ENV['IS_LOCAL_RUN'] ? 'https' : PROTOCOLS[Rails.env.to_sym]
 
   HOST = "#{Animeon::PROTOCOL}://#{Animeon::DOMAIN}".freeze
@@ -29,11 +27,13 @@ module Animeon
       Rails.application.config.redis
     end
     Aws.config.update(
-      credentials: Aws::Credentials.new(ENV['access_key_id'], ENV['secret_access_key']),
-      region: ENV['region'],
-      endpoint: ENV['endpoint']
+      credentials: Aws::Credentials.new(ENV['ACCESS_KEY_ID'], ENV['SECRET_ACCESS_KEY']),
+      endpoint: ENV['S3_ENDPOINT'],
+      force_path_style: true,
     )
-
+    def s3_client
+      Aws::S3::Client.new
+    end
     config.i18n.default_locale = :ru
     config.i18n.locale = :ru
     config.i18n.available_locales = %i[ru en]
@@ -49,7 +49,7 @@ module Animeon
       generator.test_framework :rspec
     end
     config.redis = Redis.new(
-      host: 'redis',
+      host: Rails.env == 'production' ? 'redis' : 'localhost',
       port: 6379,
       #password: ENV['REDIS_PASSWORD']
     )

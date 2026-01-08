@@ -1,4 +1,5 @@
 import Turbolinks from 'turbolinks';
+import Playerjs from './playerjs.js';
 Turbolinks.start();
 $(document).on('turbolinks:load', () => {
   function Data() {
@@ -9,6 +10,31 @@ $(document).on('turbolinks:load', () => {
     formData.append('video[fandub]', $('#video_fandub').val())
     formData.append('video[quality][]', $('#video_quality').val())
     return formData
+  }
+
+  $('.video_choose_button').on('click', function (e) {
+    //$('#player-88955').remove()
+    //$('.video_block').add('<div id="player-88955"></div>').appendTo( '.video_block' )
+    $.ajax({
+      url: '/api/videos/' + e.currentTarget.id + '',
+      type: 'GET',
+      data: null,
+      processData: false,
+      contentType: false,
+      headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+      success: function (response) {
+        set_new_player(response)
+      },
+      error: function (error) {
+        console.log(error)
+      }
+    })
+
+    //console.log(player);
+  })
+
+  function set_new_player(resp) {
+    new window.Playerjs({id:"player", file: "[480]" + resp[0].url + ',[720]' + resp[1].url + ',[1080]' + resp[2].url});
   }
 
   $('.approve_changes').on('click', function (e) {

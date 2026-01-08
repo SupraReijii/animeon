@@ -3,10 +3,15 @@
 span Серия #{@episode.episode_number}
 .video_block
   .video_choose
+    - @episode.video.where(status: 2).each do |v|
+      p.video_choose_button [
+        id=v.id
+      ] Озвучка #{v.fandub.name}
   .anime-video-player[
-    id="player-#{@episode.id}"
+    id="player"
   ]
-  script new Playerjs({id:"player-#{@episode.id}", file: #{compile_videojs_url(@episode.video.where(status: 2))}});
+
+  //script new Playerjs({id:"player-#{@episode.id}", file: #{compile_videojs_url(@episode.video.where(status: 2))}});
 .buttons
   - if  @episode.episode_number > 1
     = link_to 'Предыдущая серия', anime_episode_path(id: @episode.previous_episode.id), class: "btn btn-outline-danger ep"
