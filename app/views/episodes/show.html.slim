@@ -2,6 +2,7 @@
   h2 #{@episode.anime.russian} / #{@episode.anime.name}
 span Серия #{@episode.episode_number}
 .video_block
+  p Выберите озвучку:
   .video_choose
     - @episode.video.where(status: 2).each do |v|
       p.video_choose_button [
