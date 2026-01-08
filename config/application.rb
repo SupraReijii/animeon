@@ -28,6 +28,7 @@ module Animeon
     end
     Aws.config.update(
       credentials: Aws::Credentials.new(ENV['ACCESS_KEY_ID'], ENV['SECRET_ACCESS_KEY']),
+      region: ENV['S3_REGION'],
       endpoint: ENV['S3_ENDPOINT'],
       force_path_style: true,
     )
