@@ -51,7 +51,6 @@ services:
 #      - "8888:80"
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
     ports:
       - "9090:9090"
     volumes:
@@ -65,7 +64,6 @@ services:
       - --web.config.file=/etc/prometheus/web-config.yml
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
     ports:
       - "3000:3000"
     environment:
@@ -77,6 +75,12 @@ services:
       - ./fullchain.pem:/etc/grafana/fullchain.pem:ro
       - ./privkey.pem:/etc/grafana/privkey.pem:ro
       - ./config/grafana.ini:/etc/grafana/grafana.ini
+  nginx-prometheus-exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    command:
+      - -nginx.scrape-uri=http://web:80/nginx_status
+    ports:
+      - "9113:9113"
 secrets:
   db_password:
     file: ./db_password
@@ -85,3 +89,9 @@ volumes:
   prometheusdata:
   pgdata:
     driver: local
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
