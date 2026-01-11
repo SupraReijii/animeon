@@ -6,4 +6,4 @@ scrape_configs:
     metrics_path: /metrics
     scheme: https
     static_configs:
-      - targets: ["metrics.animeon.ru:9394"]
+      - targets: ["metrics.animeon.ru"]
