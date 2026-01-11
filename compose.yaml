@@ -28,6 +28,8 @@ services:
   web:
     build:
       dockerfile: Dockerfile
+    ports:
+      - "9394:9394"
     environment:
       DATABASE_HOST: db
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
