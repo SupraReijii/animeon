@@ -4,6 +4,6 @@ global:
 scrape_configs:
   - job_name: "animeon"
     metrics_path: /metrics
-    scheme: https
+    scheme: http
     static_configs:
       - targets: ["web:9394"]
