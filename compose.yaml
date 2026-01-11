@@ -60,7 +60,7 @@ services:
       - ./privkey.pem:/prometheus/privkey.pem:ro
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-      - --web.config.file=/etc/prometheus/web-config.yml
+#      - --web.config.file=/etc/prometheus/web-config.yml
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
