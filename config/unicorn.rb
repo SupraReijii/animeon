@@ -38,5 +38,10 @@ before_fork do |server, worker|
 end
 
 after_fork do |server, worker|
+  require 'prometheus_exporter/instrumentation'
+  PrometheusExporter::Instrumentation::ActiveRecord.start(
+    custom_labels: { type: "unicorn_worker" }, #optional params
+    config_labels: [:database, :host] #optional params
+  )
   ApplicationRecord.establish_connection
 end
