@@ -14,6 +14,10 @@ services:
   redis:
     image: redis
     restart: always
+    command:
+      - --save 60 1
+    volumes:
+      - /var/lib/redisdata:/data
   redis-commander:
     container_name: redis-commander
     hostname: redis-commander
@@ -91,4 +95,6 @@ volumes:
   grafanadata:
   prometheusdata:
   pgdata:
+    driver: local
+  redisdata:
     driver: local
