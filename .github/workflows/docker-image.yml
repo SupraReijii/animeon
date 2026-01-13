@@ -31,10 +31,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Install system dependencies
-      run: |
-        apt-get update
-        apt-get install -y libyaml-dev
     - name: Install Ruby and gems
       uses: ruby/setup-ruby@v1
       with:
@@ -44,8 +40,11 @@ jobs:
       run: |
         bundle exec rails db:create
         bundle exec rails db:schema:load
+    - name: Shakapacker
+      run: bin/shakapacker
     - name: Run tests
       run: bundle exec rspec --format progress
+
   build:
     needs: [test]
     runs-on: ubuntu-latest
