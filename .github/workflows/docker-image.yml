@@ -14,5 +14,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set Node.js 20.14.0
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.14.0
+
+    - name: Run install
+      uses: borales/actions-yarn@v4
+      with:
+        cmd: install
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag animeon:$(date +%s)
