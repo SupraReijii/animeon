@@ -31,10 +31,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Install system dependencies
-      run: |
-        apt-get update
-        apt-get install -y libyaml-dev
     - name: Install Ruby and gems
       uses: ruby/setup-ruby@v1
       with:
