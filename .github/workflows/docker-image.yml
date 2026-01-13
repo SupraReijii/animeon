@@ -14,13 +14,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.6
+        bundler-cache: true
     - name: Set Node.js 20.14.0
       uses: actions/setup-node@v3
       with:
         node-version: 20.14.0
 
-    - name: Run install
+    - name: Run yarn install
       run: yarn install
+    - name: Run bundle install
+      run: bundle install
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag animeon:$(date +%s)
