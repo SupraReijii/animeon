@@ -9,11 +9,45 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
+    services:
+      redis:
+        image: redis:6
+      postgres:
+        image: postgres:10.5-alpine
+        ports:
+          - '5432:5432'
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+    env:
+      DATABASE_HOST: postgres
+      POSTGRES_TEST_USER: postgres
+      DATABASE_PASSWORD: postgres
+      POSTGRES_TEST_DB: github-actions
+      REDIS_HOST: redis
+      RAILS_ENV: test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Install system dependencies
+      run: |
+        apt-get update
+        apt-get install -y libyaml-dev
+    - name: Install Ruby and gems
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.6
+        bundler-cache: true
+    - name: Set up database schema
+      run: |
+        bundle exec rails db:create
+        bundle exec rails db:schema:load
+    - name: Run tests
+      run: bundle exec rspec --format progress
+  build:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1

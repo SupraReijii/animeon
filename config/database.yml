@@ -13,8 +13,8 @@ development:
 
 test:
   <<: *default
-  database: animeon_test
-  username: animeon
+  database: <%= ENV['POSTGRES_TEST_DB'] %>
+  username: <%= ENV['POSTGRES_TEST_USER'] %>
 
 production:
   <<: *default
