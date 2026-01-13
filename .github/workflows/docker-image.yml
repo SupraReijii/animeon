@@ -22,10 +22,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 20.14.0
-
     - name: Run yarn install
       run: yarn install
-    - name: Run bundle install
-      run: bundle install
+    - name: Download playerjs
+      run: curl -o app/packs/javascripts/playerjs.js https://cdn.plrjs.com/player/d7ybfrhe9nh7e/gt0888ggbuuc.js
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag animeon:$(date +%s)
