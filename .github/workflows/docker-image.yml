@@ -109,5 +109,6 @@ jobs:
             git checkout master;
             git pull origin master;
             docker compose down;
+            docker compose pull web;
             docker compose --env-file .env up -d;
             docker system prune --all --force;
