@@ -31,6 +31,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: r
+      run: echo $RAILS_ENV
     - name: Install Ruby and gems
       uses: ruby/setup-ruby@v1
       with:
