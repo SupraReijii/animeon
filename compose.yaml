@@ -32,6 +32,8 @@ services:
     environment:
       DATABASE_HOST: db
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    volumes:
+      - ./.env:./.env:ro
   adminer:
     image: adminer
     restart: always
