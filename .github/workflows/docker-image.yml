@@ -40,6 +40,14 @@ jobs:
       run: |
         bundle exec rails db:create
         bundle exec rails db:schema:load
+    - name: Set Node.js 20.14.0
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.14.0
+    - name: Run yarn install
+      run: yarn install
+    - name: Download playerjs
+      run: curl -o app/packs/javascripts/playerjs.js https://cdn.plrjs.com/player/d7ybfrhe9nh7e/gt0888ggbuuc.js
     - name: Shakapacker
       run: bin/shakapacker
     - name: Run tests
