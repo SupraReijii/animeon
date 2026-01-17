@@ -16,8 +16,9 @@ class Video < ApplicationRecord
 
   validates :status, presence: true
   has_attached_file :video_file,
+                    url: ":s3_path_url",
                     path: '/:id/video-:id.:extension'
-  validates_attachment_content_type :video_file, content_type: [/\Avideo/, 'video/x-matroska', 'application/x-matroska', 'application/octet-stream']
+  validates_attachment_content_type :video_file, content_type: [/\Avideo/, 'video/x-matroska', 'application/x-matroska', 'video/mp4', 'application/octet-stream']
 
   validates :quality, presence: true
   after_create :add_video_urls

@@ -1,0 +1,5 @@
+ru:
+  activerecord:
+    errors:
+      messages:
+        spoofed_media_type: "Неверный тип файла"

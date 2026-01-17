@@ -14,6 +14,10 @@ Paperclip::Attachment.default_options[:s3_credentials] = {
   secret_access_key: ENV['SECRET_ACCESS_KEY'],
   region: 'Zone_1'
 }
+Paperclip::Attachment.default_options[:s3_options] = {
+  endpoint: "https://s3.animeon.ru",
+  force_path_style: true
+}
 # Required for newer versions of aws-sdk-s3
 Paperclip::Attachment.default_options[:s3_region] = 'Zone_1'
 Paperclip::Attachment.default_options[:s3_host_name] = 's3.animeon.ru'
