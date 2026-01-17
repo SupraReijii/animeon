@@ -1,15 +1,15 @@
 #app_name = "animeon"
-app_path = "/rails"
+app_path = ENV['RAILS_ENV'] == 'production' ? "/rails" : "/home/devops/animeon"
 shared_path = "#{app_path}/shared"
 
 worker_processes 32
 timeout 90
 # listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4096
-listen 9001, :tcp_nopush => true
-user "rails"
+listen ENV['RAILS_ENV'] == 'production' ? 9001 : 5100, :tcp_nopush => true
+user ENV['RAILS_ENV'] == 'production' ? 'rails' : 'devops'
 
 working_directory app_path
-
+stdout_path "#{shared_path}/log/unicorn.access.log"
 stderr_path "#{shared_path}/log/unicorn.error.log"
 
 pid "#{shared_path}/tmp/pids/unicorn.pid"
