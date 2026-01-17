@@ -115,7 +115,8 @@ $(document).on('turbolinks:load', () => {
           $('#btn-submit').prop({disabled: false})
           $('#btn-save').css({visibility: 'visible'})
         },
-        error: function () {
+        error: function (e) {
+          console.log(e)
           $('#progress-bar').css('background-color', 'red');
           $('#btn-submit').prop({disabled: false})
         }

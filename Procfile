@@ -1,5 +1,6 @@
 webpack: bin/shakapacker-dev-server
-server: bundle exec unicorn -c config/unicorn.rb
+#server: bundle exec unicorn -c config/unicorn.rb
+server: bin/rails s
 sidekiq: bundle exec sidekiq -C config/sidekiq.yml
 clockwork: bundle exec clockwork config/clock.rb
 prom: bundle exec prometheus_exporter
