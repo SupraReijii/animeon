@@ -20,8 +20,8 @@ class Anime < ApplicationRecord
                       original: '-quality 94',
                       mini: '-quality 98'
                     },
-                    url: "#{Animeon::PROXY}/files/posters/animes/:style/:id.:extension",
-                    path: ':rails_root/public/files/posters/animes/:style/:id.:extension',
+                    bucket: 'anime-posters',
+                    path: ':style/:id.:extension',
                     default_url: '/default_poster.png'
   validates_attachment_content_type :poster, content_type: /\Aimage/
 
