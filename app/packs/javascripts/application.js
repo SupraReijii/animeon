@@ -1,5 +1,4 @@
 import Turbolinks from 'turbolinks';
-import Playerjs from './playerjs.js';
 Turbolinks.start();
 $(document).on('turbolinks:load', () => {
   function Data() {
@@ -23,19 +22,13 @@ $(document).on('turbolinks:load', () => {
       contentType: false,
       headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
       success: function (response) {
-        set_new_player(response)
+        new window.Playerjs({id:"player", file: "[480]" + response[0].url + ',[720]' + response[1].url + ',[1080]' + response[2].url});
       },
       error: function (error) {
         console.log(error)
       }
     })
-
-    //console.log(player);
   })
-
-  function set_new_player(resp) {
-    new window.Playerjs({id:"player", file: "[480]" + resp[0].url + ',[720]' + resp[1].url + ',[1080]' + resp[2].url});
-  }
 
   $('.approve_changes').on('click', function (e) {
     $.ajax({
