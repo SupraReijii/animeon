@@ -12,7 +12,8 @@ module Api
         @video = Video.find(params[:id])
         response = []
         [480, 720, 1080].each do |r|
-          response.push quality: r, url: Aws::S3::Object.new(client: Animeon::Application.s3_client, bucket_name: 'video', key: "#{params[:id]}/#{r}.m3u8").presigned_url(:get, expires_in: 3600)
+          response.push quality: r, url:
+            "https://proxy.animeon.ru#{URI.parse(Aws::S3::Object.new(client: Animeon::Application.s3_client, bucket_name: 'video', key: "#{params[:id]}/#{r}.m3u8").presigned_url(:get, expires_in: 3600)).request_uri}"
         end
         render json: response, status: 200
       end
