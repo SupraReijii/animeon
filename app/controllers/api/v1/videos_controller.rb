@@ -18,9 +18,9 @@ module Api
               "https://proxy.animeon.ru#{URI.parse(Aws::S3::Object.new(client: Animeon::Application.s3_client, bucket_name: 'video', key: "#{params[:id]}/#{r}.m3u8").presigned_url(:get, expires_in: 3600)).request_uri}"
           end
           Animeon::Application.redis.set("api:videos:show:#{@video.id}", response.to_json, ex: 3500)
-          render json: [response], status: 200
+          render json: response, status: 200
         else
-          render json: [JSON.parse(cache)], status: 200
+          render json: JSON.parse(cache), status: 200
         end
       end
       api :POST, '/api/v1/videos', 'Create a video'
