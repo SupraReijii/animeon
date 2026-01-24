@@ -12,17 +12,17 @@ $(document).on('turbolinks:load', () => {
   }
 
   $('.video_choose_button').on('click', function (e) {
-    //$('#player-88955').remove()
-    //$('.video_block').add('<div id="player-88955"></div>').appendTo( '.video_block' )
+    let id = $('.video_choose_button').attr('video_id')
     $.ajax({
-      url: '/api/videos/' + e.currentTarget.id + '',
+      url: '/api/videos/' + id + '',
       type: 'GET',
       data: null,
       processData: false,
       contentType: false,
       headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
       success: function (response) {
-        new window.Playerjs({id:"player", file: "[480]" + response[0].url + ',[720]' + response[1].url + ',[1080]' + response[2].url});
+        $('.video_block').append('<div id="' + id + '"></div>')
+        let player = new window.Playerjs({id: id, file: "[480]" + response[0].url + ',[720]' + response[1].url + ',[1080]' + response[2].url});
       },
       error: function (error) {
         console.log(error)
@@ -213,5 +213,4 @@ $(document).on('turbolinks:load', () => {
       })
     }
   }
-
 })

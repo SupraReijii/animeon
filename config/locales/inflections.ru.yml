@@ -1,0 +1,9 @@
+ru:
+  inflections:
+    cardinal:
+      view:
+        subjective:
+          one: просмотр
+          few: просмотра
+          many: просмотров
+          other: просмотры

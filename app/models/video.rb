@@ -32,4 +32,8 @@ class Video < ApplicationRecord
   def fandub
     Fandub.find_by(id: fandub_id)
   end
+
+  def increase_views
+    update(views: self.views + 1)
+  end
 end

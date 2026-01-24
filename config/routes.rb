@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         member do
           patch :update_status
           put :update_status
+          get :increase_views
         end
       end
       resources :db_modifications, only: %i[destroy] do

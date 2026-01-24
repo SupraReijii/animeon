@@ -61,6 +61,14 @@ module Api
           render json: { errors: @video.errors.full_messages }, status: :unprocessable_entity
         end
       end
+
+      api :GET, '/api/v1/videos/:id/increase_views', 'Increase views'
+      def increase_views
+        @video = Video.find(params[:id])
+        @video.increase_views
+        render json: @video.views, status: 200
+      end
+
       private
 
       def video_params
