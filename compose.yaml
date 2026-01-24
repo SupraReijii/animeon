@@ -9,6 +9,8 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - "/var/lib/pgdata:/var/lib/postgresql/data/pgdata"
+    ports:
+      - "54320:5432"
     secrets:
       - db_password
   redis:
