@@ -1,11 +1,11 @@
 = link_to anime_path(@episode.anime)
-  h2 #{@episode.anime.russian} / #{@episode.anime.name}
-span Серия #{@episode.episode_number}
+  h2 #{@episode.anime.russian} / #{@episode.anime.name} - Серия #{@episode.episode_number}
 .video_block
-  p Выберите озвучку:
+  h4 Выберите озвучку:
   .video_choose
     - @episode.video.where(status: 2).each do |v|
       p.video_choose_button [
+        class="btn ep"
         video_id=v.id
       ] Озвучка #{v.fandub.name} ~ #{v.views} #{i18n_i 'view', v.views}
   .anime-video-player[

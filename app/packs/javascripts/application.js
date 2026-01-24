@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', () => {
   }
 
   $('.video_choose_button').on('click', function (e) {
-    let id = $('.video_choose_button').attr('video_id')
+    let id = $(e.currentTarget).attr('video_id')
     $.ajax({
       url: '/api/videos/' + id + '',
       type: 'GET',
@@ -21,7 +21,8 @@ $(document).on('turbolinks:load', () => {
       contentType: false,
       headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
       success: function (response) {
-        $('.video_block').append('<div id="' + id + '"></div>')
+        $('.anime-video-player').remove()
+        $('.video_block').append('<div id="' + id + '" class="anime-video-player"></div>')
         let player = new window.Playerjs({id: id, file: "[480]" + response[0].url + ',[720]' + response[1].url + ',[1080]' + response[2].url});
       },
       error: function (error) {

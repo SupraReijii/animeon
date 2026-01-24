@@ -1,7 +1,11 @@
 @import '../../mixins/btn'
 @import '../../mixins/icons.scss'
 .p-episodes-show
+  .video_block
+    h4, .video_choose
+      display: inline
   .video_choose_button
+    width: 25%!important
     &:hover
       cursor: pointer
   .uploader
@@ -34,3 +38,5 @@
   @media screen and (max-width: 400px)
     .btn
       width: 95%
+  .buttons
+    margin-top: 20px
