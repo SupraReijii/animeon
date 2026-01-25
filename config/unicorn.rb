@@ -3,7 +3,7 @@ app_path = ENV['RAILS_ENV'] == 'production' ? "/rails" : "/home/devops/animeon"
 shared_path = "#{app_path}/shared"
 
 worker_processes 32
-timeout 90
+timeout 180
 # listen "#{shared_path}/tmp/sockets/unicorn.socket", backlog: 4096
 listen ENV['RAILS_ENV'] == 'production' ? 9001 : 5100, :tcp_nopush => true
 user ENV['RAILS_ENV'] == 'production' ? 'rails' : 'devops'
