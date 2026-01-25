@@ -16,7 +16,7 @@ class Video < ApplicationRecord
 
   validates :status, presence: true
   has_attached_file :video_file,
-                    bucket: 'video',
+                    bucket: ENV['RAILS_ENV'] == 'production' ? 'video' : 'anime-videos-dev',
                     path: ':id/video-:id.:extension'
   validates_attachment_content_type :video_file, content_type: [/\Avideo/, 'video/x-matroska', 'application/x-matroska', 'video/*', 'application/octet-stream']
 
