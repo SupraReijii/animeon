@@ -7,7 +7,7 @@ h1 #{@t}
 .animes-card-block
   - @animes.each do |anime|
     = link_to anime, class: "anime-card card"
-      = image_tag "#{anime.poster.expiring_url(3600, :mini)}"
+      = image_tag "#{Animeon::PROXY+anime.poster_url(:mini)}"
       .card-body
         span #{anime_name_substr(anime.russian)}
 .pagination

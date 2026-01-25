@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module Animeon
   DOMAINS = {
     production: 'animeon.ru',
-    development: 'animeon.local',
+    development: 'animeon.ru',
   }.freeze
   DOMAIN = DOMAINS[Rails.env.to_sym]
   PROTOCOLS = {

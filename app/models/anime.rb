@@ -20,9 +20,9 @@ class Anime < ApplicationRecord
                       original: '-quality 94',
                       mini: '-quality 98'
                     },
-                    bucket: 'anime-posters',
+                    bucket: ENV['RAILS_ENV'] == 'production' ? 'anime-posters' : 'anime-posters-dev',
                     path: ':style/:id.:extension',
-                    default_url: '/default_poster.png'
+                    default_url: 'https://s3.animeon.ru/default_poster.png'
   validates_attachment_content_type :poster, content_type: /\Aimage/
 
   validates :episodes, comparison: { greater_than_or_equal_to: 0 }
@@ -78,6 +78,14 @@ class Anime < ApplicationRecord
       super(value)
     elsif value.class == String
       value.nil? ? super({}) : super(eval(value).map(&:to_i))
+    end
+  end
+
+  def poster_url(style = :original)
+    if self.poster_file_name.present?
+      URI.parse(self.poster.url(style.to_s)).request_uri
+    else
+      '/anime-posters/default_poster.png'
     end
   end
 end
