@@ -1,6 +1,6 @@
 server {
     listen 127.0.0.1:1443 ssl;
-    client_max_body_size 1G;
+    client_max_body_size 2G;
     server_name animeon.ru;
     keepalive_timeout 5;
     ssl_certificate /etc/nginx/fullchain.pem;
