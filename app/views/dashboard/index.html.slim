@@ -4,7 +4,7 @@
   .ongoing_cards
     - @animes.each do |anime|
       = link_to anime, class: "anime-card card"
-        = image_tag anime.poster.expiring_url(3600, :mini)
+        = image_tag anime.poster_url(:mini)
         .card-body
           span #{anime_name_substr(anime.russian)}
 .animes_with_video_box
@@ -13,7 +13,7 @@
   .ongoing_cards
     - @animes_with_video.each do |anime|
       = link_to anime, class: "anime-card card"
-        = image_tag anime.poster.expiring_url(3600, :mini)
+        = image_tag anime.poster_url(:mini)
         .card-body
           span #{anime_name_substr(anime.russian)}
 .news_box

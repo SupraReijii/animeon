@@ -4,7 +4,7 @@ h2 #{@animes.russian} / #{@animes.name}
     .text_info
       span Фото
     div.anime_img
-      = image_tag @animes.poster.expiring_url(3600)
+      = image_tag @animes.poster_url
       = link_to '', edit_anime_url(params[:id]), class: "edit_anime", title: 'Редактировать'
       - if user_signed_as_admin? && @animes.next_episode? != 0
         = link_to '', new_anime_episode_path(anime_id: @animes.id), class: "add_episode", title: 'Добавить эпизод'

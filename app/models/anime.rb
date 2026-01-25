@@ -82,7 +82,7 @@ class Anime < ApplicationRecord
   end
 
   def poster_url(style = :original)
-    if self.poster_file_name.present?
+    Animeon::PROXY + if self.poster_file_name.present?
       URI.parse(self.poster.url(style.to_s)).request_uri
     else
       '/anime-posters/default_poster.png'
