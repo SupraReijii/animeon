@@ -15,6 +15,11 @@ Paperclip::Attachment.default_options.merge!(
     s3_region:         ENV["S3_REGION"],
     s3_host_name: 's3.animeon.ru'
   },
+  s3_options: {
+    http_open_timeout: 10,
+    http_read_timeout: 300,
+    max_attempts: 10
+  },
   s3_permissions: :"public-read", # или :"public-read"
   s3_protocol: "https",
   path: "uploads/:class/:attachment/:id_partition/:style/:filename"
