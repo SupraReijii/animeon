@@ -21,7 +21,7 @@
     "compression-webpack-plugin": "9",
     "core-js": "^3.41.0",
     "css-loader": "^7.1.2",
-    "jquery": "4.0.0",
+    "jquery": "3.7.1",
     "mini-css-extract-plugin": "^2.9.1",
     "node-sass-glob-importer": "^5.3.3",
     "sass": "1.77.2",
