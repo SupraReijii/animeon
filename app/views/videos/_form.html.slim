@@ -14,11 +14,6 @@
   #btn-submit.btn Загрузить
   #btn-back.btn
     = link_to 'Назад', anime_episode_path(id: params[:episode_id])
-  #btn-save.btn Сохранить
-span.upload-progress
-div id="progress-container" style="width: 50%; margin: 5px; background-color: #eee; height: 20px; border-radius: 5px; overflow: hidden;"
-  div id="progress-bar" style="width: 0%; height: 100%; background-color: steelblue;"
-
 #ep-id [
   value="#{params[:episode_id]}"
 ] #{params[:episode_id]}

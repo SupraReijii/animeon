@@ -18,6 +18,7 @@ Rails.application.routes.draw do
           patch :update_status
           put :update_status
           get :increase_views
+          post :presign
         end
       end
       resources :db_modifications, only: %i[destroy] do

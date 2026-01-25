@@ -10,12 +10,109 @@
     height: 34px
     font-size: 16px
     +btn
-
+  .btns
+    display: flex
   #ep-id
     visibility: hidden
     width: 0
     height: 0
-  #progress-bar
-    transition: width 0.3s ease, background-color 0.3s ease
-  #btn-save
-    visibility: hidden
+  .loading-container
+    display: inline-block
+    margin: 5px 5px 0 0
+  .loading
+    display: flex
+  .loading::after
+    content: ""
+    width: 20px
+    height: 20px
+    border: 5px solid #dddddd
+    border-top-color: #009579
+    border-radius: 50%
+    animation: loading 1s ease infinite
+
+  @keyframes loading
+    to
+      transform: rotate(1turn)
+
+  $ok-size: 30px
+  $ok-color: #22c55e
+  $ok-border: 3px
+
+  .ok
+    width: $ok-size
+    height: $ok-size
+    border-radius: 50%
+    border: $ok-border solid $ok-color
+    position: relative
+    display: inline-block
+
+    transform: scale(.8)
+    opacity: 0
+
+    box-shadow: 0 0 0 0 rgba($ok-color, .35)
+    animation: ok-pop 420ms cubic-bezier(.2, .9, .2, 1) forwards, ok-ring 700ms ease-out 420ms forwards
+
+    &::before,
+    &::after
+      content: ""
+      position: absolute
+      height: 0
+      border-bottom: $ok-border solid $ok-color
+      border-radius: 999px
+      transform-origin: left center
+      width: 0
+
+    // short stroke
+    &::before
+      left: 7px
+      top: 15px
+      transform: rotate(45deg)
+      animation: ok-stem 180ms ease-out 260ms forwards
+
+    // long stroke
+    &::after
+      left: 11px
+      top: 18px
+      transform: rotate(-45deg)
+      animation: ok-kick 240ms ease-out 360ms forwards
+
+  @keyframes ok-pop
+    0%
+      transform: scale(.8)
+      opacity: 0
+    60%
+      transform: scale(1.08)
+      opacity: 1
+    100%
+      transform: scale(1)
+      opacity: 1
+
+  @keyframes ok-stem
+    from
+      width: 0
+    to
+      width: 7px
+
+  @keyframes ok-kick
+    from
+      width: 0
+    to
+      width: 13px
+
+  @keyframes ok-ring
+    0%
+      box-shadow: 0 0 0 0 rgba($ok-color, .35)
+    100%
+      box-shadow: 0 0 0 10px rgba($ok-color, 0)
+
+  @media (prefers-reduced-motion: reduce)
+    .ok
+      animation: none
+      opacity: 1
+      transform: none
+
+      &::before
+        width: 7px
+
+      &::after
+        width: 13px

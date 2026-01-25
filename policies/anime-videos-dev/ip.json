@@ -5,8 +5,7 @@
       "Effect": "Allow",
       "Principal": "*",
       "Action": [
-        "s3:GetObject",
-        "s3:PutObject"
+        "s3:*"
       ],
       "Resource": [
         "arn:aws:s3:::anime-videos-dev",

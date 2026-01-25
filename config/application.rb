@@ -37,7 +37,9 @@ module Animeon
       region: ENV['S3_REGION'],
       endpoint: ENV['S3_ENDPOINT'],
       force_path_style: true,
+      signature_version: 'v4'
     )
+    Aws.config.update(logger: Logger.new($stdout), log_level: :debug)
     def s3_client
       Aws::S3::Client.new
     end

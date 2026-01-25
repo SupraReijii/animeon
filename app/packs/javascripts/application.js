@@ -1,10 +1,11 @@
 import Turbolinks from 'turbolinks';
 Turbolinks.start();
+
 $(document).on('turbolinks:load', () => {
   function Data() {
     const formData = new FormData();
-    const file = $('#video_video_file')[0].files[0];
-    formData.append('video[video_file]', file);
+    //const file = $('#video_video_file')[0].files[0];
+    //formData.append('video[video_file]', file);
     formData.append('video[episode_id]', $('#ep-id').text());
     formData.append('video[fandub]', $('#video_fandub').val())
     formData.append('video[quality][]', $('#video_quality').val())
@@ -84,6 +85,7 @@ $(document).on('turbolinks:load', () => {
     e.preventDefault();
     $('#btn-submit').prop({disabled: true})
     const formData = Data()
+    const file = $('#video_video_file')[0].files[0]
     if ($('#ep-id').attr('uploaded') == null) {
       $.ajax({
         url: '/api/videos',
@@ -92,65 +94,47 @@ $(document).on('turbolinks:load', () => {
         processData: false,
         contentType: false,
         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
-        xhr: function () {
-          const xhr = new window.XMLHttpRequest();
-          xhr.upload.addEventListener("progress", function (evt) {
-            if (evt.lengthComputable) {
-              const percentComplete = Math.round((evt.loaded / evt.total) * 100);
-              $('#progress-bar').css('width', percentComplete + '%');
-              //console.log(evt)
-            }
-          }, false);
-          return xhr;
-        },
-        success: function (response) {
-          $('#progress-bar').css('background-color', 'green');
+        success: async function (response) {
           $('#ep-id').attr({uploaded: response.video.id})
-          $('#btn-submit').prop({disabled: false})
-          $('#btn-save').css({visibility: 'visible'})
+          const presign = await fetch("/api/videos/" + response.video.id + "/presign", {
+            method: "POST",
+            headers: {"Content-Type": "application/json", 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+            body: JSON.stringify({filename: file.name})
+          }).then(r => r.json());
+          $(".btns").append("<div class='loading-container' style=\"width: 30px; height: 30px;\">\n" +
+            "    <div class=\"loading loading--full-height\"></div>\n" +
+            "</div>")
+          const res = await fetch(presign.url, {
+            method: "PUT",
+            body: file
+          });
+          if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+          if (res.ok) {
+            await fetch("/api/videos/" + response.video.id, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json", 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+              body: JSON.stringify({
+                video_file_file_name: file.name,
+                video_file_content_type: file.type,
+                video_file_file_size: file.size
+              })
+            });
+            $('.btns').prepend('<div class="btn" id="btn-save">Сохранить</div>')
+            $('.loading-container').html('<div class="ok" role="img" aria-label="Success"></div>')
+            $('#btn-submit').remove()
+          }
+          console.log(res)
         },
         error: function (e) {
           console.log(e)
-          $('#progress-bar').css('background-color', 'red');
-          $('#btn-submit').prop({disabled: false})
-        }
-      });
-    } else {
-      $('#progress-bar').css('background-color', 'steelblue');
-      $.ajax({
-        url: '/api/videos/' + $('#ep-id').attr('uploaded'),
-        type: 'PATCH',
-        data: formData,
-        processData: false,
-        contentType: false,
-        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
-        xhr: function () {
-          const xhr = new window.XMLHttpRequest();
-          xhr.upload.addEventListener("progress", function (evt) {
-            if (evt.lengthComputable) {
-              const percentComplete = Math.round((evt.loaded / evt.total) * 100);
-              $('#progress-bar').css('width', percentComplete + '%');
-              //console.log(evt)
-            }
-          }, false);
-          return xhr;
-        },
-        success: function (response) {
-          $('#progress-bar').css('background-color', 'green');
-          $('#ep-id').attr({uploaded: response.anime.id})
-          $('#btn-submit').prop({disabled: false})
-        },
-        error: function () {
-          $('#progress-bar').css('background-color', 'red');
-          $('#btn-submit').prop({disabled: false})
         }
       });
     }
   });
 
-  $('#btn-save').on('click', function (e) {
+  $(document).on('click', '#btn-save', function (e) {
+    console.log('eeee')
     e.preventDefault();
-    //$('#btn-submit').prop({disabled: true})
     const formData = new FormData()
     formData.append('video[status]', 0)
     if ($('#ep-id').attr('uploaded') != null) {
