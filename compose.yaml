@@ -20,6 +20,8 @@ services:
       - --save 60 1
     volumes:
       - /var/lib/redisdata:/data
+    ports:
+      - "63790:6379"
   redis-commander:
     container_name: redis-commander
     hostname: redis-commander

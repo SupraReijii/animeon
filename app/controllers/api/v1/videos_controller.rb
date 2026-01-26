@@ -78,7 +78,7 @@ module Api
       api :POST, '/api/v1/videos/:id/presign'
       def presign
         s3 = Aws::S3::Resource.new(client: Animeon::Application.s3_client)
-        bucket = s3.bucket('anime-videos-dev')
+        bucket = ENV['RAILS_ENV'] == 'production' ? s3.bucket('video')  : s3.bucket('anime-videos-dev')
 
         key = "#{params[:id]}/video-#{params[:id]}#{params[:filename].match('(\.mp4|\.avi|\.mkv|\.mov|\.ts)')}"
         obj = bucket.object(key)
