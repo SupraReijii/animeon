@@ -104,15 +104,15 @@ $(document).on('turbolinks:load', () => {
           $(".btns").append("<div class='loading-container' style=\"width: 30px; height: 30px;\">\n" +
             "    <div class=\"loading loading--full-height\"></div>\n" +
             "</div>")
-          const res = await fetch(presign.url, {
-            method: "PUT",
-            body: file
-          });
-          if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
-          if (res.ok) {
+          await putWithProgress(presign.url, file, ({ pct }) => {
+            $('.loading-percentage').html("Загрузка:" + pct + " %")
+          }).then(async function () {
             await fetch("/api/videos/" + response.video.id, {
               method: "PATCH",
-              headers: { "Content-Type": "application/json", 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+              headers: {
+                "Content-Type": "application/json",
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+              },
               body: JSON.stringify({
                 video_file_file_name: file.name,
                 video_file_content_type: file.type,
@@ -122,8 +122,7 @@ $(document).on('turbolinks:load', () => {
             $('.btns').prepend('<div class="btn" id="btn-save">Сохранить</div>')
             $('.loading-container').html('<div class="ok" role="img" aria-label="Success"></div>')
             $('#btn-submit').remove()
-          }
-          console.log(res)
+          });
         },
         error: function (e) {
           console.log(e)
@@ -131,7 +130,30 @@ $(document).on('turbolinks:load', () => {
       });
     }
   });
+  function putWithProgress(url, file, onProgress) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", url, true);
 
+      xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+          const pct = Math.round((e.loaded / e.total) * 100);
+          onProgress?.({ loaded: e.loaded, total: e.total, pct });
+        }
+      };
+
+      xhr.onload = () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve();
+          $('.loading-percentage').html("Успешно загружено")
+        }
+        else reject(new Error(`S3 upload failed: ${xhr.status} ${xhr.responseText}`));
+      };
+
+      xhr.onerror = () => reject(new Error("Network error during upload"));
+      xhr.send(file);
+    });
+  }
   $(document).on('click', '#btn-save', function (e) {
     console.log('eeee')
     e.preventDefault();
