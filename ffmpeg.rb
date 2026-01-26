@@ -19,7 +19,7 @@ Aws.config.update(logger: Logger.new($stdout), log_level: :debug)
 
 i = 0
 conn = PG::Connection.new(host: ENV['DATABASE_HOST'], user: 'animeon', password: ENV['DATABASE_PASSWORD'], port: 54320)
-redis = Redis.new(host: '45.84.1.34', password: ENV['REDIS_PASSWORD'], port: ENV['REDIS_PORT'])
+redis = Redis.new(host: '45.84.1.34', port: ENV['REDIS_PORT'])
 redis.set("transcoder:status", "active")
 redis.set("transcoder:iterations", "0")
 redis.set("transcoder:videos", "0")
