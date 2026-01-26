@@ -18,7 +18,7 @@ aws_client = Aws::S3::Client.new
 Aws.config.update(logger: Logger.new($stdout), log_level: :debug)
 
 i = 0
-conn = PG::Connection.new(host: ENV['DATABASE_HOST'], user: 'animeon', password: ENV['DATABASE_PASSWORD'], port: 54320)
+conn = PG::Connection.new(host: ENV['DATABASE_HOST'], user: 'animeon', password: ENV['DATABASE_PASSWORD'], port: 54320, dbname: 'animeon_prod')
 redis = Redis.new(host: '45.84.1.34', port: ENV['REDIS_PORT'])
 redis.set("transcoder:status", "active")
 redis.set("transcoder:iterations", "0")
