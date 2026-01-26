@@ -37,7 +37,7 @@ while i != -1
     aws_client.get_object(
       bucket: 'video',
       key: "#{id}/video-#{id}#{format}",
-      response_target: "/transcoding/#{id}/video-#{id}{format}"
+      response_target: "/transcoding/#{id}/video-#{id}#{format}"
     )
     movie = FFMPEG::Movie.new("/transcoding/#{id}/video-#{id}#{format}")
     if movie.valid?
