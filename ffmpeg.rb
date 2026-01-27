@@ -85,6 +85,9 @@ def main()
     REDIS.get("transcoder:stop") == "1" ? i = -1 : i += 1
     REDIS.incr("transcoder:iterations")
   end
+rescue => PG::ConnectionBad
+  REDIS.set("transcoder:status", "error")
+  LOGGER.fatal("Bad connection to Database; exiting")
 rescue => err
   REDIS.set("transcoder:status", "error")
   LOGGER.fatal("Caught exception; exiting")
