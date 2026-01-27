@@ -7,10 +7,10 @@ require 'aws-sdk-s3'
 require 'dotenv'
 require 'logger'
 
-STDOUT.sync = true
-STDERR.sync = true
-
 file = File.open('/home/devops/transcoder.log', File::WRONLY | File::APPEND | File::CREAT)
+file.sync = true
+$stdout = file
+$stderr = file
 LOGGER = Logger.new(file, 'weekly')
 LOGGER.level = Logger::DEBUG
 
