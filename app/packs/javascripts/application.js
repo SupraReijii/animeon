@@ -208,7 +208,7 @@ $(document).on('turbolinks:load', () => {
             "<a href='/animes/"+anime.id+"'>" +
             "<div class='search-result'>" +
             "<div class='search-result-img'>" +
-            "<img width='50px' src='https://proxy.animeon.ru/files/posters/animes/original/"+anime.id+".webp'>" +
+            "<img width='50px' src='https://proxy.animeon.ru/anime-posters/mini/"+anime.id+".webp'>" +
             "</div>" +
             "<div class='search-result-name'>" +
             "<span>"+anime.russian+" / "+anime.name+"</span>" +

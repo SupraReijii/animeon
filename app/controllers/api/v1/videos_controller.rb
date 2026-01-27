@@ -14,8 +14,7 @@ module Api
       def show
         @video = Video.find(params[:id])
         bucket = ENV['RAILS_ENV'] == 'production' ? 'video' : 'anime-videos-dev'
-        cache = Animeon::Application.redis.get("api:videos:show:#{@video.id}")
-        if cache.nil?
+        if (cache = Animeon::Application.redis.get("api:videos:show:#{@video.id}")).nil?
           response = []
           [480, 720, 1080].each do |r|
             response.push quality: r, url:
