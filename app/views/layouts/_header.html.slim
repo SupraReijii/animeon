@@ -1,0 +1,38 @@
+header.site-header
+  .header-inner
+    a.brand href="/"
+      span.brand-mark
+        = image_tag '/favicon.ico', width: '30px'
+      span.brand-name
+        | Animeon
+    nav.nav
+      a.nav-link Главная
+      a.nav-link Аниме
+      a.nav-link Онгоинги
+    .search-container
+      form.search[action="/animes" method="get" role="search"]
+        span.search-ico ⌕
+        input.search-field name="name" type="search" placeholder="Поиск..." value="#{params[:name]}"
+        button type="submit" Найти
+      .search-results
+    - unless user_signed_in?
+      = link_to 'Войти', new_user_session_path, class: 'to-login-button'
+    - if user_signed_in?
+      .user
+        .user-menu[tabindex="0"]
+          img.user-ava src="#{current_user.avatar.url}"
+          span.user-name
+            = current_user.username
+          span.caret
+            | ▾
+          .dropdown
+            = link_to 'Мой Профиль', user_path(current_user.id)
+            a[href="/my/watching"]
+              | Мой список
+            .sep
+            - if current_user.admin?
+              = link_to 'Админ Панель', admin_index_path
+              = link_to 'Adminer', "https://adminer.animeon.ru/?pgsql=db&username=animeon&db=animeon_prod&ns=public", target: "_blank", rel: "noopener"
+              = link_to 'Redis commander', "https://redis-commander.animeon.ru", target: "_blank", rel: "noopener"
+              .sep
+            = link_to 'Выход', destroy_user_session_path, class: 'danger'

@@ -203,7 +203,6 @@ $(document).on('turbolinks:load', () => {
         method: 'get',
         dataType: 'json',
         success: function (data) {
-
           const res = data.map(anime => "" +
             "<a href='/animes/"+anime.id+"'>" +
             "<div class='search-result'>" +

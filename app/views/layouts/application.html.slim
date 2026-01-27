@@ -23,27 +23,8 @@ html
     script src="https://code.jquery.com/jquery-3.7.1.min.js"
     script src="/playerjs.js"
   body class="#{controller_classes}"
-    .navbar
-      .nav-items
-        .nav-item
-          = link_to "Главная", root_path
-        .nav-item
-          = link_to "Аниме", animes_path
-        .nav-item
-          = link_to "Онгоинги", animes_path(status: :ongoing)
-        .nav-item
-          - if user_signed_in?
-            = link_to "Ваш профиль", user_path(id: current_user.id)
-          - else
-            = link_to "Войти в профиль", new_user_session_path
+    = render 'layouts/header'
     .container
-      .animes-search-block
-        label.field
-          span.search-ico
-          input.search-field[
-            placeholder="Поиск..."
-          ]
-          .search-results
       = yield
       - if Rails.env.production?
         = render partial: 'layouts/metrika'
