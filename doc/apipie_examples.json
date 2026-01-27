@@ -1,0 +1,17 @@
+{
+  "animes#index": [
+    {
+      "verb": "GET",
+      "path": "/api/animes",
+      "versions": [
+        "1"
+      ],
+      "query": "",
+      "request_data": null,
+      "response_data": [],
+      "code": "200",
+      "show_in_doc": 1,
+      "recorded": true
+    }
+  ]
+}
