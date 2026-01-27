@@ -2,7 +2,7 @@
 
 require 'pg'
 require 'streamio-ffmpeg'
-require 'REDIS'
+require 'redis'
 require 'aws-sdk-s3'
 require 'dotenv'
 require 'logger'
@@ -32,7 +32,7 @@ REDIS.set("transcoder:videos", "0")
 REDIS.set("transcoder:stop", "0")
 REDIS.set("transcoder:current", "0")
 REDIS.set("transcoder:current_time_start", "0")
-def main
+def main()
   i = 0
   while i != -1
     LOGGER.debug("iteration - #{REDIS.get("transcoder:iterations")}")
