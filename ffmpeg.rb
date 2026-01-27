@@ -88,4 +88,6 @@ rescue => err
   LOGGER.fatal(err)
 end
 
+main
+
 REDIS.set("transcoder:status", "stopped")
