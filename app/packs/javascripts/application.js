@@ -119,7 +119,9 @@ $(document).on('turbolinks:load', () => {
                 video_file_file_size: file.size
               })
             });
-            $('.btns').prepend('<div class="btn" id="btn-save">Сохранить</div>')
+            $('.btns')
+              .prepend('<div class="btn" id="btn-next">Следующий эпизод</div>')
+              .prepend('<div class="btn" id="btn-save">Сохранить</div>')
             $('.loading-container').html('<div class="ok" role="img" aria-label="Success"></div>')
             $('#btn-submit').remove()
           });
@@ -155,7 +157,6 @@ $(document).on('turbolinks:load', () => {
     });
   }
   $(document).on('click', '#btn-save', function (e) {
-    console.log('eeee')
     e.preventDefault();
     const formData = new FormData()
     formData.append('video[status]', 0)
@@ -168,8 +169,33 @@ $(document).on('turbolinks:load', () => {
         contentType: false,
         headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
         success: function (response) {
-          console.log(response)
           Turbolinks.visit('/animes/' + response.anime.id + '/episodes/' + response.episode.id)
+        },
+        error: function () {
+          $('#progress-bar').css('background-color', 'red');
+          $('#btn-submit').prop({disabled: false})
+        }
+      })
+    }
+  })
+  $(document).on('click', '#btn-next', function (e) {
+    e.preventDefault();
+    const formData = new FormData()
+    formData.append('video[status]', 0)
+    if ($('#ep-id').attr('uploaded') != null) {
+      $.ajax({
+        url: '/api/videos/' + $('#ep-id').attr('uploaded') + '/update_status',
+        type: 'PATCH',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+        success: function (response) {
+          if (response.next_episode == null) {
+            Turbolinks.visit('/animes/' + response.anime.id)
+          } else {
+            Turbolinks.visit('/animes/' + response.anime.id + '/episodes/' + response.next_episode.id + '/videos/new?fandub=' + response.video.fandub_id)
+          }
         },
         error: function () {
           $('#progress-bar').css('background-color', 'red');

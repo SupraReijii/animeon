@@ -58,7 +58,11 @@ class Api::V1::VideosController < Api::V1Controller
   def update_status
     @video = Video.find(params[:id])
     if @video.update(status: video_params[:status].to_i)
-      render json: { video: @video, episode: @video.episode, anime: @video.episode.anime }, status: 200
+      render json: { video: @video,
+                     episode: @video.episode,
+                     anime: @video.episode.anime,
+                     next_episode: @video.episode.next_episode,
+      }, status: 200
     else
       render json: { errors: @video.errors.full_messages }, status: :unprocessable_entity
     end

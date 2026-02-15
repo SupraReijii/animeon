@@ -1,5 +1,8 @@
 =simple_form_for @video, url: animes_path, multipart: true do |f|
-  = f.input :fandub, collection: Fandub.all, default: :first, input_html: { class: 'chosen-select' }
+  = f.input :fandub,
+          collection: Fandub.all,
+          selected: params['fandub'].present? ? params['fandub'] : :first,
+          input_html: { class: 'chosen-select' }
   = f.input :quality,
           collection: VideoUrl::QUALITIES,
           multiple: true,
