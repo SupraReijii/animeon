@@ -101,7 +101,7 @@ class AnimesController < ApplicationController
   end
 
   def create_from_shikimori
-    client = Shikimori::API::Client.new
+    client = Animeon::Application.shiki_api
     anime = client.v1.anime(animes_params[:shiki_id]).to_hash
     genres_ids = []
     studio_ids = []

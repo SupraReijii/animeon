@@ -8,7 +8,7 @@ require 'aws-sdk-core'
 Bundler.require(*Rails.groups)
 
 module Animeon
-  SHIKI_URL="https://shiki.one"
+  SHIKI_URL="https://shikimori.io"
   DOMAINS = {
     production: 'animeon.ru',
     development: 'animeon.ru',
