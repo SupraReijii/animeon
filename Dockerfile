@@ -46,7 +46,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 RUN bundle binstubs overmind
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+#RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/shakapacker
 
 #RUN VISUAL="mate --wait" ./bin/rails credentials:edit
