@@ -7,3 +7,18 @@ datasources:
     url: https://animeon.ru:9090
     isDefault: true
     editable: true
+    jsonData:
+      tlsSkipVerify: true
+  - name: infinity
+    type: "yesoreyeram-infinity-datasource"
+    url: "https://animeon.ru/api/dashboard"
+    basicAuth: false
+    basicAuthUser: ""
+    isDefault: false
+    jsonData:
+      global_queries: []
+      pdcInjected: false
+      tlsAuth: false
+      tlsSkipVerify: true
+    readOnly: false
+    apiVersion: ""
