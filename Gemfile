@@ -10,7 +10,7 @@ gem 'bootstrap'
 gem 'clockwork', '~> 3.0'
 gem 'graphql-client'
 gem 'devise', '~> 4.9'
-gem 'enumerize'
+gem "enumerize", "~> 2.8.1"
 gem 'i18n'
 gem 'jbuilder'
 gem 'jquery-rails'
