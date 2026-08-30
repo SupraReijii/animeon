@@ -26,6 +26,7 @@ Rails.application.routes.draw do
         post :approve
         post :rollback
       end
+      resources :dashboard, only: [:index]
     end
   end
   devise_for :users, controllers: {
